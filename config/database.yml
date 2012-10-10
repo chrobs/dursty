@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: dursty_development
   pool: 5
-  username: root
-  password:
+  username: dursty
+  password: WeHofyorm9
   socket: /opt/lampp/var/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -27,8 +27,8 @@ test:
   reconnect: false
   database: dursty_test
   pool: 5
-  username: root
-  password:
+  username: dursty
+  password: WeHofyorm9
   socket: /opt/lampp/var/mysql/mysql.sock
 
 production:

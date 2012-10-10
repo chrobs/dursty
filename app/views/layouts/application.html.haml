@@ -1,0 +1,28 @@
+!!!html
+%html
+  %head
+    %title Dursty: Getränke-AG management des OPH & TVK
+    =stylesheet_link_tag    "application", :media => "all"
+    =javascript_include_tag "application"
+    =csrf_meta_tags
+    %style{type:"text/css"}
+      = yield :stylesheets
+
+  %body
+
+    %div{id:"header"}
+      %h1 Dursty - Getränke für OPH & TVK
+    %div{id:"flash_container"}
+      - flash.each do |name,msg|
+        - if msg.is_a?(String)
+          =content_tag :p, msg, :class=>"flash_element"
+
+    %div{id:"body"}
+      %div{id:"left"}
+        = yield(:left)
+
+      %div{id:"main"}
+        = content_for?(:content) ? yield(:content) : yield
+
+    %div{id:"footer"}
+      = render "shared/footer"

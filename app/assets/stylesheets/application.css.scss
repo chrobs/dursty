@@ -1,0 +1,74 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require reset-min
+ *= require_self
+ *= require_tree .
+ */
+
+$color-bg-main: lightgreen;
+
+$padding-box-inner: 10px;
+$margin-box-outer: 10px;
+
+$width-body: 1200px;
+$width-left: 150px;
+$width-main: $width-body - $width-left;
+
+body {
+  margin-left: auto;
+  margin-right: auto;
+  width: $width-body;
+}
+
+#body{
+  position: relative;
+  min-height: 300px;
+}
+
+#header {
+  border-bottom: 10px solid $color-bg-main;
+  height: 40px;
+  padding: $padding-box-inner;
+  margin-top: $margin-box-outer;
+  margin-bottom: $margin-box-outer;
+}
+
+#left {
+  width: $width-left;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: $padding-box-inner;
+}
+
+#main{
+  width: $width-main;
+  position: absolute;
+  top: 0px;
+  left: $width-left + 2*$padding-box-inner;
+  padding: $padding-box-inner;
+}
+
+#flash_container{
+  background-color: $color-bg-main;
+  width: $width-body/3;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#footer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2*$margin-box-outer;
+  text-align: center;
+  border-top: 2px solid $color-bg-main;
+}
