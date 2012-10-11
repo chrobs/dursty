@@ -1,6 +1,7 @@
 - content_for :left do
-  = render "home/user"
   = render "shared/menu"
+  - if user_signed_in?
+    = render "home/user"
 
 - content_for :content do
 

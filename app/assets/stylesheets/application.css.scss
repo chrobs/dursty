@@ -13,10 +13,14 @@
  *= require_tree .
  */
 
-$color-bg-main: lightgreen;
+$color-a1: #00CC00;
+$color-a2: #008500;
+$color-b1: #FFBB73;
+$color-b2: #FF8300;
+$color-b3: #A65500;
 
-$padding-box-inner: 10px;
-$margin-box-outer: 10px;
+$padding-box: 5px;
+$margin-box: 10px;
 
 $border-size-header: 10px;
 
@@ -24,53 +28,119 @@ $width-body: 1200px;
 $width-left: 150px;
 $width-main: $width-body - $width-left;
 
-$height-header: 40px;
+$height-header: 38px;
 
 body {
   margin-left: auto;
   margin-right: auto;
   width: $width-body;
+
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 1em;
+  font-weight: normal;
+}
+
+h1 {
+  font-variant: small-caps;
+  font-size: 2em;
+  font-weight: normal;
+  margin-bottom: $padding-box;
+  color: #FFF;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: normal;
+  font-variant: small-caps;
+  margin-bottom: $padding-box / 2;
+}
+
+h3 {
+  font-size: 1em;
+  font-weight: normal;
+  font-variant: small-caps;
+  font-style: italic;
+}
+
+a {
+  font-size: 1em;
+  color: $color-b3;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $color-b2;
+  text-decoration: underline;
 }
 
 #header {
-  border-bottom: $border-size-header solid $color-bg-main;
+  border-bottom: $border-size-header solid $color-a2;
+  background-color: $color-a1;
   height: $height-header;
-  padding: $padding-box-inner;
-  margin-top: $margin-box-outer;
+  padding: $padding-box;
+  margin-top: $margin-box;
 }
 
 #body{
   position: relative;
   min-height: 300px;
-  margin-top: $margin-box-outer;
+  margin-top: $margin-box;
 }
 
 #left {
   width: $width-left;
-  padding: $padding-box-inner;
   float: left;
+}
+
+#left > div {
+  padding: $padding-box;
+}
+
+#left > div li {
+  border-bottom: 1px solid black;
+  background-color: $color-b1;
+}
+
+#left > div li a {
+  display: block;
+  width: $width-left - 2*$padding-box - 2*$padding-box;
+  padding: $padding-box;
+  height: 17px;
+}
+
+#left > div li a:hover {
+  text-decoration: none;
+  background-color: $color-b3;
+  color: $color-b1;
+}
+
+#left > div > h2 {
+  background-color: $color-a1;
+  margin-left: -$padding-box;
+  padding: $padding-box;
 }
 
 #main{
   width: $width-main;
-  padding: $padding-box-inner;
+  padding: $padding-box;
 
-  margin-left: $width-left + 2*$padding-box-inner;
+  margin-left: $width-left + 2*$padding-box;
 }
 
 #flash_container{
-  background-color: $color-bg-main;
+  background-color: $color-a2;
   width: $width-body/3;
   max-width: $width-body;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+  color: #FFF;
 }
 
 #footer {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2*$margin-box-outer;
+  margin-top: 2*$margin-box;
   text-align: center;
-  border-top: 2px solid $color-bg-main;
+  border-top: 2px solid $color-a2;
 }
