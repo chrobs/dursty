@@ -18,9 +18,13 @@ $color-bg-main: lightgreen;
 $padding-box-inner: 10px;
 $margin-box-outer: 10px;
 
+$border-size-header: 10px;
+
 $width-body: 1200px;
 $width-left: 150px;
 $width-main: $width-body - $width-left;
+
+$height-header: 40px;
 
 body {
   margin-left: auto;
@@ -28,38 +32,36 @@ body {
   width: $width-body;
 }
 
+#header {
+  border-bottom: $border-size-header solid $color-bg-main;
+  height: $height-header;
+  padding: $padding-box-inner;
+  margin-top: $margin-box-outer;
+}
+
 #body{
   position: relative;
   min-height: 300px;
-}
-
-#header {
-  border-bottom: 10px solid $color-bg-main;
-  height: 40px;
-  padding: $padding-box-inner;
   margin-top: $margin-box-outer;
-  margin-bottom: $margin-box-outer;
 }
 
 #left {
   width: $width-left;
-  position: absolute;
-  left: 0px;
-  top: 0px;
   padding: $padding-box-inner;
+  float: left;
 }
 
 #main{
   width: $width-main;
-  position: absolute;
-  top: 0px;
-  left: $width-left + 2*$padding-box-inner;
   padding: $padding-box-inner;
+
+  margin-left: $width-left + 2*$padding-box-inner;
 }
 
 #flash_container{
   background-color: $color-bg-main;
   width: $width-body/3;
+  max-width: $width-body;
   text-align: center;
   margin-left: auto;
   margin-right: auto;

@@ -1,12 +1,15 @@
 Dursty::Application.routes.draw do
 
+  get "public/index"
+  get "home/index"
+
   devise_for :users
 
   authenticated :user do
     root :to => 'home#index'
   end
 
-  root :to => 'home#index'
+  root :to => 'public#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

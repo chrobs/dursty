@@ -1,0 +1,7 @@
+%div{id:menu}
+  %ul
+    %li= link_to "home", root_path
+    %li item1
+    - if content_for?(:verkauf)
+      = yield(:verkauf)
+    %li item2

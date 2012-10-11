@@ -1,1 +1,1 @@
-rvm ruby-1.9.3@dursty-rails328
+rvm use ruby-1.9.3@dursty-rails328
