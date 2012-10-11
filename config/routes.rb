@@ -1,5 +1,14 @@
 Dursty::Application.routes.draw do
 
+  get "kasse/kassenstand"
+
+  get "artikel/new"
+  get "artikel/edit"
+  get "artikel/list"
+
+  get "verkauf/shop"
+  get "verkauf/konto"
+
   get "public/index"
   get "home/index"
 

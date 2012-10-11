@@ -1,6 +1,8 @@
 - content_for :left do
   - if user_signed_in?
+    = render "shared/menu"
     = render "home/user"
-  = render "shared/menu"
+  - else
+    = render "public/menu"
 
 = render :template => 'layouts/application'

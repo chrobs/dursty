@@ -45,7 +45,7 @@ h1 {
   font-size: 2em;
   font-weight: normal;
   margin-bottom: $padding-box;
-  color: #FFF;
+  color: $color-a2;
 }
 
 h2 {
@@ -79,6 +79,10 @@ a:hover {
   height: $height-header;
   padding: $padding-box;
   margin-top: $margin-box;
+}
+
+#header h1 {
+  color: #FFF;
 }
 
 #body{
