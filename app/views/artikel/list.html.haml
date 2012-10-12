@@ -1,2 +1,5 @@
-%h1 Artikel#new
+%h1 Artikel#list
 %p Find me in app/views/artikel/list.html.haml
+
+- @artikel.each do |a|
+  %p= a.name

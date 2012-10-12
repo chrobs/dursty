@@ -22,6 +22,7 @@ end
 
 #gem 'haml', '~> 3.1.7'
 gem 'haml-rails', '~> 0.3.5', :group => :development
+gem 'simple_form'
 
 gem 'jquery-rails'
 gem "devise", '~>2.1.2'

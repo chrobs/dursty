@@ -1,2 +1,5 @@
 %h1 Artikel#new
-%p Find me in app/views/artikel/new.html.haml
+
+= form_for @artikel, :url => { :action => "new" }, :html => {:class => "nifty_form"} do |f|
+  = f.text_field :name
+  = f.submit "Create"
