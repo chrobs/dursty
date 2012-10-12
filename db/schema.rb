@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012210753) do
+ActiveRecord::Schema.define(:version => 20121012214416) do
 
-  create_table "artikels", :force => true do |t|
+  create_table "items", :force => true do |t|
     t.string   "name"
     t.integer  "kaufpreis"
     t.integer  "verkaufspreis"

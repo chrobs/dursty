@@ -3,11 +3,11 @@ class ArtikelController < ApplicationController
   before_filter {|controller| controller.check_role('admin','lagerwart') }
 
   def list
-    @artikel = Artikel.all
+    @item= Item.all
   end
 
   def new
-    @artikel = Artikel.new
+    @item = Item.new
   end
 
   def edit
