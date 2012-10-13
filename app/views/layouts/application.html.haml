@@ -22,7 +22,8 @@
         = yield(:left)
 
       %div{id:"main"}
-        Home #{yield(:pathway)}
+        %div{id:"pathway"}
+          Home #{yield(:pathway)}
         = content_for?(:content) ? yield(:content) : yield
 
     %div{id:"footer"}

@@ -1,3 +1,6 @@
+- content_for :artikelMenu do
+  = render "items/submenu"
+
 - content_for :left do
   = render "shared/menu"
   - if user_signed_in?
@@ -8,6 +11,6 @@
   = content_for?(:home_content) ? yield(:home_content) : yield
 
 - content_for :pathway do
-  &raquo; Artikel #{yield(:pathway)}
+  &raquo; Artikel #{@pathway}
 
 = render :template => 'layouts/application'

@@ -11,16 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012214416) do
+ActiveRecord::Schema.define(:version => 20121013222146) do
+
+  create_table "itemgroups", :force => true do |t|
+    t.integer  "menge"
+    t.integer  "item_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "main_item"
+  end
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.integer  "kaufpreis"
-    t.integer  "verkaufspreis"
+    t.decimal  "preis",        :precision => 8, :scale => 2, :default => 0.0
     t.boolean  "shop"
     t.integer  "kategorie_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
   end
 
   create_table "users", :force => true do |t|

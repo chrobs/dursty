@@ -1,0 +1,25 @@
+%table
+  %tr
+    %td Name
+    %td=@item.name
+  %tr
+    %td Kaufpreis
+    %td=@item.kaufpreis
+  %tr
+    %td Verkaufspreis
+    %td=@item.verkaufspreis
+  %tr
+    %td Shop?
+    %td=@item.shop
+  %tr
+    %td Kategorie
+    %td=@item.kategorie_id
+
+%table
+  %tr
+    %th subitems
+    %th Menge
+    - @subitems.each do |s|
+      %tr
+        %td= s.item_id.to_s
+        %td= s.menge.to_s

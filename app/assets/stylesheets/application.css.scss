@@ -11,6 +11,7 @@
  *= require reset-min
  *= require_self
  *= require_tree .
+ *= require formtastic
  */
 
 $color-a1: #00CC00;
@@ -26,7 +27,7 @@ $border-size-header: 10px;
 
 $width-body: 1200px;
 $width-left: 150px;
-$width-main: $width-body - $width-left;
+$width-main: $width-body - $width-left - 3*$padding-box;
 
 $height-header: 38px;
 
@@ -124,6 +125,14 @@ a:hover {
   padding: $padding-box;
 }
 
+#left div ul ul {
+  padding-left: 2*$padding-box;
+}
+
+#left div ul ul li a {
+  width: $width-left - 2*$padding-box - 2*$padding-box - 2*$padding-box;
+}
+
 #main{
   width: $width-main;
   padding: $padding-box;
@@ -147,4 +156,9 @@ a:hover {
   margin-top: 2*$margin-box;
   text-align: center;
   border-top: 2px solid $color-a2;
+}
+
+#pathway {
+  margin-bottom: $margin-box;
+  border-bottom: 1px solid black;
 }

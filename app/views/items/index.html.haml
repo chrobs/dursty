@@ -1,0 +1,6 @@
+%ul
+  - @items.each do |i|
+    %p
+      =i.name
+      =link_to "editieren", edit_item_path(i)
+      =link_to "löschen", edit_item_path(i)

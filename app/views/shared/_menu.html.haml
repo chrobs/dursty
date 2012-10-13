@@ -2,11 +2,17 @@
   %h2 Menü
   %ul
     %li= link_to "Home", root_path
+
     - if user_signed_in?
-      %li= link_to "Verkauf", verkauf_shop_path
+      %li= link_to "Verkauf", shop_show_path
+
     - if current_user.try(:admin?) || current_user.try(:lagerwart?)
-      %li= link_to "Artikel", artikel_list_path
+      %li= link_to "Artikel", items_path
+      - if content_for?(:artikelMenu)
+        = yield(:artikelMenu)
+
     - if current_user.try(:admin?) || current_user.try(:kassenwart?)
       %li= link_to "Kasse", kasse_kassenstand_path
+
     - if content_for?(:menu)
       = yield(:menu)

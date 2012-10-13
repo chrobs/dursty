@@ -1,18 +1,15 @@
 Dursty::Application.routes.draw do
 
+  devise_for :users
+
+  resources :items
+
   get "kasse/kassenstand"
 
-  get "artikel/new"
-  get "artikel/edit"
-  get "artikel/list"
-
-  get "verkauf/shop"
-  get "verkauf/konto"
-
+  get "shop/show"
+  get "shop/shoppingcart"
   get "public/index"
   get "home/index"
-
-  devise_for :users
 
   authenticated :user do
     root :to => 'home#index'

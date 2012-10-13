@@ -1,0 +1,4 @@
+%h1 shop/show
+
+- @products.each do |p|
+  %p=p.name + ": " + number_to_currency(p.kaufpreis, :unit => "€")
