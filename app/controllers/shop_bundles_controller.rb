@@ -1,28 +1,25 @@
 # encoding: UTF-8
 
-class ItemsController < ApplicationController
+class ShopBundlesController < ApplicationController
   before_filter :authenticate_user!
   before_filter {|controller| controller.check_role('admin','lagerwart') }
 
   def index
-    @items = Item.order("name")
+    @bundles = ShopBundle.all
+    render :text => @bundles.inspect and return
   end
 
   def new
-    @item = Item.new
+    @bundle = ShopBundle.new
   end
 
   def edit
-    @item = Item.find(params[:id])
-  end
-
-  def show
-    @item = Item.find(params[:id])
+    @bundle = ShopBundle.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
-    if @item.update_attributes(params[:item])
+    @bundle = ShopBundle.find(params[:id])
+    if @bundle.update_attributes(params[:item])
       redirect_to(items_path, :notice => 'Artikel erfolgreich editiert.')
     else
       render :edit
@@ -30,7 +27,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new params[:item]
+    render :text => params.inspect and return
+    @bundle= ShopBundle.new params[:shop_bundle]
     if @item.save
       redirect_to(items_path, :notice => 'Artikel erfolgreich angelegt.')
     else

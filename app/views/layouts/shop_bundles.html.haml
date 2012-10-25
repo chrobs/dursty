@@ -1,5 +1,5 @@
-- content_for :artikelMenu do
-  = render "items/submenu"
+- content_for :shop_bundlesMenu do
+  = render "shop_bundles/submenu"
 
 - content_for :left do
   = render "shared/menu"
@@ -11,6 +11,6 @@
   = content_for?(:home_content) ? yield(:home_content) : yield
 
 - content_for :pathway do
-  &raquo; #{link_to "Artikel", items_path} #{yield(:pathway)}
+  &raquo; #{link_to "Shop bundles", shop_bundles_path} #{yield(:pathway)}
 
 = render :template => 'layouts/application'

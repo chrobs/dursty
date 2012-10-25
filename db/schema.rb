@@ -11,23 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013222146) do
-
-  create_table "itemgroups", :force => true do |t|
-    t.integer  "menge"
-    t.integer  "item_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "main_item"
-  end
+ActiveRecord::Schema.define(:version => 20121025220622) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
-    t.decimal  "preis",        :precision => 8, :scale => 2, :default => 0.0
-    t.boolean  "shop"
-    t.integer  "kategorie_id"
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at",                                                  :null => false
+    t.decimal  "preis",      :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "kategorie"
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+  end
+
+  create_table "shop_bundles", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.text     "bundle",     :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -1,0 +1,11 @@
+%table{:class=> "table-index"}
+  %thead
+    %td Name
+    %td Preis
+    %td Kategorie
+  %tbody
+    - @bundles.each do |i|
+      %tr
+        %td= i.name
+        %td= link_to "editieren", edit_shop_bundle_path(i)
+        %td= link_to "löschen", shop_bundle_path(i), :confirm => "Are you sure you want to delete this attachment?", :method => :delete

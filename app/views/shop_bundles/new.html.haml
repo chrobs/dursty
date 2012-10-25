@@ -1,0 +1,25 @@
+= semantic_form_for :shop_bundle, :url => shop_bundles_path, :method => :post do |f|
+  = f.label :name
+  = f.text_field :name
+  %br
+  = f.label "Positiv"
+  = f.radio_button :type, 'positive', :checked => true
+  = f.label "Negativ"
+  = f.radio_button :type, 'negative'
+  %br
+  %br
+  %table{:class=>"table-index"}
+    %thead
+      %td Artikel
+      %td Anzahl
+    %tr
+      %td
+        = f.text_field :item_id
+      %td
+        = f.text_field :item_amount, :size=>5
+    %tr
+      %td{colspan:2}
+        %span{:class=>"js-link"}
+          weitere Artikel
+  %br
+  = f.submit

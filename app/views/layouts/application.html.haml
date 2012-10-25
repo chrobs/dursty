@@ -23,7 +23,7 @@
 
       %div{id:"main"}
         %div{id:"pathway"}
-          Home #{yield(:pathway)}
+          #{link_to "Home", root_path} #{yield(:pathway)}
         = content_for?(:content) ? yield(:content) : yield
 
     %div{id:"footer"}

@@ -63,15 +63,19 @@ h3 {
   font-style: italic;
 }
 
-a {
+a, .js-link {
   font-size: 1em;
   color: $color-b3;
   text-decoration: none;
 }
 
-a:hover {
+a:hover, .js-link:hover {
   color: $color-b2;
   text-decoration: underline;
+}
+
+.js-link:hover{
+  cursor: pointer;
 }
 
 #header {
@@ -102,7 +106,7 @@ a:hover {
 }
 
 #left > div li {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #000;
   background-color: $color-b1;
 }
 
@@ -160,5 +164,15 @@ a:hover {
 
 #pathway {
   margin-bottom: $margin-box;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #000;
 }
+
+table td {
+  padding: $padding-box;
+}
+
+
+.table-index thead{
+  border-bottom: 1px solid #000;
+}
+

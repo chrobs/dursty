@@ -3,6 +3,7 @@ Dursty::Application.routes.draw do
   devise_for :users
 
   resources :items
+  resources :shop_bundles
 
   get "kasse/kassenstand"
 
