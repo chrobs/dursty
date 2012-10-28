@@ -8,18 +8,18 @@
   = f.radio_button :type, 'negative'
   %br
   %br
-  %table{:class=>"table-index"}
+  %table{:class=>"table-index", :id => "item-list"}
     %thead
       %td Artikel
       %td Anzahl
     %tr
       %td
-        = f.text_field :item_id
+        = f.text_field :item_id_1
       %td
-        = f.text_field :item_amount, :size=>5
-    %tr
-      %td{colspan:2}
-        %span{:class=>"js-link"}
-          weitere Artikel
+        = f.text_field :item_amount_1, :size=>5
+
+  %span{:class => "js-link", :id => "addItem"}
+    weitere Artikel
+
   %br
   = f.submit
