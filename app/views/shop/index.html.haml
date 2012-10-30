@@ -1,0 +1,11 @@
+%table{:class=> "table-index"}
+  %thead
+    %td Name
+    %td Preis
+  %tbody
+    - @bundles.each do |b|
+      %tr
+        %td= b["name"]
+        %td= number_to_currency(b["total"], :unit => "€")
+
+        %td= link_to "kaufen", shop_buy_path(:bundle => b["id"], :amount => 1)

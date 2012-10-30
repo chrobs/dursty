@@ -4,11 +4,13 @@ Dursty::Application.routes.draw do
 
   resources :items
   resources :shop_bundles
+  resources :orders
 
   get "kasse/kassenstand"
 
-  get "shop/show"
-  get "shop/shoppingcart"
+  get "shop/index"
+  match "shop/buy/:bundle/:amount" => 'shop#buy', :as => :shop_buy
+
   get "public/index"
   get "home/index"
 

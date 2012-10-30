@@ -1,11 +1,18 @@
 %table{:class=> "table-index"}
   %thead
     %td Name
+    %td Typ
     %td Preis
-    %td Kategorie
+    %td Artikel
   %tbody
-    - @bundles.each do |i|
+    - @bundles.each do |b|
       %tr
-        %td= i.name
-        %td= link_to "editieren", edit_shop_bundle_path(i)
-        %td= link_to "löschen", shop_bundle_path(i), :confirm => "Are you sure you want to delete this attachment?", :method => :delete
+        %td= b["name"]
+        %td= b["type"]
+        %td= number_to_currency(b["total"], :unit => "€")
+        %td
+          %table
+            = render :partial => "item", :collection => b["items"].to_a, :as => "item"
+
+        %td= link_to "editieren", edit_shop_bundle_path(b["id"].to_i)
+        %td= link_to "löschen", shop_bundle_path(b["id"].to_i), :confirm => "Are you sure you want to delete this bundle?", :method => :delete

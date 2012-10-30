@@ -3,9 +3,10 @@
   = f.text_field :name
   %br
   = f.label "Positiv"
-  = f.radio_button :type, 'positive', :checked => true
+  = f.radio_button :type, 'positive', :checked => true, :label => "test"
   = f.label "Negativ"
   = f.radio_button :type, 'negative'
+  = f.input :max_items, :as => :hidden, :value => 1, :id => :max_items
   %br
   %br
   %table{:class=>"table-index", :id => "item-list"}
@@ -16,7 +17,7 @@
       %td
         = f.text_field :item_id_1
       %td
-        = f.text_field :item_amount_1, :size=>5
+        = f.text_field :item_amount_1, :size => 5
 
   %span{:class => "js-link", :id => "addItem"}
     weitere Artikel
