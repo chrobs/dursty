@@ -1,5 +1,37 @@
-= semantic_form_for @item do |f|
-  = f.input :name
-  = f.input :preis
-  = f.input :kategorie
-  = f.actions
+- count = 0
+
+= semantic_form_for :shop_bundle, :url => shop_bundle_path, :method => :put do |f|
+  = f.label :name
+  = f.text_field :name, :value => @bundle["name"]
+  %br
+  = f.label "Positiv"
+  - if @bundle["type"]=="positive"
+    = f.radio_button :type, 'positive', :checked => true
+  - else
+    = f.radio_button :type, 'positive', :checked => false
+  = f.label "Negativ"
+  - if @bundle["type"]=="negative"
+    = f.radio_button :type, 'negative', :checked => true
+  - else
+    = f.radio_button :type, 'negative', :checked => false
+  = f.input :max_items, :as => :hidden, :value => @bundle["items"].size, :id => :max_items
+  %br
+  %br
+  %table{:class=>"table-index", :id => "item-list"}
+    %thead
+      %td Artikel
+      %td Anzahl
+    - @bundle["items"].each do |item|
+      - count+=1
+      %tr
+        %td
+          = f.text_field "item_id_"+count.to_s, :value => item["id"]
+        %td
+          = f.text_field "item_amount_"+count.to_s, :size => 5, :value => item["amount"]
+
+
+  %span{:class => "js-link", :id => "addItem"}
+    weitere Artikel
+
+  %br
+  = f.submit

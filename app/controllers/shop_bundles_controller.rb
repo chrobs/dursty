@@ -13,13 +13,16 @@ class ShopBundlesController < ApplicationController
   end
 
   def edit
-    @bundle = ShopBundle.find(params[:id])
+    b = ShopBundle.find(params[:id])
+    @bundle = ShopBundle.buildArrayFromBundle b
   end
 
   def update
     @bundle = ShopBundle.find(params[:id])
-    if @bundle.update_attributes(params[:item])
-      redirect_to(items_path, :notice => 'Artikel erfolgreich editiert.')
+    bundle = ShopBundle.paramsToJson params[:shop_bundle]
+
+    if @bundle.update_attributes( :bundle => bundle.to_s)
+      redirect_to(shop_bundles_path, :notice => 'Shop bundle erfolgreich editiert.')
     else
       render :edit
     end

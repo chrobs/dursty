@@ -9,7 +9,10 @@
       %tr
         %td= b["name"]
         %td= b["type"]
-        %td= number_to_currency(b["total"], :unit => "€")
+        - if b["type"]=="positive"
+          %td{:class => "type_positive"}= number_to_currency(b["total"], :unit => "€ ")
+        - else
+          %td{:class => "type_negative"}= number_to_currency(b["total"], :unit => "€ -")
         %td
           %table
             = render :partial => "item", :collection => b["items"].to_a, :as => "item"

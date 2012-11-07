@@ -20,6 +20,8 @@ $color-b1: #FFBB73;
 $color-b2: #FF8300;
 $color-b3: #A65500;
 
+$color-type-negative: red;
+
 $padding-box: 5px;
 $margin-box: 10px;
 
@@ -178,4 +180,8 @@ table td {
 
 .table-index td {
   vertical-align: top;
+}
+
+.type_negative {
+  color: $color-type-negative;
 }

@@ -3,6 +3,8 @@ class ShopController < ApplicationController
 
   def index
     @bundles = ShopBundle.getShopBundlesWithItems
+    @order = Order.where "user_id = ? AND closed = ?", current_user.id, false
+    render :text => @order.size and return
   end
 
   def buy

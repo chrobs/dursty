@@ -37,12 +37,9 @@ class ShopBundle < ActiveRecord::Base
   end
 
   #
-  # returns array of all ShopBundles and returns ShopBundles with all item information
+  # gets params from shopBundle new-method and returns JSON string
   #
-  def self.getShopBundlesWithItems
-    bundles = self.all
-    res_bundles = []
-    bundles.each do |b|
+  def self.buildArrayFromBundle b
       parse = JSON.parse b.bundle
       bundle = {}
       bundle["id"] = b.id
@@ -64,6 +61,17 @@ class ShopBundle < ActiveRecord::Base
         bundle["total"] += amount.to_f * i.preis
       end
 
+      return bundle
+  end
+
+  #
+  # returns array of all ShopBundles and returns ShopBundles with all item information
+  #
+  def self.getShopBundlesWithItems
+    bundles = self.all
+    res_bundles = []
+    bundles.each do |b|
+      bundle = self.buildArrayFromBundle b
       res_bundles.push bundle
     end
 
