@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require reset-min
+ *= require jquery.ui.autocomplete
  *= require_self
  *= require_tree .
  *= require formtastic
@@ -29,7 +30,9 @@ $border-size-header: 10px;
 
 $width-body: 1200px;
 $width-left: 150px;
-$width-main: $width-body - $width-left - 3*$padding-box;
+$width-right: 300px;
+$width-main: auto;
+
 
 $height-header: 38px;
 
@@ -56,6 +59,7 @@ h2 {
   font-weight: normal;
   font-variant: small-caps;
   margin-bottom: $padding-box / 2;
+  color: #000;
 }
 
 h3 {
@@ -142,9 +146,16 @@ a:hover, .js-link:hover {
 #main{
   width: $width-main;
   padding: $padding-box;
-
-  margin-left: $width-left + 2*$padding-box;
+  float: left;
+  //margin-left: $width-left + 2*$padding-box;
 }
+
+#right{
+  width: $width-right;
+  padding: $padding-box;
+  float: right;
+}
+
 
 #flash_container{
   background-color: $color-a2;
@@ -171,6 +182,10 @@ a:hover, .js-link:hover {
 
 table td {
   padding: $padding-box;
+}
+
+table td table {
+  margin: -$padding-box;
 }
 
 

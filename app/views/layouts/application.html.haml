@@ -26,5 +26,8 @@
           #{link_to "Home", root_path} #{yield(:pathway)}
         = content_for?(:content) ? yield(:content) : yield
 
+      %div{id:"right"}
+        = yield(:right)
+
     %div{id:"footer"}
       = render "shared/footer"

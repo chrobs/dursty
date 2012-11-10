@@ -5,29 +5,54 @@
   = f.text_field :name, :value => @bundle["name"]
   %br
   = f.label "Positiv"
-  - if @bundle["type"]=="positive"
-    = f.radio_button :type, 'positive', :checked => true
+  - if @bundle[:positive]
+    = f.radio_button :positive, 'true', :checked => true
   - else
-    = f.radio_button :type, 'positive', :checked => false
+    = f.radio_button :positive, 'true', :checked => false
   = f.label "Negativ"
-  - if @bundle["type"]=="negative"
-    = f.radio_button :type, 'negative', :checked => true
+  - unless @bundle[:positive]
+    = f.radio_button :positive, 'false', :checked => true
   - else
-    = f.radio_button :type, 'negative', :checked => false
-  = f.input :max_items, :as => :hidden, :value => @bundle["items"].size, :id => :max_items
+    = f.radio_button :positive, 'false', :checked => false
+
+  - if @bundle.shop_bundle_parts.size < 1
+    = f.input :max_items, :as => :hidden, :value => 1, :id => :max_items
+  - else
+    = f.input :max_items, :as => :hidden, :value => @bundle.shop_bundle_parts.size, :id => :max_items
+
   %br
   %br
-  %table{:class=>"table-index", :id => "item-list"}
-    %thead
-      %td Artikel
-      %td Anzahl
-    - @bundle["items"].each do |item|
-      - count+=1
-      %tr
-        %td
-          = f.text_field "item_id_"+count.to_s, :value => item["id"]
-        %td
-          = f.text_field "item_amount_"+count.to_s, :size => 5, :value => item["amount"]
+  = f.fields_for :shop_bundle_parts do |g|
+    %table{:class=>"table-index", :id => "item-list"}
+      %thead
+        %td Artikel
+        %td Anzahl
+
+      - if @bundle.shop_bundle_parts.size < 1
+        - count+=1
+        %tr{:class => "item-row"}
+          %td
+            = g.text_field "item_name_"+count.to_s, :class => "item_name"
+          %td
+            = g.text_field "item_amount_"+count.to_s, :size => 5, :class => "item_amount"
+          %td
+            = image_tag "delete.png", :class => "delete_shop_bundle_part js-link", :width => "20px"
+          %td{:class => "item_id"}
+            = g.input "item_id_"+count.to_s, :as => :hidden, :class => "item_id"
+
+      - else
+        - @bundle.shop_bundle_parts.each do |p|
+          - count+=1
+          %tr{:class => "item-row"}
+            %td
+              = g.text_field "item_name_"+count.to_s, :value => p.item[:name], :class => "item_name"
+            %td
+              = g.text_field "item_amount_"+count.to_s, :size => 5, :value => p[:amount], :class => "item_amount"
+            %td
+              = image_tag "delete.png", :class => "delete_shop_bundle_part js-link", :width => "20px", :onclick => "del_row(event)"
+            %td{:class => "item_id"}
+              = g.input "item_id_"+count.to_s,:as => :hidden, :value => p.item[:id]
+
 
 
   %span{:class => "js-link", :id => "addItem"}
@@ -35,3 +60,13 @@
 
   %br
   = f.submit
+
+:javascript
+  $(".item_name").autocomplete({
+    source: #{getItemsAutocompleteForBundle()},
+    select: function(event, ui) {
+      $(event.target).val(ui.item.label)
+      $(event.target).parent().parent().find(".item_id input").val(ui.item.value)
+      return false
+    }
+  })

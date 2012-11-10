@@ -1,0 +1,8 @@
+%div{:class => "shoppingcard"}
+  %div{:class => "title"}
+    %h2 Einkaufswagen
+  %p stand vom: #{@order.updated_at.strftime "%d.%m.%Y - %H:%M"}
+  %ul
+    - @order.order_parts.each do |p|
+      %li
+        = p.amount.to_s + "x " + p.item_id.to_s #+ " (" + number_to_currency(p.item_id.to_i, :unit => "€") + ")"

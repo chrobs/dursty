@@ -5,7 +5,7 @@ class ShopBundlesController < ApplicationController
   before_filter {|controller| controller.check_role('admin','lagerwart') }
 
   def index
-    @bundles = ShopBundle.getShopBundlesWithItems
+    @bundles = ShopBundle.all
   end
 
   def new
@@ -13,19 +13,21 @@ class ShopBundlesController < ApplicationController
   end
 
   def edit
-    b = ShopBundle.find(params[:id])
-    @bundle = ShopBundle.buildArrayFromBundle b
+    @bundle = ShopBundle.find(params[:id])
   end
 
   def update
     @bundle = ShopBundle.find(params[:id])
-    bundle = ShopBundle.paramsToJson params[:shop_bundle]
+    #render :text => params.inspect and return
 
-    if @bundle.update_attributes( :bundle => bundle.to_s)
-      redirect_to(shop_bundles_path, :notice => 'Shop bundle erfolgreich editiert.')
-    else
-      render :edit
-    end
+    render :edit unless @bundle.update_attributes( :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive])
+
+    render :edit unless @bundle.shop_bundle_parts.destroy_all
+    #render :edit unless ShopBundlePart.newFromBundleParams params[:shop_bundle_parts], params[:max_items]
+    render :edit unless ShopBundlePart.newFromBundleParams params
+    puts "\n\n\n testchen \n\n\n"
+
+    redirect_to(shop_bundles_path, :notice => 'Shop bundle erfolgreich editiert.')
   end
 
   def create

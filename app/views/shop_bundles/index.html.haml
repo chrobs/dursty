@@ -7,15 +7,15 @@
   %tbody
     - @bundles.each do |b|
       %tr
-        %td= b["name"]
-        %td= b["type"]
-        - if b["type"]=="positive"
-          %td{:class => "type_positive"}= number_to_currency(b["total"], :unit => "€ ")
+        %td= b[:name]
+        %td= b[:type]
+        - if b[:positive]
+          %td{:class => "type_positive"}= number_to_currency(b.getTotalCost, :unit => "€ ")
         - else
-          %td{:class => "type_negative"}= number_to_currency(b["total"], :unit => "€ -")
+          %td{:class => "type_negative"}= number_to_currency(b.getTotalCost, :unit => "€ -")
         %td
           %table
-            = render :partial => "item", :collection => b["items"].to_a, :as => "item"
+            = #render :partial => "item", :collection => b["items"].to_a, :as => "item"
 
         %td= link_to "editieren", edit_shop_bundle_path(b["id"].to_i)
         %td= link_to "löschen", shop_bundle_path(b["id"].to_i), :confirm => "Are you sure you want to delete this bundle?", :method => :delete

@@ -10,4 +10,7 @@
 - content_for :pathway do
   &raquo; Verkauf #{yield(:pathway)}
 
+- content_for :right do
+  = render "shared/shoppingcard"
+
 = render :template => 'layouts/application'

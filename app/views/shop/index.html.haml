@@ -1,11 +1,18 @@
 %table{:class=> "table-index"}
   %thead
     %td Name
-    %td Preis
+    %td Besteht aus
+    %td Gesamtpreis
   %tbody
     - @bundles.each do |b|
       %tr
-        %td= b["name"]
+        %td
+          = b["name"]
+
+        %td
+          %table{:class => "bundle-item-list"}
+            = render :partial => "item", :collection => b["items"].to_a, :as => "item"
+
         - if b["type"] == "positive"
           %td{:class => "type_positive"}= number_to_currency(b["total"], :unit => "€ ")
         - else
