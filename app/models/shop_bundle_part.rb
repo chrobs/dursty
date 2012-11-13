@@ -10,7 +10,6 @@ class ShopBundlePart < ActiveRecord::Base
 
       next if id.nil? || id.empty? || amount.empty? || amount.nil?
 
-      puts "\n\n\n #{id},#{amount}"
       self.new do |s|
         s.shop_bundle_id = params[:id]
         s.item_id = id

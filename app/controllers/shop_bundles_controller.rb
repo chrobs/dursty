@@ -23,21 +23,21 @@ class ShopBundlesController < ApplicationController
     render :edit unless @bundle.update_attributes( :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive])
 
     render :edit unless @bundle.shop_bundle_parts.destroy_all
-    #render :edit unless ShopBundlePart.newFromBundleParams params[:shop_bundle_parts], params[:max_items]
     render :edit unless ShopBundlePart.newFromBundleParams params
-    puts "\n\n\n testchen \n\n\n"
 
     redirect_to(shop_bundles_path, :notice => 'Shop bundle erfolgreich editiert.')
   end
 
   def create
-    @bundle = ShopBundle.new params[:shop_bundle]
 
-    if @bundle.save
-      redirect_to(shop_bundles_path, :notice => 'Bundle erfolgreich angelegt.')
-    else
-      render :new
-    end
+    #render :text => params[:shop_bundle].inspect and return
+    @bundle = ShopBundle.new :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive]
+
+    render :new unless @bundle.save
+    params[:id] = @bundle.id
+    render :new unless ShopBundlePart.newFromBundleParams params
+
+    redirect_to(shop_bundles_path, :notice => 'Bundle erfolgreich angelegt.')
   end
 
   def destroy

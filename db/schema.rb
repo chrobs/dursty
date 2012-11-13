@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20121109202120) do
   end
 
   create_table "orders", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.boolean  "closed",     :null => false
+    t.integer  "user_id"
+    t.boolean  "closed"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

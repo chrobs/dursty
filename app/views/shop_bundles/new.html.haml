@@ -2,25 +2,56 @@
   = f.label :name
   = f.text_field :name
   %br
+  %br
   = f.label "Positiv"
-  = f.radio_button :type, 'positive', :checked => true, :label => "test"
+  = f.radio_button :positive, 'true', :checked => true
   = f.label "Negativ"
-  = f.radio_button :type, 'negative'
-  = f.input :max_items, :as => :hidden, :value => 1, :id => :max_items
+  = f.radio_button :positive, 'false', :checked => false
+
+  = f.input :max_items, :as => :hidden, :value => 0, :id => :max_items
   %br
   %br
-  %table{:class=>"table-index", :id => "item-list"}
+  %h2 Neuen Artikel hinzufügen
+  %table
     %thead
       %td Artikel
       %td Anzahl
     %tr
+      %td= f.text_field :item_name_new
+      %td= f.text_field :item_amount_new, :size => 5
       %td
-        = f.text_field :item_id_1
-      %td
-        = f.text_field :item_amount_1, :size => 5
+        %span{:class => "js-link", :id => "addItem"}
+          Artikel hinzufügen
+      %td= f.input :item_id_new, :as => :hidden
 
-  %span{:class => "js-link", :id => "addItem"}
-    weitere Artikel
 
   %br
+  %h2 Artikel im Shop bundle
+  = f.fields_for :shop_bundle_parts do |g|
+    %table{:class=>"table-index", :id => "item-list"}
+      %tr{:id => "item-row-sample", :style => "display:none"}
+        %td
+          = g.text_field :item_name_sample, :class => "item_name"
+        %td
+          = g.text_field :item_amount_sample, :size => 5, :class => "item_amount"
+        %td{:class => "item_id"}
+          = g.input :item_id_sample, :as => :hidden
+        %td
+          = image_tag "delete.png", :class => "delete_shop_bundle_part js-link", :width => "20px", :onclick => "del_row(event)"
+
+
+
+
+  %br
+  %br
   = f.submit
+
+:javascript
+  $("#shop_bundle_item_name_new").autocomplete({
+    source: #{getItemsAutocompleteForBundle()},
+    select: function(event, ui) {
+      $(event.target).val(ui.item.label)
+      $(event.target).parent().parent().find("#shop_bundle_item_id_new").val(ui.item.value)
+      return false
+    }
+  })
