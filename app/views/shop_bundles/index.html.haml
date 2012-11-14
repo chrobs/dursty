@@ -1,21 +1,22 @@
-%table{:class=> "table-index"}
+%table{:class=> "table-index table-datatable"}
   %thead
-    %td Name
-    %td Typ
-    %td Preis
-    %td Artikel
+    %tr
+      %th Name
+      %th Preis
+      %th Artikel
+      %th
+      %th
   %tbody
     - @bundles.each do |b|
-      %tr
+      %tr{:class => "row_highlighted"}
         %td= b[:name]
-        %td= b[:type]
         - if b[:positive]
           %td{:class => "type_positive"}= number_to_currency(b.getTotalCost, :unit => "€ ")
         - else
           %td{:class => "type_negative"}= number_to_currency(b.getTotalCost, :unit => "€ -")
         %td
           %table
-            = #render :partial => "item", :collection => b["items"].to_a, :as => "item"
+            = render :partial => "item", :collection => b.shop_bundle_parts, :as => "part"
 
         %td= link_to "editieren", edit_shop_bundle_path(b["id"].to_i)
         %td= link_to "löschen", shop_bundle_path(b["id"].to_i), :confirm => "Are you sure you want to delete this bundle?", :method => :delete

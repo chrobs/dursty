@@ -3,6 +3,7 @@ class Item < ActiveRecord::Base
   validates_presence_of :name, :preis
 
   has_many :shop_bundle_parts
+  has_many :order_parts
 
   def self.itemsForAutocomplete
     res = self.all.map {|k| '{label: "'+k.name+'", value: "'+k.id.to_s+'"}'}.join(",")

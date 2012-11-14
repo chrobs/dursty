@@ -8,10 +8,15 @@ $margin-box: 5px;
 .shoppingcard {
   border-left: 1px solid #000;
   padding: $padding-box;
+  font-size: 13px;
 }
 
 .shoppingcard .title {
   border-bottom: 1px solid #000;
   margin-bottom: $margin-box;
   text-align: center;
+}
+
+.shoppingcard table td{
+  vertical-align: top
 }

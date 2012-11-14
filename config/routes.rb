@@ -9,7 +9,7 @@ Dursty::Application.routes.draw do
   get "kasse/kassenstand"
 
   get "shop/index"
-  match "shop/buy/:bundle/:amount" => 'shop#buy', :as => :shop_buy
+  match "shop/add_to_Card/:bundle/:amount" => 'shop#addToCard', :as => :shop_add_to_card
 
   get "public/index"
   get "home/index"

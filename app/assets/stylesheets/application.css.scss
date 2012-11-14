@@ -9,6 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require reset-min
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
+ *= require dataTables/src/demo_table_jui
  *= require jquery.ui.autocomplete
  *= require_self
  *= require_tree .
@@ -28,10 +31,10 @@ $margin-box: 10px;
 
 $border-size-header: 10px;
 
-$width-body: 1200px;
+$width-body: 1000px;
 $width-left: 150px;
-$width-right: 300px;
-$width-main: auto;
+$width-right: 200px;
+$width-main: 630px;
 
 
 $height-header: 38px;
@@ -188,6 +191,9 @@ table td table {
   margin: -$padding-box;
 }
 
+table tr.row_highlighted{
+  border-bottom: 1px dashed #B8B8B8;
+}
 
 .table-index thead{
   border-bottom: 1px solid #000;
@@ -199,4 +205,8 @@ table td table {
 
 .type_negative {
   color: $color-type-negative;
+}
+
+.row_price{
+  min-width: 54px;
 }

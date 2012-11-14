@@ -1,72 +1,72 @@
-- count = 0
-
 = semantic_form_for :shop_bundle, :url => shop_bundle_path, :method => :put do |f|
   = f.label :name
-  = f.text_field :name, :value => @bundle["name"]
+  = f.text_field :name, :value => @bundle.name
+  %br
   %br
   = f.label "Positiv"
-  - if @bundle[:positive]
-    = f.radio_button :positive, 'true', :checked => true
-  - else
-    = f.radio_button :positive, 'true', :checked => false
+  = f.radio_button :positive, 'true', :checked => @bundle.positive
   = f.label "Negativ"
-  - unless @bundle[:positive]
-    = f.radio_button :positive, 'false', :checked => true
-  - else
-    = f.radio_button :positive, 'false', :checked => false
+  = f.radio_button :positive, 'false', :checked => !@bundle.positive
 
-  - if @bundle.shop_bundle_parts.size < 1
-    = f.input :max_items, :as => :hidden, :value => 1, :id => :max_items
-  - else
-    = f.input :max_items, :as => :hidden, :value => @bundle.shop_bundle_parts.size, :id => :max_items
-
+  = f.input :max_items, :as => :hidden, :value => @bundle.shop_bundle_parts.size, :id => :max_items
   %br
   %br
+  %h2 Neuen Artikel hinzufügen
+  %table
+    %thead
+      %td Artikel
+      %td Anzahl
+    %tr
+      %td= f.text_field :item_name_new
+      %td= f.text_field :item_amount_new, :size => 5
+      %td
+        %span{:class => "js-link", :id => "addItem"}
+          Artikel hinzufügen
+      %td= f.input :item_id_new, :as => :hidden
+
+
+  %br
+  %h2 Artikel im Shop bundle
   = f.fields_for :shop_bundle_parts do |g|
     %table{:class=>"table-index", :id => "item-list"}
-      %thead
-        %td Artikel
-        %td Anzahl
+      %tr{:id => "item-row-sample", :style => "display:none"}
+        %td
+          = g.text_field :item_name_sample, :class => "item_name"
+        %td
+          = g.text_field :item_amount_sample, :size => 5, :class => "item_amount"
+        %td{:class => "item_id"}
+          = g.input :item_id_sample, :as => :hidden
+        %td
+          = image_tag "delete.png", :class => "delete_shop_bundle_part js-link", :width => "20px", :onclick => "del_row(event)"
 
-      - if @bundle.shop_bundle_parts.size < 1
-        - count+=1
-        %tr{:class => "item-row"}
+      - count = 0
+      - @bundle.shop_bundle_parts.each do |p|
+        - count += 1
+        %tr{:style => "display:block"}
           %td
-            = g.text_field "item_name_"+count.to_s, :class => "item_name"
+            = g.text_field "item_name_" + count.to_s, :class => "item_name", :value => p.item.name
           %td
-            = g.text_field "item_amount_"+count.to_s, :size => 5, :class => "item_amount"
-          %td
-            = image_tag "delete.png", :class => "delete_shop_bundle_part js-link", :width => "20px"
+            = g.text_field "item_amount_" + count.to_s, :size => 5, :class => "item_amount", :value => p.amount
           %td{:class => "item_id"}
-            = g.input "item_id_"+count.to_s, :as => :hidden, :class => "item_id"
-
-      - else
-        - @bundle.shop_bundle_parts.each do |p|
-          - count+=1
-          %tr{:class => "item-row"}
-            %td
-              = g.text_field "item_name_"+count.to_s, :value => p.item[:name], :class => "item_name"
-            %td
-              = g.text_field "item_amount_"+count.to_s, :size => 5, :value => p[:amount], :class => "item_amount"
-            %td
-              = image_tag "delete.png", :class => "delete_shop_bundle_part js-link", :width => "20px", :onclick => "del_row(event)"
-            %td{:class => "item_id"}
-              = g.input "item_id_"+count.to_s,:as => :hidden, :value => p.item[:id]
+            = g.input "item_id_" + count.to_s, :as => :hidden, :value => p.item.id.to_s
+          %td
+            = image_tag "delete.png", :class => "delete_shop_bundle_part js-link", :width => "20px", :onclick => "del_row(event)"
 
 
 
-  %span{:class => "js-link", :id => "addItem"}
-    weitere Artikel
 
+
+
+  %br
   %br
   = f.submit
 
 :javascript
-  $(".item_name").autocomplete({
+  $("#shop_bundle_item_name_new").autocomplete({
     source: #{getItemsAutocompleteForBundle()},
     select: function(event, ui) {
       $(event.target).val(ui.item.label)
-      $(event.target).parent().parent().find(".item_id input").val(ui.item.value)
+      $(event.target).parent().parent().find("#shop_bundle_item_id_new").val(ui.item.value)
       return false
     }
   })

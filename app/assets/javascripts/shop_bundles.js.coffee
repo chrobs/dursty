@@ -11,6 +11,14 @@
 #                  return false
 #            })
 
+jQuery ->
+  $(".table-datatable").dataTable({
+    sPaginationType: "full_numbers"
+    bJQueryUI: true
+    bProcessing: true
+    aLengthMenu: [[10, 50,100, -1],[10, 50,100, "All"]]
+  })
+
 @del_row = (event) =>
   $(event.currentTarget).parent().parent().remove()
 

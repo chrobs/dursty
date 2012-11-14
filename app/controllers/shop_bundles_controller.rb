@@ -5,7 +5,7 @@ class ShopBundlesController < ApplicationController
   before_filter {|controller| controller.check_role('admin','lagerwart') }
 
   def index
-    @bundles = ShopBundle.all
+    @bundles = ShopBundle.find(:all, :order => :name)
   end
 
   def new
@@ -18,7 +18,7 @@ class ShopBundlesController < ApplicationController
 
   def update
     @bundle = ShopBundle.find(params[:id])
-    #render :text => params.inspect and return
+    #render :text => @bundle.id and return
 
     render :edit unless @bundle.update_attributes( :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive])
 
@@ -42,11 +42,13 @@ class ShopBundlesController < ApplicationController
 
   def destroy
     @bundle = ShopBundle.find params[:id]
-    if @bundle.destroy
-      redirect_to(shop_bundles_path, :notice => "Bundle erfolgreich gelöscht.")
-    else
+    unless @bundle.shop_bundle_parts.destroy_all
+      redirect_to(shop_bundles_path, :notice => 'Bundle-Parts nicht komplett gelöscht.')
+    end
+    unless @bundle.destroy
       redirect_to(shop_bundles_path, :notice => 'Bundle nicht gelöscht.')
     end
+    redirect_to(shop_bundles_path, :notice => "Bundle erfolgreich gelöscht.")
   end
 
   def show

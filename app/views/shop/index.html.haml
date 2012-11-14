@@ -5,17 +5,12 @@
     %td Gesamtpreis
   %tbody
     - @bundles.each do |b|
-      %tr
+      %tr{:class => "row_highlighted"}
         %td
-          = b["name"]
+          = b.name
 
         %td
           %table{:class => "bundle-item-list"}
-            = render :partial => "item", :collection => b["items"].to_a, :as => "item"
+            = render :partial => "item", :collection => b.shop_bundle_parts, :locals => {:positive => b.positive}, :as => "part"
 
-        - if b["type"] == "positive"
-          %td{:class => "type_positive"}= number_to_currency(b["total"], :unit => "€ ")
-        - else
-          %td{:class => "type_negative"}= number_to_currency(b["total"], :unit => "€ -")
-
-        %td= link_to "kaufen", shop_buy_path(:bundle => b["id"], :amount => 1)
+        %td= link_to "kaufen", shop_add_to_card_path(:bundle => b["id"], :amount => 1)

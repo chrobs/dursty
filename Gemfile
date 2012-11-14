@@ -26,6 +26,7 @@ gem 'formtastic', '~> 2.2.1'
 
 gem 'jquery-rails'
 gem "jquery-ui-rails", "~> 2.0.2"
+gem 'jquery-datatables-rails', "~> 1.11.1"
 gem "devise", '~>2.1.2'
 
 gem 'rspec-rails', '~> 2.11.0', :group => [:development, :test]
