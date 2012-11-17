@@ -1,0 +1,19 @@
+2x Club Mate Kasten (18,70) 37,40
+  - 40xFlasche (0,08)
+  - 40xInhalt(0,91)
+  - 2x Leerrahmen (1,50)
+5x Club Mate Flasche Pfand (-0,08) - 0,40
+----------------------------
+      Saldo   18,30
+
+
+Order_parts erweitern um bundle_id und preis
+
+1. Klicke 1xClub Mate Kasten
+  - Bestellung anlegen (falls nicht vorhanden)
+  - Nimm bundle_id und checke für jeden Bundle_part ob es order_part gibt mit gleicher bundle_id und item_id und positive-typ
+    * wenn ja, erhöhe/erniedrige
+    * wenn nein, lege an und setze amount, preis, bundle_id, item_id, order_id, positive
+2. Einkaufswagen anpassen
+  - nimm alle distinct bundle_ids und zeige an
+  - dazu alle order_parts mit dieser bundle_id

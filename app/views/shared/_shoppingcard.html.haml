@@ -4,7 +4,7 @@
   - if @order.updated_at
     %p stand vom: #{@order.updated_at.strftime "%d.%m.%Y - %H:%M"}
   %table
-    - @order.order_parts.each do |p|
+    -# @order.order_parts.each do |p|
       %tr
         %td= p.amount.to_s + "x"
         %td=  p.item.name

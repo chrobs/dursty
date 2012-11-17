@@ -3,10 +3,19 @@ class ShopController < ApplicationController
 
   def index
     @bundles = ShopBundle.find :all, :order => :name
+
+    # get information for shopping card
     @order = Order.where(:user_id => current_user.id, :closed => false)
                   .order("updated_at")
                   .last
     @order = Order.new if @order.nil?
+
+    # fetch infos sorted by shop_bundels
+    bundle_ids = @order.shop_bundle_ids
+    @order_bundles = []
+    bundle_ids.each do |b_id|
+
+    end
   end
 
   def addToCard
