@@ -9,13 +9,6 @@ class ShopController < ApplicationController
                   .order("updated_at")
                   .last
     @order = Order.new if @order.nil?
-
-    # fetch infos sorted by shop_bundels
-    bundle_ids = @order.shop_bundle_ids
-    @order_bundles = []
-    bundle_ids.each do |b_id|
-
-    end
   end
 
   def addToCard
@@ -29,10 +22,12 @@ class ShopController < ApplicationController
     end
 
     # add order_part for each item in shop_bundle
-    @order.updateParts(params[:bundle], params[:amount])
-    @order.touch
-
-    redirect_to(shop_index_path, :notice => "Erfolgreich in den Wagen gelegt.")
+    if @order.updateParts(params[:bundle], params[:amount])
+      @order.touch
+      redirect_to(shop_index_path, :notice => "Erfolgreich in den Wagen gelegt.")
+    else
+      redirect_to(shop_index_path, :notice => "Fehler aufgetreten, nicht in den wagen geleget.")
+    end
   end
 
   def konto

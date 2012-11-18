@@ -34,6 +34,9 @@ gem "factory_girl_rails", "~> 4.1.0", :group => [:development, :test]
 
 gem "database_cleaner", "~> 0.8.0", :group => :test
 
+# internationalization
+gem "rails-i18n", "~> 0.7.0"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -17,3 +17,9 @@ Order_parts erweitern um bundle_id und preis
 2. Einkaufswagen anpassen
   - nimm alle distinct bundle_ids und zeige an
   - dazu alle order_parts mit dieser bundle_id
+
+------------
+
+Order(id, userid, closed) hat viele Order_parts
+Order_part (id, order_id, shop_bundle_id, amount) has many order_part_items
+Order_part_item (id, order_part_id, item_id, amount, price, name)

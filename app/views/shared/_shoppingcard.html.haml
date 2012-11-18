@@ -3,13 +3,20 @@
     %h2 Einkaufswagen
   - if @order.updated_at
     %p stand vom: #{@order.updated_at.strftime "%d.%m.%Y - %H:%M"}
+
   %table
-    -# @order.order_parts.each do |p|
+    - @order.order_parts.each do |p|
       %tr
         %td= p.amount.to_s + "x"
-        %td=  p.item.name
+        %td=  p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
         - if p.positive
-          %td{:class => "type_positive row_price"}=number_to_currency(p.amount * p.item.preis, :unit => "€ ")
+          %td{:class => "type_positive row_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
         - else
-          %td{:class => "type_negative row_price"}=number_to_currency(p.amount * p.item.preis, :unit => "€ -")
-  %h3 Gesamtpreis: #{number_to_currency(@order.gesamtpreis, :unit => "€")}
+          %td{:class => "type_negative row_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+
+      - p.order_part_items.each do |pi|
+        %tr{:class => "bundle-item-list"}
+          %td
+          - if pi.order_part.positive; price = pi.price; else price = pi.price * (-1) end
+          %td= (pi.order_part.amount * pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
+  %h3 Gesamtpreis: #{number_to_currency(@order.gesamtpreis, :locale => :de)}

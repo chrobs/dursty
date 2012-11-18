@@ -2,7 +2,7 @@
   %thead
     %td Name
     %td Besteht aus
-    %td Gesamtpreis
+    %td Preis
   %tbody
     - @bundles.each do |b|
       %tr{:class => "row_highlighted"}
@@ -13,4 +13,5 @@
           %table{:class => "bundle-item-list"}
             = render :partial => "item", :collection => b.shop_bundle_parts, :locals => {:positive => b.positive}, :as => "part"
 
+        %td= number_to_currency(b.getTotalCost, :locale => :de)
         %td= link_to "kaufen", shop_add_to_card_path(:bundle => b["id"], :amount => 1)
