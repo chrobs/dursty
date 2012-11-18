@@ -207,6 +207,7 @@ table tr.row_highlighted{
   color: $color-type-negative;
 }
 
-.row_price{
+.cell_price{
   min-width: 54px;
+  text-align: right;
 }

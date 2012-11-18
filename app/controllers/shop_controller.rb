@@ -30,6 +30,24 @@ class ShopController < ApplicationController
     end
   end
 
-  def konto
+  def buy
+    # get information for shopping card
+    order = Order.where(:user_id => current_user.id, :closed => false)
+                  .order("updated_at")
+
+    if order.size > 1
+      redirect_to(shop_index_path, :notice => "Fehler: mehrere Order vorhanden. Nicht abgerechnet.")
+    elsif order.size < 1
+      redirect_to(shop_index_path, :notice => "Keine Order vorhanden. Nichts abgerechnet.")
+    end
+
+    order = order.first
+    order.closed = true
+    if order.save
+      redirect_to(shop_index_path, :notice => "Erfolgreich abgerechnet.")
+    else
+      redirect_to(shop_index_path, :notice => "Fehler aufgetreten. Nichts abgerechnet.")
+    end
   end
+
 end
