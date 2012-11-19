@@ -13,4 +13,19 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name, :email, :case_sensitive => false
 
   has_many :orders
+  has_many :userkontos
+
+  def kontoSaldo
+    saldo = self.orders.inject(0.0) do |s,order|
+      if order.closed
+        s + order.gesamtpreis
+      else
+        s
+      end
+    end
+
+    #saldo = self.userkonto.inject(saldo){|s,k| s + k.price}
+
+    return saldo
+  end
 end

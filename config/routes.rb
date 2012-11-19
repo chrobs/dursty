@@ -1,5 +1,9 @@
 Dursty::Application.routes.draw do
 
+  get "usercash/index"
+
+  get "usercash/edit"
+
   devise_for :users
 
   resources :items
@@ -8,12 +12,19 @@ Dursty::Application.routes.draw do
 
   get "kasse/kassenstand"
 
+  # shop
   get "shop/index"
   get "shop/buy"
   match "shop/add_to_Card/:bundle/:amount" => 'shop#addToCard', :as => :shop_add_to_card
 
-  get "public/index"
+  # userkonto
+  get "userkonto/index"
+
+  # home
   get "home/index"
+
+  # public
+  get "public/index"
 
   authenticated :user do
     root :to => 'home#index'

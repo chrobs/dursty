@@ -34,7 +34,7 @@ $border-size-header: 10px;
 $width-body: 1200px;
 $width-left: 150px;
 $width-right: 350px;
-$width-main: 680px;
+$width-main: auto;
 
 
 $height-header: 38px;
@@ -203,6 +203,14 @@ table tr.row_highlighted{
   vertical-align: top;
 }
 
+.indent{
+  padding-left: 6 * $padding-box;
+}
+
+.indent-double{
+  padding-left: 12 * $padding-box;
+}
+
 .type_negative {
   color: $color-type-negative;
 }
@@ -210,4 +218,13 @@ table tr.row_highlighted{
 .cell_price{
   min-width: 54px;
   text-align: right;
+}
+
+.bundle-item-list{
+  color: grey;
+  font-style: italic;
+}
+
+.bundle-item{
+  font-style: italic;
 }

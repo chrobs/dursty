@@ -1,0 +1,16 @@
+%table{:class=> "table-index"}
+  %thead
+    %tr
+      %th Buchung
+      %th Summe
+      %th
+      %th Bestandteile
+  %tbody
+    %tr{:class => "row_highlighted"}
+      %td Saldo
+      - if @user.kontoSaldo >= 0
+        %td{:class => "type_positive cell_price"}=number_to_currency(@user.kontoSaldo, :locale => :de)
+      - else
+        %td{:class => "type_negative cell_price"}=number_to_currency(@user.kontoSaldo, :locale => :de)
+
+    = render :partial => "order", :collection => @orders

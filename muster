@@ -23,3 +23,13 @@ Order_parts erweitern um bundle_id und preis
 Order(id, userid, closed) hat viele Order_parts
 Order_part (id, order_id, shop_bundle_id, amount) has many order_part_items
 Order_part_item (id, order_part_id, item_id, amount, price, name)
+
+
+
+Kassenstand
+11.12.2012                                137,20
+            1x Club Mate Kasten (21,30)
+            2x Club Mate Flasche (0,99)
+
+Kassenstand:
+11.12.2012  34,50

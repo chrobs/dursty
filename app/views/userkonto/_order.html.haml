@@ -1,0 +1,36 @@
+%tr
+  %td #{order.updated_at.strftime("%d.%m.%Y, %H:%M")}
+  - if order.gesamtpreis >= 0
+    %td{:class => "type_positive cell_price"}=number_to_currency(order.gesamtpreis, :locale => :de)
+  - else
+    %td{:class => "type_negative cell_price"}=number_to_currency(order.gesamtpreis, :locale => :de)
+  %td
+  %td
+
+- order.order_parts.each do |p|
+  %tr{:class => "bundle-item"}
+    %td
+    %td
+    %td{:style => "width: 20px"}
+    %td{}=p.amount.to_s + "x " + p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
+    - if p.positive
+      %td{:class => "type_positive cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+    - else
+      %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+
+  - p.order_part_items.each do |pi|
+    %tr{:class => "bundle-item-list"}
+      %td
+      %td
+      %td{:style => "width: 20px"}
+      - if pi.order_part.positive; price = pi.price; else price = pi.price * (-1) end
+      %td{:class => "indent-double"}= (pi.order_part.amount * pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
+
+%tr
+  %td
+  %td
+
+%tr{:class => "row_highlighted"}
+  %td
+  %td
+  %td
