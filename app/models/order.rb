@@ -38,6 +38,30 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def removePart shop_bundle_id
+    # check if bundle in order
+    part = OrderPart.where :order_id => self.id,
+                           :shop_bundle_id => shop_bundle_id
+    if part.size == 1
+      # part exists in order, get first
+      part = part.first
+
+      # remove order_part_items
+      return false unless part.removePartItems
+
+      # remove order_part
+      return part.destroy
+
+    elsif part.size == 0
+      # not existent in order, job done
+      return true
+    else
+      # error: more than one order_part for same shop_bundle
+      return false
+    end
+
+  end
+
   def gesamtpreis
     preis = 0
     self.order_parts.each do |p|

@@ -17,6 +17,10 @@ class OrderPart < ActiveRecord::Base
     return true
   end
 
+  def removePartItems
+    return self.order_part_items.destroy_all
+  end
+
   def sumOfPartItems
     sum = 0
     self.order_part_items.each do |i|

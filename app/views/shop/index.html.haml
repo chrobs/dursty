@@ -13,6 +13,8 @@
           %table{:class => "bundle-item-list"}
             = render :partial => "item", :collection => b.shop_bundle_parts, :locals => {:positive => b.positive}, :as => "part"
 
-        %td= number_to_currency(b.getTotalCost, :locale => :de)
-        %td= link_to "kaufen", shop_add_to_card_path(:bundle => b["id"], :amount => 1)
-        -#%td= semantic_form_for :, :url => shop_bundles_path, :method => :post do |f|
+        %td{:class => :cell_price_big}= number_to_currency(b.getTotalCost, :locale => :de)
+        -#%td= link_to "kaufen", shop_add_to_card_path(:bundle => b["id"], :amount => 1)
+        %td{:class => :cell_buy}
+          %input{:type => 'text', :size => 1, :value => 1}
+          = image_tag "buy.png", :class => "js-link", :onclick => "shop_buy_bundle(event, #{b["id"]})"

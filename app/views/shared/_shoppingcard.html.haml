@@ -7,18 +7,24 @@
   %table
     - @order.order_parts.each do |p|
       %tr
-        %td= p.amount.to_s + "x"
+        %td
+          = image_tag "up.png", :class => "shop_more_bundle_part js-link", :width => "15px", :onclick => "shop_change_bundle_amount(event, #{p.shop_bundle_id}, 1)"
+          = p.amount.to_s + "x"
+          = image_tag "down.png", :class => "shop_less_bundle_part js-link", :width => "15px", :onclick => "shop_change_bundle_amount(event, #{p.shop_bundle_id}, -1)"
         %td=  p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
         - if p.positive
           %td{:class => "type_positive cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
         - else
           %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+        %td
+          = image_tag "delete.png", :class => "shop_delete_bundle_part js-link", :width => "15px", :onclick => "shop_del_bundle(event, #{p.shop_bundle_id})"
 
       - p.order_part_items.each do |pi|
         %tr{:class => "bundle-item-list"}
           %td
           - if pi.order_part.positive; price = pi.price; else price = pi.price * (-1) end
           %td= (pi.order_part.amount * pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
+
     - unless @order.id.nil?
       %tr
         %td
@@ -27,7 +33,11 @@
       %tr
         %td
         %td{:style => "text-align:right"} Gesamtpreis:
-        %td{:class => "cell_price"}=number_to_currency(@order.gesamtpreis, :locale => :de)
+        - gesamtpreis = @order.gesamtpreis
+        - if gesamtpreis >= 0
+          %td{:class => "type_positive cell_price"}=number_to_currency(gesamtpreis, :locale => :de)
+        - else
+          %td{:class => "type_negative cell_price"}=number_to_currency(gesamtpreis, :locale => :de)
 
   %br
   %h2{:style => "text-align:center"}= link_to "== Kauf abschließen ==", shop_buy_path

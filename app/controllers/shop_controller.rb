@@ -26,7 +26,25 @@ class ShopController < ApplicationController
       @order.touch
       redirect_to(shop_index_path, :notice => "Erfolgreich in den Wagen gelegt.")
     else
-      redirect_to(shop_index_path, :notice => "Fehler aufgetreten, nicht in den wagen geleget.")
+      redirect_to(shop_index_path, :notice => "Fehler aufgetreten, nicht in den Wagen geleget.")
+    end
+  end
+
+  def removeFromCard
+    # get last order from user or die
+    @order = Order.where(:user_id => current_user.id, :closed => false)
+                  .order("updated_at")
+                  .last
+    if @order.nil?
+      redirect_to(shop_index_path, :notice => "Fehler aufgetreten, keine offene Bestellung vorhanden.")
+    end
+
+    # remove bundle from order_parts
+    if @order.removePart(params[:bundle])
+      @order.touch
+      redirect_to(shop_index_path, :notice => "Erfolgreich aus dem Wagen entfernt.")
+    else
+      redirect_to(shop_index_path, :notice => "Fehler aufgetreten, nichts aus dem Wagen entfernt.")
     end
   end
 
