@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119152048) do
+ActiveRecord::Schema.define(:version => 20121119160201) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(:version => 20121119152048) do
   end
 
   create_table "orders", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.boolean  "closed",     :null => false
+    t.integer  "user_id"
+    t.boolean  "closed"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 20121119152048) do
     t.boolean  "positive"
   end
 
-  create_table "userkontos", :force => true do |t|
+  create_table "user_account_bills", :force => true do |t|
     t.string   "name"
     t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
     t.datetime "created_at",                                                :null => false

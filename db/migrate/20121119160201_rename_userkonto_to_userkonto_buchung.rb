@@ -1,5 +1,5 @@
 class RenameUserkontoToUserkontoBuchung < ActiveRecord::Migration
   def change
-    rename_table :userkontos, :userkonto_buchungs
+    rename_table :userkontos, :user_account_bills
   end
 end

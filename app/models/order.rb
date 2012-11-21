@@ -5,6 +5,9 @@ class Order < ActiveRecord::Base
   has_many :order_part_items, :through => :order_parts
   has_many :items, :through => :order_part_items
   has_many :shop_bundles, :through => :order_parts
+  has_many :user_account_bills, :through => :user
+
+  scope :closed, where(:closed => true)
 
   def updateParts shop_bundle_id, amount
     # check if bundle already in order

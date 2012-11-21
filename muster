@@ -33,3 +33,13 @@ Kassenstand
 
 Kassenstand:
 11.12.2012  34,50
+
+
+Buchung   Grund                   Summe
+                          Saldo:  -0,08
+
+1.1.12    Bestellung:             20,08
+          2xMate(10,00)   20,00
+          1xFlasche(0,08) 0,08
+
+2.2.12    Umbuchung auf Konto     -20,00

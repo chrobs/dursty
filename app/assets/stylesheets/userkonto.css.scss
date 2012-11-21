@@ -1,0 +1,42 @@
+// Place all the styles related to the usercash controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.element_first_row > td {
+  padding-top: 10px;
+}
+
+.element_first_row > td {
+  padding-bottom: 10px;
+}
+
+.element_last_row {
+
+  border-bottom: 1px dashed #B8B8B8;
+}
+
+.table_bills .row_saldo {
+  background-color: #DDDDDD;
+}
+
+.table_bills .bundle-item{
+  font-size: 13px;
+}
+
+.table_bills .bundle-item-list{
+  font-size: 13px;
+}
+
+.cell_price{
+  min-width: 54px;
+  text-align: right;
+}
+
+.bundle-item-list{
+  color: grey;
+  font-style: italic;
+}
+
+.bundle-item{
+  font-style: italic;
+}

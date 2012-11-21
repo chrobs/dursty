@@ -35,6 +35,7 @@ $width-body: 1200px;
 $width-left: 150px;
 $width-right: 350px;
 $width-main: auto;
+$width-main-max: 1040px;
 
 
 $height-header: 38px;
@@ -148,6 +149,7 @@ a:hover, .js-link:hover {
 
 #main{
   width: $width-main;
+  max-width: $width-main-max;
   padding: $padding-box;
   float: left;
   //margin-left: $width-left + 2*$padding-box;
@@ -195,6 +197,11 @@ table tr.row_highlighted{
   border-bottom: 1px dashed #B8B8B8;
 }
 
+table tr.row_highlighted > td {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
 .table-index thead{
   border-bottom: 1px solid #000;
 }
@@ -213,18 +220,4 @@ table tr.row_highlighted{
 
 .type_negative {
   color: $color-type-negative;
-}
-
-.cell_price{
-  min-width: 54px;
-  text-align: right;
-}
-
-.bundle-item-list{
-  color: grey;
-  font-style: italic;
-}
-
-.bundle-item{
-  font-style: italic;
 }

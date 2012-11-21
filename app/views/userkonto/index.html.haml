@@ -1,16 +1,22 @@
-%table{:class=> "table-index"}
+%table{:class=> "table-index table_bills"}
   %thead
     %tr
       %th Buchung
-      %th Summe
+      %th Grund
       %th
-      %th Bestandteile
+      %th Betrag
   %tbody
-    %tr{:class => "row_highlighted"}
-      %td Saldo
+    %tr{:class => "element_first_row element_last_row row_saldo"}
+      %td
+      %td Aktueller Kassenstand
+      %td{:style => "text-align:right"} Saldo:
       - if @user.kontoSaldo >= 0
         %td{:class => "type_positive cell_price"}=number_to_currency(@user.kontoSaldo, :locale => :de)
       - else
         %td{:class => "type_negative cell_price"}=number_to_currency(@user.kontoSaldo, :locale => :de)
 
-    = render :partial => "order", :collection => @orders
+    - @buchungen.each do |b|
+      - if b.class == Order
+        = render :partial => "order", :collection => [b]
+      - elsif b.class == UserAccountBill
+        = render :partial => "bill", :collection => [b]

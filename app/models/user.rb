@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name, :email, :case_sensitive => false
 
   has_many :orders
-  has_many :userkontos
+  has_many :user_account_bills
 
   def kontoSaldo
     saldo = self.orders.inject(0.0) do |s,order|
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    #saldo = self.userkonto.inject(saldo){|s,k| s + k.price}
+    saldo = self.user_account_bills.inject(saldo){|s,k| s + k.price}
 
     return saldo
   end
