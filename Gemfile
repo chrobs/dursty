@@ -24,18 +24,24 @@ end
 gem 'haml-rails', '~> 0.3.5', :group => :development
 gem 'formtastic', '~> 2.2.1'
 
+# jquery
 gem 'jquery-rails'
 gem "jquery-ui-rails", "~> 2.0.2"
 gem 'jquery-datatables-rails', "~> 1.11.1"
+
+# user authentication
 gem "devise", '~>2.1.2'
 
+# testing
 gem 'rspec-rails', '~> 2.11.0', :group => [:development, :test]
 gem "factory_girl_rails", "~> 4.1.0", :group => [:development, :test]
-
 gem "database_cleaner", "~> 0.8.0", :group => :test
 
 # internationalization
 gem "rails-i18n", "~> 0.7.0"
+
+# pagination
+gem 'will_paginate', "~> 3.0.3"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

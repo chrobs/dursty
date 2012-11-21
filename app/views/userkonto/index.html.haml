@@ -20,3 +20,10 @@
         = render :partial => "order", :collection => [b]
       - elsif b.class == UserAccountBill
         = render :partial => "bill", :collection => [b]
+
+%div{:class => "digg_pagination"}
+  %div{:class => "page_info"}
+    = page_entries_info @buchungen
+  = will_paginate @buchungen, :container => false
+
+
