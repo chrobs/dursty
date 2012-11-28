@@ -2,7 +2,11 @@
 
 class ItemsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter {|controller| controller.check_role('admin','lagerwart') }
+  before_filter do |controller|
+    unless controller.check_role('admin','lagerwart')
+      redirect_to root_path, :notice => 'Aktion nicht erlaubt'
+    end
+  end
 
   def index
     @items = Item.order("name")

@@ -1,17 +1,5 @@
 Dursty::Application.routes.draw do
 
-  get "order/edit"
-
-  get "order/update"
-
-  get "order/destroy"
-
-  get "order_controller/edit"
-
-  get "order_controller/update"
-
-  get "order_controller/destroy"
-
   get "usercash/index"
 
   get "usercash/edit"
@@ -20,7 +8,7 @@ Dursty::Application.routes.draw do
 
   resources :items
   resources :shop_bundles
-  resources :orders
+  resources :order
 
   get "kasse/kassenstand"
 
@@ -31,7 +19,7 @@ Dursty::Application.routes.draw do
   match "shop/remove_from_card/:bundle" => 'shop#removeFromCard', :as => :shop_remove_from_card
 
   # userkonto
-  get "userkonto/index"
+  match "userkonto/:id" => 'userkonto#show', :as => :userkonto_show
 
   # home
   get "home/index"

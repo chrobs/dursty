@@ -2,8 +2,13 @@
 
 class UserkontoController < ApplicationController
   before_filter :authenticate_user!
+  before_filter do |controller|
+    unless controller.check_role('admin','kassenwart') || User.find(params[:id]).id == current_user.id
+      redirect_to root_path, :notice => 'Aktion nicht erlaubt'
+    end
+  end
 
-  def index
+  def show
     @user = User.find current_user
     orders = Order.closed.where :user_id => current_user
     bills = UserAccountBill.where :user_id => current_user
