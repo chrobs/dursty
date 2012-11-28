@@ -63,6 +63,7 @@ class ShopController < ApplicationController
 
     order = order.first
     order.closed = true
+    order.created_at = Time.zone.now
     if order.save
       redirect_to(shop_index_path, :notice => "Erfolgreich abgerechnet.")
     else

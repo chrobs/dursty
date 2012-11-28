@@ -1,5 +1,17 @@
 Dursty::Application.routes.draw do
 
+  get "order/edit"
+
+  get "order/update"
+
+  get "order/destroy"
+
+  get "order_controller/edit"
+
+  get "order_controller/update"
+
+  get "order_controller/destroy"
+
   get "usercash/index"
 
   get "usercash/edit"

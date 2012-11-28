@@ -8,7 +8,7 @@ class UserkontoController < ApplicationController
     orders = Order.closed.where :user_id => current_user
     bills = UserAccountBill.where :user_id => current_user
     @buchungen = (orders + bills).sort!{|a,b| b.updated_at <=> a.updated_at}
-    @buchungen = @buchungen.paginate(page:params[:page], per_page:5)
+    @buchungen = @buchungen.paginate(page:params[:page], per_page:10)
   end
 
   def edit

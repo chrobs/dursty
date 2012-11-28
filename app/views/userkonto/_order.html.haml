@@ -1,11 +1,18 @@
 %tr{:class => "element_first_row"}
-  %td #{order.updated_at.strftime("%d.%m.%Y, %H:%M")}
+  %td #{order.created_at.strftime("%d.%m.%Y, %H:%M")}
   %td Bestellung:
   %td
   - if order.gesamtpreis >= 0
-    %td{:class => "type_positive cell_price"}=number_to_currency(order.gesamtpreis, :locale => :de)
+    %td{:class => "type_positive cell_price"}
+      =number_to_currency(order.gesamtpreis, :locale => :de)
   - else
-    %td{:class => "type_negative cell_price"}=number_to_currency(order.gesamtpreis, :locale => :de)
+    %td{:class => "type_negative cell_price"}
+      =number_to_currency(order.gesamtpreis, :locale => :de)
+
+  - unless order.created_at < 8.days.ago.beginning_of_day
+    %td{:class => "cell_edit"}
+      %a{:href => edit_order_path(order.id)}
+        = image_tag "edit.png"
 
 - order.order_parts.each do |p|
   %tr{:class => "bundle-item"}

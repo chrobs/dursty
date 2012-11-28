@@ -11,9 +11,12 @@
       %td Aktueller Kassenstand
       %td{:style => "text-align:right"} Saldo:
       - if @user.kontoSaldo >= 0
-        %td{:class => "type_positive cell_price"}=number_to_currency(@user.kontoSaldo, :locale => :de)
+        %td{:class => "type_positive cell_price"}
+          =number_to_currency(@user.kontoSaldo, :locale => :de)
       - else
-        %td{:class => "type_negative cell_price"}=number_to_currency(@user.kontoSaldo, :locale => :de)
+        %td{:class => "type_negative cell_price"}
+          =number_to_currency(@user.kontoSaldo, :locale => :de)
+      %td
 
     - @buchungen.each do |b|
       - if b.class == Order
