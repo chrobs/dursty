@@ -1,2 +1,46 @@
-%h1 Order#edit
-%p Find me in app/views/order/edit.html.haml
+- content_for :pathway_2 do
+  &raquo; Bestellung vom #{@order.created_at.strftime("%d.%m.%Y, %H:%M")}
+
+%table
+  - @order.order_parts.each do |p|
+    %tr
+      %td
+        %a{:href => order_update_bundle_amount_path(:id => @order.id, :bundle => p.shop_bundle_id, :amount => 1)}
+          = image_tag "up.png", :class => "shop_more_bundle_part", :width => "15px"
+        = p.amount.to_s + "x"
+        %a{:href => order_update_bundle_amount_path(:id => @order.id, :bundle => p.shop_bundle_id, :amount => -1)}
+          = image_tag "down.png", :class => "shop_less_bundle_part", :width => "15px"
+
+      %td=  p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
+
+      - if p.positive
+        %td{:class => "type_positive cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+      - else
+        %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+
+      %td
+        %a{:href => order_delete_bundle_path(:id => @order.id, :bundle => p.shop_bundle_id)}
+          = image_tag "delete.png", :class => "shop_delete_bundle_part", :width => "15px"
+
+    - p.order_part_items.each do |pi|
+      %tr{:class => "bundle-item-list"}
+        %td
+        - if pi.order_part.positive; price = pi.price; else price = pi.price * (-1) end
+        %td= (pi.order_part.amount * pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
+
+  - unless @order.id.nil?
+    %tr
+      %td
+      %td
+      %td{:style => "text-align:center"} -------
+    %tr
+      %td
+      %td{:style => "text-align:right"} Gesamtpreis:
+      - gesamtpreis = @order.gesamtpreis
+      - if gesamtpreis >= 0
+        %td{:class => "type_positive cell_price"}=number_to_currency(gesamtpreis, :locale => :de)
+      - else
+        %td{:class => "type_negative cell_price"}=number_to_currency(gesamtpreis, :locale => :de)
+
+%br
+%h3{:style => "text-align:center"}= link_to "zurück zum Kassenstand", userkonto_show_path(@order.user.id)

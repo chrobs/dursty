@@ -9,7 +9,7 @@
     %td{:class => "type_negative cell_price"}
       =number_to_currency(order.gesamtpreis, :locale => :de)
 
-  - unless order.created_at < 8.days.ago.beginning_of_day
+  - unless order.created_at < 10.days.ago.beginning_of_day
     %td{:class => "cell_edit"}
       %a{:href => edit_order_path(order.id)}
         = image_tag "edit.png"

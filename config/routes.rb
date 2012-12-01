@@ -21,6 +21,10 @@ Dursty::Application.routes.draw do
   # userkonto
   match "userkonto/:id" => 'userkonto#show', :as => :userkonto_show
 
+  # order
+  match "order/:id/update/:bundle/:amount" => 'order#update_bundle_amount', :as => :order_update_bundle_amount
+  match "order/:id/delete/:bundle" => 'order#delete_bundle', :as => :order_delete_bundle
+
   # home
   get "home/index"
 
