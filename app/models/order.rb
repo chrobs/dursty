@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   attr_accessible :closed, :id, :user_id
+
   belongs_to :user
   has_many :order_parts
   has_many :order_part_items, :through => :order_parts
@@ -8,6 +9,12 @@ class Order < ActiveRecord::Base
   has_many :user_account_bills, :through => :user
 
   scope :closed, where(:closed => true)
+
+  @@expiration = 8
+
+  def expired
+    return self.created_at < @@expiration.days.ago.beginning_of_day
+  end
 
   def updateParts shop_bundle_id, amount
     # check if bundle already in order

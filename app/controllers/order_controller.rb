@@ -3,8 +3,18 @@
 class OrderController < ApplicationController
   before_filter :authenticate_user!
   before_filter do |controller|
+    # check if user owns order or user is admin/kassenwart
     unless controller.check_role('admin','kassenwart') || Order.find(params[:id]).user_id == current_user.id
-      redirect_to(userkonto_index_path, :notice => 'Aktion nicht erlaubt.')
+      redirect_to(userkonto_show_path(current_user.id), :notice => 'Bestellung eines anderen Benutzers, Aktion nicht erlaubt.')
+    end
+  end
+
+  before_filter do |controller|
+    # unless user is admin/kassenwart, check if Order is not expired
+    unless controller.check_role('admin','kassenwart')
+      if Order.find(params[:id]).expired
+        redirect_to(userkonto_show_path(current_user.id), :notice => 'Bestellung zu alt, nicht mehr editierbar.')
+      end
     end
   end
 
