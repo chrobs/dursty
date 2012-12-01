@@ -8,16 +8,19 @@
     - @order.order_parts.each do |p|
       %tr
         %td
-          = image_tag "up.png", :class => "shop_more_bundle_part js-link", :width => "15px", :onclick => "shop_change_bundle_amount(event, #{p.shop_bundle_id}, 1)"
+          %a{:href => shop_add_to_card_path(:bundle => p.shop_bundle_id, :amount => 1)}
+            = image_tag "up.png", :class => "shop_more_bundle_part", :width => "15px"
           = p.amount.to_s + "x"
-          = image_tag "down.png", :class => "shop_less_bundle_part js-link", :width => "15px", :onclick => "shop_change_bundle_amount(event, #{p.shop_bundle_id}, -1)"
+          %a{:href => shop_add_to_card_path(:bundle => p.shop_bundle_id, :amount => -1)}
+            = image_tag "down.png", :class => "shop_less_bundle_part", :width => "15px"
         %td=  p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
         - if p.positive
           %td{:class => "type_positive cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
         - else
           %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
         %td
-          = image_tag "delete.png", :class => "shop_delete_bundle_part js-link", :width => "15px", :onclick => "shop_del_bundle(event, #{p.shop_bundle_id})"
+          %a{:href => shop_remove_from_card_path(:bundle => p.shop_bundle_id)}
+            = image_tag "delete.png", :class => "shop_delete_bundle_part", :width => "15px"
 
       - p.order_part_items.each do |pi|
         %tr{:class => "bundle-item-list"}
