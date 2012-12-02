@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202172052) do
+ActiveRecord::Schema.define(:version => 20121202201807) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -22,15 +22,19 @@ ActiveRecord::Schema.define(:version => 20121202172052) do
   end
 
   create_table "konto_transactions", :force => true do |t|
-    t.integer "from"
-    t.integer "to"
-    t.string  "name"
-    t.decimal "price", :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "from"
+    t.integer  "to"
+    t.string   "name"
+    t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "kontos", :force => true do |t|
-    t.string  "name"
-    t.integer "user_id"
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "order_part_items", :force => true do |t|

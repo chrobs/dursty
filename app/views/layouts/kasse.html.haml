@@ -14,3 +14,7 @@
   &raquo; #{link_to "Kasse", kasse_uebersicht_path} #{yield(:pathway_sub)}
 
 = render :template => 'layouts/application'
+
+- # fix max width for main-element
+:javascript
+  $("#main").attr("style","max-width:none")

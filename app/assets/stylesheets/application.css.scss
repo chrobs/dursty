@@ -222,3 +222,17 @@ table tr.row_highlighted > td {
 .type_negative {
   color: $color-type-negative;
 }
+
+.float-right{
+  float: right;
+}
+
+.float-left{
+  float: left;
+}
+
+.toggle_background:nth-child(odd){
+  background-color: #f0f0f0;
+  border-bottom: 1px dashed black;
+  border-top: 1px dashed black;
+}

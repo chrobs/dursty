@@ -12,4 +12,14 @@ class KasseController < ApplicationController
     @bar_konto = Konto.bar_konto
     @ec_konto = Konto.ec_konto
   end
+
+  def bar_konto
+    @konto = Konto.bar_konto
+    render "kasse/konto.html.haml"
+  end
+
+  def ec_konto
+    @konto = Konto.ec_konto
+    render "kasse/konto.html.haml"
+  end
 end

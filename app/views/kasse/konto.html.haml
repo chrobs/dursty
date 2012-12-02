@@ -1,0 +1,34 @@
+%div{:class => "konto-detail"}
+  %h1=@konto.name
+  %br
+  %table{:class=> "table-index table_bills"}
+    %thead
+      %tr
+        %th Datum
+        %th Von
+        %th An
+        %th Grund
+        %th Betrag
+    %tbody
+      %tr{:class => "element_first_row element_last_row row_saldo"}
+        %td
+        %td
+        %td
+        %td{:style => "text-align:right"} Saldo:
+        - if @konto.saldo >= 0
+          %td{:class => "type_positive cell_price"}
+            =number_to_currency(@konto.saldo, :locale => :de)
+        - else
+          %td{:class => "type_negative cell_price"}
+            =number_to_currency(@konto.saldo, :locale => :de)
+
+      -@konto.transactions.each do |t|
+        %tr{:class => "toggle_background"}
+          %td=t.created_at.strftime("%d.%m.%Y")
+          %td=t.from_konto.name
+          %td=t.to_konto.name
+          %td=t.name
+          - if t.from_konto.id == @konto.id
+            %td{:class => "type_negative cell_price"}=number_to_currency (-1)*t.price, :locale => :de
+          - else
+            %td{:class => "type_positive cell_price"}=number_to_currency t.price, :locale => :de

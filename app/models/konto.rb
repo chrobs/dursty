@@ -15,4 +15,17 @@ class Konto < ActiveRecord::Base
   def self.ec_konto
     return self.find @@ec_konto_id
   end
+
+  def saldo
+    saldo = 0
+    saldo = self.transactions_in.inject(saldo){|s,t| s + t.price}
+    saldo = self.transactions_out.inject(saldo){|s,t| s - t.price}
+    return saldo
+  end
+
+  def transactions limit=nil
+    res = self.transactions_in.limit(limit) + self.transactions_out.limit(limit)
+    res.sort!{|a,b| b.created_at <=> a.created_at}
+    return res
+  end
 end
