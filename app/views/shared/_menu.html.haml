@@ -20,7 +20,9 @@
         = yield(:shop_bundlesMenu)
 
     - if current_user.try(:admin?) || current_user.try(:kassenwart?)
-      %li= link_to "Kasse", kasse_kassenstand_path
+      %li= link_to "Kasse", kasse_uebersicht_path
+      - if content_for?(:kasseMenu)
+        = yield(:kasseMenu)
 
     - if content_for?(:menu)
       = yield(:menu)

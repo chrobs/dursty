@@ -8,6 +8,8 @@ class KasseController < ApplicationController
     end
   end
 
-  def kassenstand
+  def uebersicht
+    @bar_konto = Konto.bar_konto
+    @ec_konto = Konto.ec_konto
   end
 end

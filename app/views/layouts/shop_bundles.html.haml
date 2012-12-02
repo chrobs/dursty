@@ -11,6 +11,6 @@
   = content_for?(:home_content) ? yield(:home_content) : yield
 
 - content_for :pathway do
-  &raquo; #{link_to "Shop bundles", shop_bundles_path} #{yield(:pathway)}
+  &raquo; #{link_to "Shop bundles", shop_bundles_path} #{yield(:pathway_sub)}
 
 = render :template => 'layouts/application'

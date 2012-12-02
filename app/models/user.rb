@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   has_many :orders
   has_many :user_account_bills
+  has_one :konto
 
   def kontoSaldo
     saldo = self.orders.inject(0.0) do |s,order|

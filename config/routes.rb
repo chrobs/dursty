@@ -1,16 +1,14 @@
 Dursty::Application.routes.draw do
 
-  get "usercash/index"
-
-  get "usercash/edit"
-
   devise_for :users
 
   resources :items
   resources :shop_bundles
   resources :order
 
-  get "kasse/kassenstand"
+  get "kasse/uebersicht"
+  get "kasse/ec_konto"
+  get "kasse/bar_konto"
 
   # shop
   get "shop/index"

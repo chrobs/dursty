@@ -1,3 +1,6 @@
+- content_for :pathway_sub do
+  &raquo; Editiere "#{@bundle.name}"
+
 = semantic_form_for :shop_bundle, :url => shop_bundle_path, :method => :put do |f|
   = f.label :name
   = f.text_field :name, :value => @bundle.name
