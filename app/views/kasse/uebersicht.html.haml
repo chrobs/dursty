@@ -1,31 +1,38 @@
 - content_for :pathway_sub do
   &raquo; Barkasse
 
-%table{:class=> "table-index table_bills"}
-  %thead
-    %tr
-      %th Konto
-      %th Letzter Stand
-      %th Saldo
-  %tbody
-    %tr{:class => "toggle_background"}
-      %td
-      %td{:style => "text-align:right"} Gesamt:
-      - if (@bar_konto.saldo + @ec_konto.saldo) >= 0
-        %td{:class => "type_positive cell_price"}= number_to_currency @bar_konto.saldo + @ec_konto.saldo, :locale => :de
-      - else
-        %td{:class => "type_negative cell_price"}= number_to_currency(@bar_konto.saldo + @ec_konto.saldo, :locale => :de)
-    %tr{:class => "toggle_background"}
-      %td Barkasse
-      %td=@bar_konto.transactions.last.created_at.strftime "%d.%m.%Y"
-      - if @bar_konto.saldo >= 0
-        %td{:class => "type_positive cell_price"}=number_to_currency @bar_konto.saldo, :locale => :de
-      - else
-        %td{:class => "type_positive cell_price"}=number_to_currency @bar_konto.saldo, :locale => :de
-    %tr{:class => "toggle_background"}
-      %td EC-Konto
-      %td=@ec_konto.transactions.last.created_at.strftime "%d.%m.%Y"
-      - if @ec_konto.saldo >= 0
-        %td{:class => "type_positive cell_price"}=number_to_currency @ec_konto.saldo, :locale => :de
-      - else
-        %td{:class => "type_negative cell_price"}=number_to_currency @ec_konto.saldo, :locale => :de
+%div{:class => "konto-uebersicht float-left"}
+  %h1 AG-Konten
+  %table{:class=> "table-index table_bills"}
+    %thead
+      %tr
+        %th Konto
+        %th Letzter Stand
+        %th Saldo
+    %tbody
+      %tr{:class => "toggle_background"}
+        %td
+        %td{:style => "text-align:right"} Gesamt:
+        - if @ag_kontos_saldo >= 0
+          %td{:class => "type_positive cell_price"}= number_to_currency @ag_kontos_saldo, :locale => :de
+        - else
+          %td{:class => "type_negative cell_price"}= number_to_currency @ag_kontos_saldo, :locale => :de
+      = render :partial => "ag_konto_uebersicht", :collection => @ag_kontos, :as => :konto
+
+%div{:class => "konto-uebersicht float-right"}
+  %h1 Verkäufer-Konten
+  %table{:class=> "table-index table_bills"}
+    %thead
+      %tr
+        %th Verkäufer
+        %th Letzter Stand
+        %th Saldo
+    %tbody
+      %tr{:class => "toggle_background"}
+        %td
+        %td{:style => "text-align:right"} Gesamt:
+        - if @verkaeufer_kontos_saldo >= 0
+          %td{:class => "type_positive cell_price"}= number_to_currency @verkaeufer_kontos_saldo, :locale => :de
+        - else
+          %td{:class => "type_negative cell_price"}= number_to_currency @verkaeufer_kontos_saldo, :locale => :de
+        = render :partial => "verkaeufer_konto_uebersicht", :collection => @verkaeufer_kontos, :as => :konto

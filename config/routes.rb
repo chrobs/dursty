@@ -7,8 +7,7 @@ Dursty::Application.routes.draw do
   resources :order
 
   get "kasse/uebersicht"
-  get "kasse/ec_konto"
-  get "kasse/bar_konto"
+  match "kasse/:id" => 'kasse#show_konto', :as => "kasse_show_konto"
 
   # shop
   get "shop/index"

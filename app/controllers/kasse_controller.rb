@@ -7,19 +7,20 @@ class KasseController < ApplicationController
       redirect_to root_path, :notice => 'Aktion nicht erlaubt'
     end
   end
+  before_filter :set_ag_kontos
+
+  def set_ag_kontos
+    @ag_kontos = Konto.ag_kontos
+  end
 
   def uebersicht
-    @bar_konto = Konto.bar_konto
-    @ec_konto = Konto.ec_konto
+    @ag_kontos_saldo = @ag_kontos.inject(0){|s,k| s+=k.saldo}
+
+    @verkaeufer_kontos = Konto.verkaeufer_kontos
+    @verkaeufer_kontos_saldo = @verkaeufer_kontos.inject(0){|s,k| s+=k.saldo}
   end
 
-  def bar_konto
-    @konto = Konto.bar_konto
-    render "kasse/konto.html.haml"
-  end
-
-  def ec_konto
-    @konto = Konto.ec_konto
-    render "kasse/konto.html.haml"
+  def show_konto
+    @konto = Konto.find params[:id]
   end
 end

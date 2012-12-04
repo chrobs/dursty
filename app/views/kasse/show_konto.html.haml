@@ -1,5 +1,10 @@
+- content_for :pathway_sub do
+  &raquo; Konto #{@konto.name}
+
 %div{:class => "konto-detail"}
   %h1=@konto.name
+  - if @konto.user
+    %h3=link_to "-> zum Kassenstand von "+@konto.name, userkonto_show_path(@konto.user_id)
   %br
   %table{:class=> "table-index table_bills"}
     %thead
@@ -25,8 +30,8 @@
       -@konto.transactions.each do |t|
         %tr{:class => "toggle_background"}
           %td=t.created_at.strftime("%d.%m.%Y")
-          %td=t.from_konto.name
-          %td=t.to_konto.name
+          %td=link_to t.from_konto.name, kasse_show_konto_path(t.from_konto.id)
+          %td=link_to t.to_konto.name, kasse_show_konto_path(t.to_konto.id)
           %td=t.name
           - if t.from_konto.id == @konto.id
             %td{:class => "type_negative cell_price"}=number_to_currency (-1)*t.price, :locale => :de

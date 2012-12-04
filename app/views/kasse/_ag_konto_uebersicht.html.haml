@@ -1,0 +1,7 @@
+%tr{:class => "toggle_background"}
+  %td=link_to(konto.name, kasse_show_konto_path(konto.id))
+  %td=konto.transactions.last.created_at.strftime "%d.%m.%Y"
+  - if konto.saldo >= 0
+    %td{:class => "type_positive cell_price"}=number_to_currency konto.saldo, :locale => :de
+  - else
+    %td{:class => "type_negative cell_price"}=number_to_currency konto.saldo, :locale => :de
