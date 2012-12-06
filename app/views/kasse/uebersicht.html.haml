@@ -1,6 +1,14 @@
 - content_for :pathway_sub do
   &raquo; Barkasse
 
+%br
+
+%h2
+  %a{:href => new_konto_transaction_path}
+    Neue Transaktion
+    =image_tag "new.png", :width => "20px"
+%br
+
 %div{:class => "konto-uebersicht float-left"}
   %h1 AG-Konten
   %table{:class=> "table-index table_bills"}
@@ -9,6 +17,7 @@
         %th Konto
         %th Letzter Stand
         %th Saldo
+        %th
     %tbody
       %tr{:class => "toggle_background"}
         %td
@@ -17,6 +26,7 @@
           %td{:class => "type_positive cell_price"}= number_to_currency @ag_kontos_saldo, :locale => :de
         - else
           %td{:class => "type_negative cell_price"}= number_to_currency @ag_kontos_saldo, :locale => :de
+        %td
       = render :partial => "ag_konto_uebersicht", :collection => @ag_kontos, :as => :konto
 
 %div{:class => "konto-uebersicht float-right"}
@@ -27,6 +37,7 @@
         %th Verkäufer
         %th Letzter Stand
         %th Saldo
+        %th
     %tbody
       %tr{:class => "toggle_background"}
         %td
@@ -35,4 +46,5 @@
           %td{:class => "type_positive cell_price"}= number_to_currency @verkaeufer_kontos_saldo, :locale => :de
         - else
           %td{:class => "type_negative cell_price"}= number_to_currency @verkaeufer_kontos_saldo, :locale => :de
+        %td
         = render :partial => "verkaeufer_konto_uebersicht", :collection => @verkaeufer_kontos, :as => :konto

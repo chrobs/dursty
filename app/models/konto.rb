@@ -22,6 +22,10 @@ class Konto < ActiveRecord::Base
     return k
   end
 
+  def self.ext_kontos
+    return Konto.where(:user_id => nil).where('id not in (?)', Konto.ag_kontos)
+  end
+
   def self.bar_konto
     return self.find @@bar_konto_id
   end

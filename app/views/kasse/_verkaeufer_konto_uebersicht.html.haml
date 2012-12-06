@@ -5,3 +5,6 @@
     %td{:class => "type_positive cell_price"}=number_to_currency konto.saldo, :locale => :de
   - else
     %td{:class => "type_negative cell_price"}=number_to_currency konto.saldo, :locale => :de
+  %td
+    %a{:href => new_konto_transaction_path(:from => konto.id)}
+      = image_tag "new.png", :width => "20px"

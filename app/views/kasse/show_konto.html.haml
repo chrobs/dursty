@@ -6,6 +6,13 @@
   - if @konto.user
     %h3=link_to "-> zum Kassenstand von "+@konto.name, userkonto_show_path(@konto.user_id)
   %br
+
+%h2
+  %a{:href => new_konto_transaction_path}
+    Neue Transaktion
+    =image_tag "new.png", :width => "20px"
+%br
+
   %table{:class=> "table-index table_bills"}
     %thead
       %tr

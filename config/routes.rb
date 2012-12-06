@@ -6,8 +6,11 @@ Dursty::Application.routes.draw do
   resources :shop_bundles
   resources :order
 
+  # kasse
   get "kasse/uebersicht"
   match "kasse/:id" => 'kasse#show_konto', :as => "kasse_show_konto"
+  resource :konto_transaction
+  #match "konto_transaction/new/:from" => "konto_transaction#new"
 
   # shop
   get "shop/index"
