@@ -21,6 +21,8 @@
         %th An
         %th Grund
         %th Betrag
+        %th
+        %th
     %tbody
       %tr{:class => "element_first_row element_last_row row_saldo"}
         %td
@@ -33,6 +35,8 @@
         - else
           %td{:class => "type_negative cell_price"}
             =number_to_currency(@konto.saldo, :locale => :de)
+        %td
+        %td
 
       -@konto.transactions.each do |t|
         %tr{:class => "toggle_background"}
@@ -44,3 +48,7 @@
             %td{:class => "type_negative cell_price"}=number_to_currency (-1)*t.price, :locale => :de
           - else
             %td{:class => "type_positive cell_price"}=number_to_currency t.price, :locale => :de
+          %td
+            =link_to(image_tag("edit.png", :width => "20px", :title => "Transaktion editieren"), edit_konto_transaction_path(t.id))
+          %td
+            =link_to(image_tag("delete.png", :width => "20px", :title => "Transaktion löschen"), konto_transaction_path(t.id), :method => :delete)

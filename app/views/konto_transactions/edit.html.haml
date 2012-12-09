@@ -1,2 +1,9 @@
-%h1 KontoTransactions#edit
-%p Find me in app/views/konto_transactions/edit.html.haml
+- content_for :pathway_sub do
+  &raquo; Transaktion vom #{@konto_transaction.created_at}
+
+= semantic_form_for @konto_transaction do |f|
+  = f.input :from, :label => "von Konto", :as => :select, :collection => @kontos
+  = f.input :to, :label => "zu Konto", :as => :select, :collection => @kontos
+  = f.input :price, :label => "Summe"
+  = f.input :name, :label => "Grund"
+  = f.action :submit, :label => "Transaktion speichern"

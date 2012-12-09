@@ -32,6 +32,9 @@ class KontoTransactionsController < ApplicationController
 
   def edit
     @konto_transaction = KontoTransaction.find params[:id]
+    @kontos = Konto.ag_kontos
+    @kontos += Konto.ext_kontos
+    @kontos += Konto.verkaeufer_kontos
   end
 
   def show
@@ -40,8 +43,8 @@ class KontoTransactionsController < ApplicationController
 
   def update
     transact = KontoTransaction.find params[:id]
-    if transact.update_attributes(params[:item])
-      redirect_to(kasse_uebersicht_path, :notice => 'Transaktion erfolgreich editiert.')
+    if transact.update_attributes(params[:konto_transaction])
+      redirect_to(kasse_show_konto_path(transact.from), :notice => 'Transaktion erfolgreich editiert.')
     else
       render :edit
     end
@@ -50,9 +53,9 @@ class KontoTransactionsController < ApplicationController
   def destroy
     transact = KontoTransaction.find params[:id]
     if transact.destroy
-      redirect_to(kasse_uebersicht_path, :notice => 'Transaktion erfolgreich gelöscht.')
+      redirect_to(kasse_show_konto_path(transact.from), :notice => 'Transaktion erfolgreich gelöscht.')
     else
-      redirect_to(kasse_uebersicht_path, :notice => 'Transaktion nicht gelöscht.')
+      redirect_to(kasse_show_konto_path(transact.from), :notice => 'Transaktion nicht gelöscht.')
     end
   end
 end

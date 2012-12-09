@@ -9,8 +9,7 @@ Dursty::Application.routes.draw do
   # kasse
   get "kasse/uebersicht"
   match "kasse/:id" => 'kasse#show_konto', :as => "kasse_show_konto"
-  resource :konto_transaction
-  #match "konto_transaction/new/:from" => "konto_transaction#new"
+  resources :konto_transactions
 
   # shop
   get "shop/index"

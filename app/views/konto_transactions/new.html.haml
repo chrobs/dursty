@@ -1,7 +1,7 @@
 - content_for :pathway_sub do
   &raquo; neue Transaktion
 
-= semantic_form_for @konto_transaction, :url => konto_transaction_path, :method => :post do |f|
+= semantic_form_for @konto_transaction do |f|
   = f.input :from, :label => "von Konto", :as => :select, :collection => @kontos
   = f.input :to, :label => "zu Konto", :as => :select, :collection => @kontos
   = f.input :price, :label => "Summe"
