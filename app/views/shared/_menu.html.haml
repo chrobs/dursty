@@ -24,5 +24,10 @@
       - if content_for?(:kasseMenu)
         = yield(:kasseMenu)
 
+    - if current_user.try(:admin?)
+      %li= link_to "Useradmin", users_path
+      - if content_for?(:usersMenu)
+        = yield(:usersMenu)
+
     - if content_for?(:menu)
       = yield(:menu)

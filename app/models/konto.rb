@@ -1,5 +1,5 @@
 class Konto < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :user_id
 
   has_many :transactions_out, :class_name => "KontoTransaction", :foreign_key => :from
   has_many :transactions_in, :class_name => "KontoTransaction", :foreign_key => :to

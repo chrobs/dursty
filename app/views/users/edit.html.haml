@@ -1,0 +1,10 @@
+= content_for :pathway_sub do
+  &raquo; Neu
+
+= semantic_form_for @user do |f|
+  = f.input :name
+  = f.input :email
+  = f.input :kassenwart, :as => :boolean
+  = f.input :lagerwart, :as => :boolean
+  = f.input :admin, :as => :boolean
+  = f.actions

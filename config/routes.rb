@@ -1,10 +1,29 @@
 Dursty::Application.routes.draw do
 
+  get "users/index"
+
+  get "users/create"
+
+  get "users/new"
+
+  get "users/edit"
+
+  get "users/show"
+
+  get "users/update"
+
+  get "users/destroy"
+
   devise_for :users
 
   resources :items
   resources :shop_bundles
   resources :order
+
+  # admin
+  scope "/admin" do
+    resources :users
+  end
 
   # kasse
   get "kasse/uebersicht"

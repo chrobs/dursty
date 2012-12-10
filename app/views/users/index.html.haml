@@ -1,0 +1,41 @@
+%div
+  %h1 Users
+  %h2
+    %a{:href => new_user_path}
+      Neuen Benutzer anlegen
+      =image_tag "new.png", :width => "20px"
+  %table{:class => "table-index"}
+    %thead
+      %tr
+        %th Id
+        %th Name
+        %th Email
+        %th Erstellt
+        %th Aktualisiert
+        %th Kasse
+        %th Lager
+        %th Admin
+    %tbody
+      - @users.each do |u|
+        %tr{:class => "toggle_background"}
+          %td= u.id
+          %td= u.name
+          %td= u.email
+          %td= u.created_at.strftime("%d.%m.%Y, %H:%M")
+          %td= u.updated_at.strftime("%d.%m.%Y, %H:%M")
+          - if u.kassenwart
+            %td= image_tag("check.png", :width => "20px")
+          - else
+            %td -
+          - if u.lagerwart
+            %td= image_tag("check.png", :width => "20px")
+          - else
+            %td -
+          - if u.admin
+            %td= image_tag("check.png", :width => "20px")
+          - else
+            %td -
+          %td
+            =link_to(image_tag("edit.png", :width => "20px"), edit_user_path(u.id), :title => "User editieren")
+          %td
+            =link_to(image_tag("delete.png", :width => "20px"), user_path(u.id), :title => "User löschen", :method => :delete)

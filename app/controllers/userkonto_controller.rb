@@ -9,9 +9,9 @@ class UserkontoController < ApplicationController
   end
 
   def show
-    @user = User.find current_user
-    orders = Order.closed.where :user_id => current_user
-    bills = UserAccountBill.where :user_id => current_user
+    @user = User.find params[:id]
+    orders = Order.closed.where :user_id => params[:id]
+    bills = UserAccountBill.where :user_id => params[:id]
     @buchungen = (orders + bills).sort!{|a,b| b.created_at <=> a.created_at}
     @buchungen = @buchungen.paginate(page:params[:page], per_page:10)
   end
