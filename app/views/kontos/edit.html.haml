@@ -1,0 +1,11 @@
+= content_for :pathway_sub do
+  &raquo; #{@konto.name}
+
+= semantic_form_for @konto do |f|
+  = f.input :name
+  = f.input :user_id, :label => "User-Id"
+  %h2 Spezielle Kontentypen:
+  %h3 Für Verkäuferkonto nichts auswählen
+  = f.input :ag, :as => :boolean, :label => "AG-Konto"
+  = f.input :ext, :as => :boolean, :label => "Externes Konto"
+  = f.actions

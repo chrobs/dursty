@@ -240,6 +240,10 @@ table tr.row_highlighted > td {
   float: left;
 }
 
+.text-align-center{
+  text-align: center;
+}
+
 .toggle_background:nth-child(odd){
   background-color: #f0f0f0;
   border-bottom: 1px dashed black;

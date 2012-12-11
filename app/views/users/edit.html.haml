@@ -1,5 +1,5 @@
 = content_for :pathway_sub do
-  &raquo; Neu
+  &raquo; #{@user.name}
 
 = semantic_form_for @user do |f|
   = f.input :name

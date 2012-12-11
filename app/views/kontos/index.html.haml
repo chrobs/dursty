@@ -1,41 +1,39 @@
 %div
-  %h1 Useradmin
+  %h1 Kontoadmin
   %h2
-    %a{:href => new_user_path}
-      Neuen Benutzer anlegen
+    %a{:href => new_konto_path}
+      Neues Konto anlegen
       =image_tag "new.png", :width => "20px"
   %table{:class => "table-index"}
     %thead
       %tr
         %th Id
         %th Name
-        %th Email
         %th Erstellt
         %th Aktualisiert
-        %th Kasse
-        %th Lager
-        %th Admin
+        %th Verkäufer
+        %th AG
+        %th Extern
     %tbody
-      - @users.each do |u|
+      - @kontos.each do |k|
         %tr{:class => "toggle_background"}
-          %td= u.id
-          %td= u.name
-          %td= u.email
-          %td= u.created_at.strftime("%d.%m.%Y, %H:%M")
-          %td= u.updated_at.strftime("%d.%m.%Y, %H:%M")
-          - if u.kassenwart
+          %td= k.id
+          %td= k.name
+          %td= k.created_at.strftime("%d.%m.%Y, %H:%M")
+          %td= k.updated_at.strftime("%d.%m.%Y, %H:%M")
+          - if k.verkaeufer
             %td{:class => "text-align-center"}= image_tag("check.png", :width => "20px")
           - else
             %td{:class => "text-align-center"} -
-          - if u.lagerwart
+          - if k.ag
             %td{:class => "text-align-center"}= image_tag("check.png", :width => "20px")
           - else
             %td{:class => "text-align-center"} -
-          - if u.admin
+          - if k.ext
             %td{:class => "text-align-center"}= image_tag("check.png", :width => "20px")
           - else
             %td{:class => "text-align-center"} -
           %td
-            =link_to(image_tag("edit.png", :width => "20px"), edit_user_path(u.id), :title => "User editieren")
+            =link_to(image_tag("edit.png", :width => "20px"), edit_konto_path(k.id), :title => "Konto editieren")
           %td
-            =link_to(image_tag("delete.png", :width => "20px"), user_path(u.id), :title => "User löschen", :method => :delete, :confirm => "Diesen User wirklich löschen?")
+            =link_to(image_tag("delete.png", :width => "20px"), konto_path(k.id), :title => "Konto löschen", :method => :delete, :confirm => "Dieses Konto wirklich löschen?")

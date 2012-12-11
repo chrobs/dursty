@@ -15,7 +15,7 @@ Dursty::Application.routes.draw do
   # kasse
   get "kasse/uebersicht"
   resources :konto_transactions
-  resources :konto
+  resources :kontos
 
   # shop
   get "shop/index"

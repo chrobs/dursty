@@ -1,5 +1,7 @@
 class Konto < ActiveRecord::Base
-  attr_accessible :name, :user_id
+  attr_accessible :name, :user_id, :ag, :ext
+
+  validates_presence_of :name
 
   has_many :transactions_out, :class_name => "KontoTransaction", :foreign_key => :from
   has_many :transactions_in, :class_name => "KontoTransaction", :foreign_key => :to
@@ -18,6 +20,12 @@ class Konto < ActiveRecord::Base
 
   def self.ec_konto
     return self.find @@ec_konto_id
+  end
+
+  def verkaeufer
+    return false if self.ag
+    return false if self.ext
+    return true
   end
 
   def saldoTransactions
