@@ -1,0 +1,20 @@
+- content_for :kasseMenu do
+  = render "kasse/submenu"
+
+- content_for :left do
+  = render "shared/menu"
+  - if user_signed_in?
+    = render "home/user"
+
+- content_for :content do
+
+  = content_for?(:home_content) ? yield(:home_content) : yield
+
+- content_for :pathway do
+  &raquo; #{link_to "Kasse", kasse_uebersicht_path} #{yield(:pathway_sub)}
+
+= render :template => 'layouts/application'
+
+- # fix max width for main-element
+:javascript
+  $("#main").attr("style","max-width:none")

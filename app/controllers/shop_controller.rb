@@ -16,12 +16,8 @@ class ShopController < ApplicationController
   def addToCard
     #get last or new order from user
     @order = Order.where(:user_id => current_user.id, :closed => false)
-                  .order("updated_at")
-                  .last
-    if @order.nil?
-      @order = Order.new(:user_id => current_user, :closed => false)
-      @order.save
-    end
+                  .order("updated_at DESC")
+                  .first_or_create!
 
     # add order_part for each item in shop_bundle
     if @order.updateParts(params[:bundle], params[:amount])

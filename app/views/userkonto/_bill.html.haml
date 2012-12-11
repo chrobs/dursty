@@ -2,7 +2,7 @@
   %td=bill.updated_at.strftime("%d.%m.%Y, %H:%M")
   %td= bill.name
   %td
-  - if bill.price >= 0
-    %td{:class => "type_positive cell_price"}=number_to_currency(bill.price, :locale => :de)
+  - if bill.from_konto.id == @user.konto.id
+    %td{:class => "type_negative cell_price"}=number_to_currency((-1)*bill.price, :locale => :de)
   - else
-    %td{:class => "type_negative cell_price"}=number_to_currency(bill.price, :locale => :de)
+    %td{:class => "type_positive cell_price"}=number_to_currency(bill.price, :locale => :de)

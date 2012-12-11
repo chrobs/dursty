@@ -1,5 +1,5 @@
 %tr{:class => "toggle_background"}
-  %td=link_to(konto.name, kasse_show_konto_path(konto.id), :title => konto.name+ " anzeigen")
+  %td=link_to(konto.name, konto_path(konto.id), :title => konto.name+ " anzeigen")
   - unless konto.transactions.empty?
     %td=konto.transactions.last.created_at.strftime "%d.%m.%Y"
   - else

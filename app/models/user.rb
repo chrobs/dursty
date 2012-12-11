@@ -16,7 +16,12 @@ class User < ActiveRecord::Base
   has_many :user_account_bills
   has_one :konto
 
-  def kontoSaldo
+  def gesSaldo
+    saldo = ordersSaldo
+    saldo += self.konto.saldoTransactions
+  end
+
+  def ordersSaldo
     saldo = self.orders.inject(0.0) do |s,order|
       if order.closed
         s + order.gesamtpreis
@@ -24,9 +29,6 @@ class User < ActiveRecord::Base
         s
       end
     end
-
-    saldo = self.user_account_bills.inject(saldo){|s,k| s + k.price}
-
     return saldo
   end
 end

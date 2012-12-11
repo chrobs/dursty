@@ -22,14 +22,38 @@
       %tr{:class => "toggle_background"}
         %td
         %td{:style => "text-align:right"} Gesamt:
-        - if @ag_kontos_saldo >= 0
-          %td{:class => "type_positive cell_price"}= number_to_currency @ag_kontos_saldo, :locale => :de
+        - if @ag_kontos.multSaldo >= 0
+          %td{:class => "type_positive cell_price"}= number_to_currency @ag_kontos.multSaldo, :locale => :de
         - else
-          %td{:class => "type_negative cell_price"}= number_to_currency @ag_kontos_saldo, :locale => :de
+          %td{:class => "type_negative cell_price"}= number_to_currency @ag_kontos.multSaldo, :locale => :de
         %td
-      = render :partial => "ag_konto_uebersicht", :collection => @ag_kontos, :as => :konto
+      = render :partial => "konto_uebersicht", :collection => @ag_kontos, :as => :konto
 
-%div{:class => "konto-uebersicht float-right"}
+
+%div{:class => "konto-uebersicht float-left"}
+  %h1 Externe-Konten
+  %table{:class=> "table-index table_bills"}
+    %thead
+      %tr
+        %th Konto
+        %th Letzter Stand
+        %th Saldo
+        %th
+    %tbody
+      %tr{:class => "toggle_background"}
+        %td
+        %td{:style => "text-align:right"} Gesamt:
+        - if @ext_kontos.multSaldo >= 0
+          %td{:class => "type_positive cell_price"}= number_to_currency @ext_kontos.multSaldo, :locale => :de
+        - else
+          %td{:class => "type_negative cell_price"}= number_to_currency @ext_kontos.multSaldo, :locale => :de
+        %td
+      = render :partial => "konto_uebersicht", :collection => @ext_kontos, :as => :konto
+
+%div{:style => "clear:both"}
+%br
+
+%div{:class => "konto-uebersicht float-left"}
   %h1 Verkäufer-Konten
   %table{:class=> "table-index table_bills"}
     %thead
@@ -42,9 +66,12 @@
       %tr{:class => "toggle_background"}
         %td
         %td{:style => "text-align:right"} Gesamt:
-        - if @verkaeufer_kontos_saldo >= 0
-          %td{:class => "type_positive cell_price"}= number_to_currency @verkaeufer_kontos_saldo, :locale => :de
+        - if @verkaeufer_kontos.multSaldo >= 0
+          %td{:class => "type_positive cell_price"}= number_to_currency @verkaeufer_kontos.multSaldo, :locale => :de
         - else
-          %td{:class => "type_negative cell_price"}= number_to_currency @verkaeufer_kontos_saldo, :locale => :de
+          %td{:class => "type_negative cell_price"}= number_to_currency @verkaeufer_kontos.multSaldo, :locale => :de
         %td
-        = render :partial => "verkaeufer_konto_uebersicht", :collection => @verkaeufer_kontos, :as => :konto
+        = render :partial => "konto_uebersicht", :collection => @verkaeufer_kontos, :as => :konto
+
+
+

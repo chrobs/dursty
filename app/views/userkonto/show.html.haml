@@ -10,18 +10,18 @@
       %td
       %td Aktueller Kassenstand
       %td{:style => "text-align:right"} Saldo:
-      - if @user.kontoSaldo >= 0
+      - if @user.gesSaldo >= 0
         %td{:class => "type_positive cell_price"}
-          =number_to_currency(@user.kontoSaldo, :locale => :de)
+          =number_to_currency(@user.gesSaldo, :locale => :de)
       - else
         %td{:class => "type_negative cell_price"}
-          =number_to_currency(@user.kontoSaldo, :locale => :de)
+          =number_to_currency(@user.gesSaldo, :locale => :de)
       %td
 
     - @buchungen.each do |b|
       - if b.class == Order
         = render :partial => "order", :collection => [b]
-      - elsif b.class == UserAccountBill
+      - elsif b.class == KontoTransaction
         = render :partial => "bill", :collection => [b]
 
 %div{:class => "digg_pagination"}

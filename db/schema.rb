@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202201807) do
+ActiveRecord::Schema.define(:version => 20121211094116) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20121202201807) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "ext",        :default => false
+    t.boolean  "ag",         :default => false
   end
 
   create_table "order_part_items", :force => true do |t|
@@ -77,14 +79,6 @@ ActiveRecord::Schema.define(:version => 20121202201807) do
     t.datetime "updated_at", :null => false
     t.text     "name",       :null => false
     t.boolean  "positive"
-  end
-
-  create_table "user_account_bills", :force => true do |t|
-    t.string   "name"
-    t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                :null => false
-    t.datetime "updated_at",                                                :null => false
-    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|

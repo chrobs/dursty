@@ -1,24 +1,11 @@
 Dursty::Application.routes.draw do
 
-  get "users/index"
-
-  get "users/create"
-
-  get "users/new"
-
-  get "users/edit"
-
-  get "users/show"
-
-  get "users/update"
-
-  get "users/destroy"
-
   devise_for :users
 
+  # lagerwart
   resources :items
   resources :shop_bundles
-  resources :order
+
 
   # admin
   scope "/admin" do
@@ -27,8 +14,8 @@ Dursty::Application.routes.draw do
 
   # kasse
   get "kasse/uebersicht"
-  match "kasse/:id" => 'kasse#show_konto', :as => "kasse_show_konto"
   resources :konto_transactions
+  resources :konto
 
   # shop
   get "shop/index"
@@ -40,6 +27,7 @@ Dursty::Application.routes.draw do
   match "userkonto/:id" => 'userkonto#show', :as => :userkonto_show
 
   # order
+  resources :order
   match "order/:id/update/:bundle/:amount" => 'order#update_bundle_amount', :as => :order_update_bundle_amount
   match "order/:id/delete/:bundle" => 'order#delete_bundle', :as => :order_delete_bundle
 
