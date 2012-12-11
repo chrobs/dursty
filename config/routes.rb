@@ -1,17 +1,5 @@
 Dursty::Application.routes.draw do
 
-  get "shop_bundles_categories/index"
-
-  get "shop_bundles_categories/new"
-
-  get "shop_bundles_categories/create"
-
-  get "shop_bundles_categories/edit"
-
-  get "shop_bundles_categories/update"
-
-  get "shop_bundles_categories/destroy"
-
   devise_for :users
 
   # lagerwart
@@ -34,6 +22,7 @@ Dursty::Application.routes.draw do
   post "shop/buy"
   match "shop/add_to_card/:bundle/:amount" => 'shop#addToCard', :as => :shop_add_to_card
   match "shop/remove_from_card/:bundle" => 'shop#removeFromCard', :as => :shop_remove_from_card
+  resources :shop_bundle_categories
 
   # userkonto
   match "userkonto/:id" => 'userkonto#show', :as => :userkonto_show

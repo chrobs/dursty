@@ -1,0 +1,16 @@
+- content_for :shop_bundlesMenu do
+  = render "shop_bundle_categories/submenu"
+
+- content_for :left do
+  = render "shared/menu"
+  - if user_signed_in?
+    = render "home/user"
+
+- content_for :content do
+
+  = content_for?(:home_content) ? yield(:home_content) : yield
+
+- content_for :pathway do
+  &raquo; #{link_to "Bundle Kategorien", shop_bundle_categories_path} #{yield(:pathway_sub)}
+
+= render :template => 'layouts/application'

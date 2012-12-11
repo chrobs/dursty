@@ -1,0 +1,16 @@
+%h1 Kategorien
+%h2
+  %a{:href => new_shop_bundle_category_path}
+    Neue Kategorie anlegen
+    =image_tag "new.png", :width => "20px"
+
+%table{:class=> "table-index"}
+  %thead
+    %tr
+      %th Name
+  %tbody
+    - @categories.each do |c|
+      %tr{:class => "toggle_background"}
+        %td= c.name
+        %td= link_to(image_tag("edit.png", :width => "20px"), edit_shop_bundle_category_path(c), :title => "Kategorie editieren")
+        %td= link_to(image_tag("delete.png", :width => "20px"), shop_bundle_category_path(c), :title => "Kategorie löschen", :method => :delete, :confirm => "Diese Kategorie wirklich löschen?")

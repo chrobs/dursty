@@ -1,0 +1,9 @@
+- content_for :pathway_sub do
+  &raquo; Neu
+
+= semantic_form_for @category do |f|
+  = f.input :name
+  = f.actions do
+    = f.action :cancel, :as => :link, :label => "Zurück"
+    = f.action :submit, :as => :button, :label => "Kategorie speichern"
+

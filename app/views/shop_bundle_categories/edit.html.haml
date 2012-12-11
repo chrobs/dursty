@@ -1,0 +1,8 @@
+- content_for :pathway_sub do
+  &raquo; Editiere "#{@category.name}"
+
+= semantic_form_for @category do |f|
+  = f.input :name
+  = f.actions do
+    = f.action :cancel, :as => :link, :label => "Abbrechen"
+    = f.action :submit, :as => :button, :label => "speichern"

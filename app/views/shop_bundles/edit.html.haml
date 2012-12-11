@@ -68,7 +68,9 @@
 
   %br
   %br
-  = f.submit
+  = f.actions do
+    = f.action :submit, :as => :button, :label => "abbrechen"
+    = f.action :submit, :as => :button, :label => "speichern"
 
 :javascript
   $("#shop_bundle_new_part_item_name_new").autocomplete({

@@ -4,4 +4,6 @@
 = semantic_form_for @item do |f|
   = f.input :name
   = f.input :preis
-  = f.actions
+  = f.actions do
+    = f.action :submit, :as => :button, :label => "zurück"
+    = f.action :submit, :as => :button, :label => "speichern"
