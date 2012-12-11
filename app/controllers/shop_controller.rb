@@ -11,7 +11,14 @@ class ShopController < ApplicationController
   end
 
   def index
-    @bundles = ShopBundle.find :all, :order => :name
+    if params[:category]
+      @bundles = ShopBundle
+                .includes(:shop_bundle_categories)
+                .where("shop_bundle_categories.id = ?", params[:category])
+                .order(["shop_bundles.name ASC","shop_bundles.positive"])
+    else
+      @bundles = ShopBundle.find :all, :order => :name
+    end
 
     # get information for shopping card
     @order = Order.where(:user_id => current_user.id, :closed => false)

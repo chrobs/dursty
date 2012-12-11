@@ -20,9 +20,9 @@
       %tr{:class => "row_highlighted"}
         %td= b[:name]
         - if b[:positive]
-          %td{:class => "type_positive"}= number_to_currency(b.getTotalCost, :unit => "€ ")
+          %td{:class => "type_positive"}= number_to_currency(b.getTotalCost, :locale => :de)
         - else
-          %td{:class => "type_negative"}= number_to_currency(b.getTotalCost, :unit => "€ -")
+          %td{:class => "type_negative"}= number_to_currency(b.getTotalCost, :locale => :de)
         %td
           %table
             = render :partial => "item", :collection => b.shop_bundle_parts, :as => "part"

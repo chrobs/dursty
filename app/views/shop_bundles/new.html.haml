@@ -1,7 +1,7 @@
 - content_for :pathway_sub do
   &raquo; Neu
 
-= semantic_form_for :shop_bundle, :url => shop_bundles_path, :method => :post do |f|
+= semantic_form_for @bundle, :url => shop_bundles_path, :method => :post do |f|
   = f.label :name
   = f.text_field :name
   %br
@@ -14,18 +14,23 @@
   = f.input :max_items, :as => :hidden, :value => 0, :id => :max_items
   %br
   %br
+
+  %h2 Kategorien
+  = f.input :shop_bundle_categories, :label => "", :as => :check_boxes, :collection => ShopBundleCategory.all, :required => false
+
   %h2 Neuen Artikel hinzufügen
   %table
     %thead
       %td Artikel
       %td Anzahl
     %tr
-      %td= f.text_field :item_name_new
-      %td= f.text_field :item_amount_new, :size => 5
-      %td
-        %span{:class => "js-link", :id => "addItem"}
-          Artikel hinzufügen
-      %td= f.input :item_id_new, :as => :hidden
+      = f.fields_for :new_part do |n|
+        %td= n.text_field :item_name_new
+        %td= n.text_field :item_amount_new, :size => 5
+        %td
+          %span{:class => "js-link", :id => "addItem"}
+            Artikel hinzufügen
+        %td= n.input :item_id_new, :as => :hidden
 
 
   %br
@@ -48,15 +53,15 @@
   %br
   %br
   = f.actions do
-    = f.action :submit, :as => :button, :label => "zurück"
+    = f.action :cancel, :as => :link, :label => "zurück"
     = f.action :submit, :as => :button, :label => "speichern"
 
 :javascript
-  $("#shop_bundle_item_name_new").autocomplete({
+  $("#shop_bundle_new_part_item_name_new").autocomplete({
     source: #{getItemsAutocompleteForBundle()},
     select: function(event, ui) {
       $(event.target).val(ui.item.label)
-      $(event.target).parent().parent().find("#shop_bundle_item_id_new").val(ui.item.value)
+      $(event.target).parent().parent().find("#shop_bundle_new_part_item_id_new").val(ui.item.value)
       return false
     }
   })

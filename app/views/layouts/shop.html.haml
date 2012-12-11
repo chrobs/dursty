@@ -1,3 +1,6 @@
+- content_for :shopMenu do
+  = render "shop/submenu"
+
 - content_for :left do
   = render "shared/menu"
   - if user_signed_in?

@@ -8,6 +8,8 @@
     - if user_signed_in?
       %li= link_to "Kassenstand", userkonto_show_path(current_user.id)
       %li= link_to "Verkauf", shop_index_path
+      - if content_for?(:shopMenu)
+        = yield(:shopMenu)
 
     - if current_user.try(:admin?) || current_user.try(:lagerwart?)
       %li= link_to "Artikel", items_path

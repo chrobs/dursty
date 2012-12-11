@@ -49,6 +49,12 @@ class ShopBundlesController < ApplicationController
     params[:id] = @bundle.id
     render :new unless ShopBundlePart.newFromBundleParams params
 
+    # update categories
+    cat_ids = params[:shop_bundle][:shop_bundle_category_ids]
+    cat_ids.reject!{|i| i.empty?}
+    categories = cat_ids.map{|cid| ShopBundleCategory.find cid}
+    @bundle.shop_bundle_categories = categories
+
     redirect_to(shop_bundles_path, :notice => 'Bundle erfolgreich angelegt.')
   end
 
