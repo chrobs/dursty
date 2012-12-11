@@ -11,12 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211152907) do
+ActiveRecord::Schema.define(:version => 20121211164219) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
     t.decimal  "preis",      :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "kategorie"
     t.datetime "created_at",                                                :null => false
     t.datetime "updated_at",                                                :null => false
   end
@@ -67,6 +66,19 @@ ActiveRecord::Schema.define(:version => 20121211152907) do
     t.string   "location"
   end
 
+  create_table "shop_bundle_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "shop_bundle_categories_shop_bundles", :force => true do |t|
+    t.integer  "shop_bundle_id"
+    t.integer  "shop_bundle_category_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
   create_table "shop_bundle_parts", :force => true do |t|
     t.integer  "shop_bundle_id"
     t.integer  "item_id"
@@ -76,10 +88,11 @@ ActiveRecord::Schema.define(:version => 20121211152907) do
   end
 
   create_table "shop_bundles", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.text     "name",       :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.text     "name",                    :null => false
     t.boolean  "positive"
+    t.integer  "shop_bundle_category_id"
   end
 
   create_table "users", :force => true do |t|

@@ -1,5 +1,17 @@
 Dursty::Application.routes.draw do
 
+  get "shop_bundles_categories/index"
+
+  get "shop_bundles_categories/new"
+
+  get "shop_bundles_categories/create"
+
+  get "shop_bundles_categories/edit"
+
+  get "shop_bundles_categories/update"
+
+  get "shop_bundles_categories/destroy"
+
   devise_for :users
 
   # lagerwart

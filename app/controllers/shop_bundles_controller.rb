@@ -21,13 +21,21 @@ class ShopBundlesController < ApplicationController
   end
 
   def update
+    #render :text => params.inspect and return
     @bundle = ShopBundle.find(params[:id])
-    #render :text => @bundle.id and return
 
-    render :edit unless @bundle.update_attributes( :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive])
+    # update bundle
+    render :edit and return unless @bundle.update_attributes( :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive])
 
-    render :edit unless @bundle.shop_bundle_parts.destroy_all
-    render :edit unless ShopBundlePart.newFromBundleParams params
+    # update bundle_parts
+    render :edit and return unless @bundle.shop_bundle_parts.destroy_all
+    render :edit and return unless ShopBundlePart.newFromBundleParams params
+
+    # update categories
+    cat_ids = params[:shop_bundle][:shop_bundle_category_ids]
+    cat_ids.reject!{|i| i.empty?}
+    categories = cat_ids.map{|cid| ShopBundleCategory.find cid}
+    @bundle.shop_bundle_categories = categories
 
     redirect_to(shop_bundles_path, :notice => 'Shop bundle erfolgreich editiert.')
   end

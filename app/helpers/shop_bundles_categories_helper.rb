@@ -1,0 +1,2 @@
+module ShopBundlesCategoriesHelper
+end

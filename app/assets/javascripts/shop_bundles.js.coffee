@@ -29,14 +29,14 @@ $ -> $("#addItem").click =>
   $("#shop_bundle_max_items").val(count)
 
   # get data from input fields
-  name = $("#shop_bundle_item_name_new").val()
-  amount = $("#shop_bundle_item_amount_new").val()
-  id = $("#shop_bundle_item_id_new").val()
+  name = $("#shop_bundle_new_part_item_name_new").val()
+  amount = $("#shop_bundle_new_part_item_amount_new").val()
+  id = $("#shop_bundle_new_part_item_id_new").val()
 
   # clear input field
-  $("#shop_bundle_item_name_new").val("")
-  $("#shop_bundle_item_amount_new").val("")
-  $("#shop_bundle_item_id_new").val("")
+  $("#shop_bundle_new_part_item_name_new").val("")
+  $("#shop_bundle_new_part_item_amount_new").val("")
+  $("#shop_bundle_new_part_item_id_new").val("")
 
   # clone sample row
   row = $("#item-row-sample").clone()
