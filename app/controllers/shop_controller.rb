@@ -3,14 +3,20 @@
 class ShopController < ApplicationController
   before_filter :authenticate_user!
 
+  before_filter :set_user
+
+
+  def set_user
+    @user = User.find current_user.id
+  end
+
   def index
     @bundles = ShopBundle.find :all, :order => :name
 
     # get information for shopping card
     @order = Order.where(:user_id => current_user.id, :closed => false)
-                  .order("updated_at")
-                  .last
-    @order = Order.new if @order.nil?
+                  .order("updated_at DESC")
+                  .first_or_create!(:location => @user.sell_locations.first)
   end
 
   def addToCard
@@ -59,6 +65,7 @@ class ShopController < ApplicationController
 
     order = order.first
     order.closed = true
+    order.location = params[:order][:location]
     order.created_at = Time.zone.now
     if order.save
       redirect_to(shop_index_path, :notice => "Erfolgreich abgerechnet.")

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def create
     # create user
     data = params[:user]
-    @user = User.new :name => data[:name], :email => data[:email]
+    @user = User.new :name => data[:name], :email => data[:email], :oph => data[:oph], :tvk => data[:tvk]
     @user.admin = data[:admin] if data[:admin]
     @user.kassenwart = data[:kassenwart] if data[:kassenwart]
     @user.lagerwart = data[:lagerwart] if data[:lagerwart]
@@ -47,6 +47,8 @@ class UsersController < ApplicationController
     data = params[:user]
     @user.name = data[:name]
     @user.email = data[:email]
+    @user.tvk = data[:tvk]
+    @user.oph = data[:oph]
     @user.admin = data[:admin] if data[:admin]
     @user.kassenwart = data[:kassenwart] if data[:kassenwart]
     @user.lagerwart = data[:lagerwart] if data[:lagerwart]
@@ -69,14 +71,14 @@ class UsersController < ApplicationController
     user = User.find params[:id]
 
     # delete user konto
-    konto = Konto.where(:user_id => user.id)
-    unless konto.exists? && konto.first.destroy
-      redirect_to users_path, :notice => 'Fehler beim Löschen des Kontos, User nicht gelöscht.' and return
-    end
+    #konto = Konto.where(:user_id => user.id)
+    #unless konto.exists? && konto.first.destroy
+    #  redirect_to users_path, :notice => 'Fehler beim Löschen des Kontos, User nicht gelöscht.' and return
+    #end
 
     # delete user
     if user.destroy
-      redirect_to(users_path, :notice => "User & Konto erfolgreich gelöscht.")
+      redirect_to(users_path, :notice => "User erfolgreich gelöscht.")
     else
       redirect_to(users_path, :notice => 'User nicht gelöscht.')
     end

@@ -9,5 +9,5 @@
         %td= i.name
         %td= number_to_currency(i.preis, :precision=>2, :unit=>" &#8364; ", :separator=>",")
         %td= i.kategorie
-        %td= link_to "editieren", edit_item_path(i)
-        %td= link_to "löschen", item_path(i), :confirm => "Are you sure you want to delete this attachment?", :method => :delete
+        %td= link_to(image_tag("edit.png", :width => "20px"), edit_item_path(i), :title => "Item editieren")
+        %td= link_to(image_tag("delete.png", :width => "20px"), item_path(i), :title => "Item löschen", :method => :delete, :confirm => "Dieses Item wirklich löschen?")

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :timeoutable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :tvk, :oph
   # attr_accessible :title, :body
   validates_presence_of :name, :email
   validates_uniqueness_of :name, :email, :case_sensitive => false
@@ -30,5 +30,11 @@ class User < ActiveRecord::Base
       end
     end
     return saldo
+  end
+
+  def sell_locations
+    loc = []
+    loc.append :oph if self.oph
+    loc.append :tvk if self.tvk
   end
 end

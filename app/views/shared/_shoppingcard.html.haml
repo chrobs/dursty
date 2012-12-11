@@ -42,5 +42,9 @@
         - else
           %td{:class => "type_negative cell_price"}=number_to_currency(gesamtpreis, :locale => :de)
 
+
   %br
-  %h2{:style => "text-align:center"}= link_to "== Kauf abschließen ==", shop_buy_path
+  = semantic_form_for @order, :url => shop_buy_path, :method => :post do |f|
+    = f.input :location, :as => :select, :collection => @user.sell_locations, :label => "Verkaufsort"
+    = f.actions do
+      = f.action :submit, :as => :button, :label => "Kauf abschliessen"

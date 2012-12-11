@@ -1,5 +1,7 @@
 class Order < ActiveRecord::Base
-  attr_accessible :closed, :id, :user_id
+  attr_accessible :closed, :id, :user_id, :location
+
+  validates_presence_of :user_id, :location
 
   belongs_to :user
   has_many :order_parts

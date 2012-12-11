@@ -19,7 +19,7 @@ Dursty::Application.routes.draw do
 
   # shop
   get "shop/index"
-  get "shop/buy"
+  post "shop/buy"
   match "shop/add_to_card/:bundle/:amount" => 'shop#addToCard', :as => :shop_add_to_card
   match "shop/remove_from_card/:bundle" => 'shop#removeFromCard', :as => :shop_remove_from_card
 
