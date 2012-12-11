@@ -22,6 +22,17 @@ class OrderController < ApplicationController
     @order = Order.find params[:id]
   end
 
+  def update
+    @order = Order.find params[:id]
+    @order.location = params[:order][:location]
+    if @order.save
+      redirect_to(userkonto_show_path(@order.user_id), :notice => 'Bestellung erfolgreich editiert.')
+    else
+      render :edit and return
+    end
+
+  end
+
   def update_bundle_amount
     @order = Order.find params[:id]
     if @order.updateParts params[:bundle], params[:amount]

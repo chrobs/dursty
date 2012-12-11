@@ -1,6 +1,6 @@
 %tr{:class => "element_first_row"}
   %td #{order.created_at.strftime("%d.%m.%Y, %H:%M")}
-  %td Bestellung:
+  %td Bestellung im #{order.location.upcase}:
   %td
   - if order.gesamtpreis >= 0
     %td{:class => "type_positive cell_price"}
