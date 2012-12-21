@@ -37,6 +37,8 @@ gem 'rspec-rails', '~> 2.11.0', :group => [:development, :test]
 gem "factory_girl_rails", "~> 4.1.0", :group => [:development, :test]
 gem "database_cleaner", "~> 0.8.0", :group => :test
 
+gem "pry", '~>0.9.10', :group => :development
+
 # internationalization
 gem "rails-i18n", "~> 0.7.0"
 
