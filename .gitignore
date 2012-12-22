@@ -13,6 +13,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+*.swp
 
 config/database.yml
-*.swp
+config/deploy.rb
+Capfile

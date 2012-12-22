@@ -45,6 +45,10 @@ gem "rails-i18n", "~> 0.7.0"
 # pagination
 gem 'will_paginate', "~> 3.0.3"
 
+
+# deploy with capistrano
+gem 'rvm-capistrano', "~>1.2.7"
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -55,7 +59,7 @@ gem 'will_paginate', "~> 3.0.3"
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem "capistrano", "~>2.13.5", :group => :development
 
 # To use debugger
 # gem 'debugger'
