@@ -82,4 +82,16 @@ class Order < ActiveRecord::Base
 
     return preis
   end
+
+  def inventory
+    inv = {}
+    self.order_parts.each do |p|
+      if inv[p.shop_bundle]
+        inv[p.shop_bundle] += p.amount
+      else
+        inv[p.shop_bundle] = p.amount
+      end
+    end
+    return inv
+  end
 end

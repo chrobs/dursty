@@ -15,11 +15,12 @@
       %li= link_to "Artikel", items_path
       - if content_for?(:artikelMenu)
         = yield(:artikelMenu)
-
-    - if current_user.try(:admin?) || current_user.try(:lagerwart?)
       %li= link_to "Shop bundles", shop_bundles_path
       - if content_for?(:shop_bundlesMenu)
         = yield(:shop_bundlesMenu)
+      %li= link_to "Lager", stock_index_path
+      - if content_for?(:stockMenu)
+        = yield(:stockMenu)
 
     - if current_user.try(:admin?) || current_user.try(:kassenwart?)
       %li= link_to "Kasse", kasse_uebersicht_path

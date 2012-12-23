@@ -1,2 +1,15 @@
-%h1 Stock#index
-%p Find me in app/views/stock/index.html.haml
+%h1 Lagerübersicht
+
+- @stocks.each do |s|
+  %div{:class => "konto-uebersicht float-left"}
+    %h2="Lager " + s.name.upcase
+    %table{:class=> "table-index table_bills"}
+      %thead
+        %tr
+          %th Shop bundle
+          %th Anzahl
+      %tbody
+        - s.inventory.sort_by{|b,a| b.name}.each do |bundle,amount|
+          %tr{:class => "toggle_background"}
+            %td=bundle.name
+            %td=amount
