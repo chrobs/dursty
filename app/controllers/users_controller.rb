@@ -14,10 +14,16 @@ class UsersController < ApplicationController
   def create
     # create user
     data = params[:user]
-    @user = User.new :name => data[:name], :email => data[:email], :oph => data[:oph], :tvk => data[:tvk]
+    @user = User.new :name => data[:name], :email => data[:email]
+
+    # set stocks
+    @user.set_stocks(data[:stock_ids])
+
+    # set roles
     @user.admin = data[:admin] if data[:admin]
     @user.kassenwart = data[:kassenwart] if data[:kassenwart]
     @user.lagerwart = data[:lagerwart] if data[:lagerwart]
+
     render :new and return unless @user.save
 
     # create konto for new user
@@ -47,8 +53,11 @@ class UsersController < ApplicationController
     data = params[:user]
     @user.name = data[:name]
     @user.email = data[:email]
-    @user.tvk = data[:tvk]
-    @user.oph = data[:oph]
+
+    # update stocks
+    @user.set_stocks(data[:stock_ids])
+
+    # update roles
     @user.admin = data[:admin] if data[:admin]
     @user.kassenwart = data[:kassenwart] if data[:kassenwart]
     @user.lagerwart = data[:lagerwart] if data[:lagerwart]

@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :user_account_bills
   has_one :konto
+  has_and_belongs_to_many :stocks
 
   def gesSaldo
     saldo = ordersSaldo
@@ -32,9 +33,8 @@ class User < ActiveRecord::Base
     return saldo
   end
 
-  def sell_locations
-    loc = []
-    loc.append :oph if self.oph
-    loc.append :tvk if self.tvk
+  def set_stocks st_ids
+    st_ids.reject!{|i| i.empty?}
+    self.stocks = st_ids.map{|sid| Stock.find sid}
   end
 end

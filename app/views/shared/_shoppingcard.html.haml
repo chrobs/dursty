@@ -45,6 +45,6 @@
 
   %br
   = semantic_form_for @order, :url => shop_buy_path, :method => :post do |f|
-    = f.input :location, :as => :select, :collection => @user.sell_locations, :label => "Verkaufsort", :include_blank => false
+    = f.input :stock, :as => :select, :collection => @user.stocks, :label => "Verkaufsort", :include_blank => false
     = f.actions do
       = f.action :submit, :as => :button, :label => "Kauf abschliessen"

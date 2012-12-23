@@ -5,6 +5,9 @@ Dursty::Application.routes.draw do
   # lagerwart
   resources :items
   resources :shop_bundles
+  resource  :stock_changes
+  get "stock/index"
+  match "stock/showBundle/:id/:location" => "stock#showBundleAtLocation"
 
 
   # admin

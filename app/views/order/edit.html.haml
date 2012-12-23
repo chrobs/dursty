@@ -43,7 +43,7 @@
         %td{:class => "type_negative cell_price"}=number_to_currency(gesamtpreis, :locale => :de)
 
 = semantic_form_for @order do |f|
-  = f.input :location, :as => :select, :collection => @order.user.sell_locations, :label => "Verkaufsort", :include_blank => false
+  = f.input :stock, :as => :select, :collection => @order.user.stocks, :label => "Verkaufsort", :include_blank => false
   = f.actions do
     = f.action :cancel, :as => :link, :label => "zurück zum Kassenstand"
     = f.action :submit, :as => :button, :label => "Bestellung speichern"

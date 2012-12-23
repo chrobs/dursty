@@ -23,7 +23,7 @@ class ShopController < ApplicationController
     # get information for shopping card
     @order = Order.where(:user_id => current_user.id, :closed => false)
                   .order("updated_at DESC")
-                  .first_or_create!(:location => @user.sell_locations.first)
+                  .first_or_create!(:stock_id => @user.stocks.first)
   end
 
   def addToCard
@@ -72,7 +72,7 @@ class ShopController < ApplicationController
 
     order = order.first
     order.closed = true
-    order.location = params[:order][:location]
+    order.stock = Stock.find(params[:order][:stock_id])
     order.created_at = Time.zone.now
     if order.save
       redirect_to(shop_index_path, :notice => "Erfolgreich abgerechnet.")

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211163810) do
+ActiveRecord::Schema.define(:version => 20121223113647) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 20121211163810) do
     t.boolean  "closed",     :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "location"
+    t.integer  "stock_id"
   end
 
   create_table "shop_bundle_categories", :force => true do |t|
@@ -92,9 +92,29 @@ ActiveRecord::Schema.define(:version => 20121211163810) do
     t.boolean  "positive"
   end
 
+  create_table "stock_changes", :force => true do |t|
+    t.integer  "shop_bundle_id"
+    t.integer  "amount"
+    t.string   "name"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "stock_id"
+  end
+
+  create_table "stocks", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "stocks_users", :force => true do |t|
+    t.integer "stock_id"
+    t.integer "user_id"
+  end
+
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",    :null => false
-    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -103,14 +123,12 @@ ActiveRecord::Schema.define(:version => 20121211163810) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "name"
     t.boolean  "admin"
     t.boolean  "kassenwart"
     t.boolean  "lagerwart"
-    t.boolean  "tvk",                    :default => false
-    t.boolean  "oph",                    :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -24,7 +24,7 @@ class OrderController < ApplicationController
 
   def update
     @order = Order.find params[:id]
-    @order.location = params[:order][:location]
+    @order.stock = Stock.find(params[:order][:stock_id])
     if @order.save
       redirect_to(userkonto_show_path(@order.user_id), :notice => 'Bestellung erfolgreich editiert.')
     else

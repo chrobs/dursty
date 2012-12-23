@@ -4,6 +4,7 @@ class ShopBundle < ActiveRecord::Base
   has_many :items, :through => :shop_bundle_parts
   has_many :order_parts
   has_and_belongs_to_many :shop_bundle_categories
+  has_many :stock_changes
 
   def getTotalCost
     total = 0

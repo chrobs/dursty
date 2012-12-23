@@ -5,8 +5,7 @@
   = f.input :name
   = f.input :email
   %h2 Verkaufsorte
-  = f.input :oph, :as => :boolean
-  = f.input :tvk, :as => :boolean
+  = f.input :stocks, :as => :check_boxes, :collection => Stock.all, :label => "", :include_blank => false
   %h2 Spezielle Ämter
   = f.input :kassenwart, :as => :boolean
   = f.input :lagerwart, :as => :boolean

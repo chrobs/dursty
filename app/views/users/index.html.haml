@@ -11,8 +11,7 @@
         %th Name
         %th Email
         %th Erstellt
-        %th OPH
-        %th TVK
+        %th Verkaufsort
         %th Kasse
         %th Lager
         %th Admin
@@ -23,14 +22,7 @@
           %td= u.name
           %td= u.email
           %td= u.created_at.strftime("%d.%m.%Y, %H:%M")
-          - if u.oph
-            %td{:class => "text-align-center"}= image_tag("check.png", :width => "20px")
-          - else
-            %td{:class => "text-align-center"} -
-          - if u.tvk
-            %td{:class => "text-align-center"}= image_tag("check.png", :width => "20px")
-          - else
-            %td{:class => "text-align-center"} -
+          %td= u.stocks.map{|s| s.name}.join(", ")
           - if u.kassenwart
             %td{:class => "text-align-center"}= image_tag("check.png", :width => "20px")
           - else
