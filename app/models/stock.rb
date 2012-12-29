@@ -7,13 +7,20 @@ class Stock < ActiveRecord::Base
 
   def inventory
     inv = {}
+
+    Item.all.each do |i|
+      inv[i] = 0
+    end
+
+    self.stock_changes.each do |sc|
+      sc.inventory.each do |item, amount|
+        inv[item] += amount
+      end
+    end
+
     self.orders.each do |o|
-      o.inventory.each do |bundle, amount|
-        if inv[bundle]
-          inv[bundle] += amount
-        else
-          inv[bundle] = amount
-        end
+      o.inventory.each do |item,amount|
+        inv[item] += amount
       end
     end
     return inv

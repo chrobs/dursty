@@ -12,8 +12,6 @@ class Order < ActiveRecord::Base
   belongs_to :stock
 
   scope :closed, where(:closed => true)
-  #scope :oph, where(:location => :oph)
-  #scope :tvk, where(:location => :tvk)
 
   @@expiration = 8
 
@@ -84,12 +82,10 @@ class Order < ActiveRecord::Base
   end
 
   def inventory
-    inv = {}
+    inv = Hash.new(0)
     self.order_parts.each do |p|
-      if inv[p.shop_bundle]
-        inv[p.shop_bundle] += p.amount
-      else
-        inv[p.shop_bundle] = p.amount
+      p.inventory.each do |item,amount|
+        inv[item] += amount
       end
     end
     return inv

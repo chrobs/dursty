@@ -31,4 +31,14 @@ class OrderPart < ActiveRecord::Base
 
     return sum
   end
+
+  def inventory
+    inv = {}
+    self.shop_bundle.inventory.each do |item, amount|
+      inv[item] = amount * self.amount
+      # count negative for outgoing and positive for incoming items
+      inv[item] *= (-1) if self.positive
+    end
+    return inv
+  end
 end

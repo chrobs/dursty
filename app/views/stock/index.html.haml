@@ -9,7 +9,7 @@
           %th Shop bundle
           %th Anzahl
       %tbody
-        - s.inventory.sort_by{|b,a| b.name}.each do |bundle,amount|
+        - s.inventory.sort_by{|b,a| b.name}.each do |item,amount|
           %tr{:class => "toggle_background"}
-            %td=bundle.name
+            %td=item.name
             %td=amount

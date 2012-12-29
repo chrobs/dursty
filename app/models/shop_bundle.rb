@@ -17,4 +17,11 @@ class ShopBundle < ActiveRecord::Base
     return total
   end
 
+  def inventory
+    inv = {}
+    self.shop_bundle_parts.each do |p|
+      inv[p.item] = p.amount
+    end
+    return inv
+  end
 end
