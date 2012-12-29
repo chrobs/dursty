@@ -1,2 +1,9 @@
-%h1 StockChange#edit
-%p Find me in app/views/stock_change/edit.html.haml
+- content_for :pathway_sub do
+  &raquo; Bearbeiten
+
+= semantic_form_for @stock_change do |f|
+  = f.input :stock_id, :as => :select, :collection => @stocks, :include_blank => false, :label => "Lager"
+  = f.input :shop_bundle_id, :as => :select, :collection => @bundles
+  = f.input :amount, :label => "Anzahl"
+  = f.input :name, :label => "Grund"
+  = f.actions

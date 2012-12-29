@@ -1,0 +1,32 @@
+- content_for :pathway_sub do
+  &raquo; Änderungen im Lager #{@stock.name.upcase}
+
+%div{:class => "konto-detail"}
+  %h1 Lager #{@stock.name.upcase}
+
+%h2
+  %a{:href => new_stock_change_path(:stock => @stock.id)}
+    Neue Lageränderung
+    =image_tag "new.png", :width => "20px"
+%br
+
+  %table{:class=> "table-index table_bills"}
+    %thead
+      %tr
+        %th Datum
+        %th Shop Bundle
+        %th Menge
+        %th Grund
+        %th
+        %th
+    %tbody
+      -@stock_changes.each do |sc|
+        %tr{:class => "toggle_background"}
+          %td=sc.created_at.strftime("%d.%m.%Y")
+          %td=sc.shop_bundle.name
+          %td=sc.amount
+          %td=sc.name
+          %td
+            =link_to(image_tag("edit.png", :width => "20px", :title => "Lageränderung editieren"), edit_stock_change_path(sc.id))
+          %td
+            =link_to(image_tag("delete.png", :width => "20px", :title => "Lageränderung löschen"), stock_change_path(sc.id), :method => :delete, :confirm => "Wirklich löschen?")

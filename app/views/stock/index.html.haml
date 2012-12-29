@@ -3,6 +3,7 @@
 - @stocks.each do |s|
   %div{:class => "konto-uebersicht float-left"}
     %h2="Lager " + s.name.upcase
+    %p=link_to "Lageränderungen anzeigen", stock_changes_path(:stock => s.id)
     %table{:class=> "table-index table_bills"}
       %thead
         %tr
