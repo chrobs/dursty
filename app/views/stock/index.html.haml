@@ -7,7 +7,7 @@
     %table{:class=> "table-index table_bills"}
       %thead
         %tr
-          %th Shop bundle
+          %th Artikel
           %th Anzahl
       %tbody
         - s.inventory.sort_by{|b,a| b.name}.each do |item,amount|
