@@ -1,10 +1,1 @@
-- content_for :left do
-  = render "shared/menu"
-  - if user_signed_in?
-    = render "home/user"
-
-- content_for :content do
-
-  = content_for?(:home_content) ? yield(:home_content) : yield
-
 = render :template => 'layouts/application'

@@ -45,6 +45,8 @@ gem "rails-i18n", "~> 0.7.0"
 # pagination
 gem 'will_paginate', "~> 3.0.3"
 
+# navigation rendering
+gem "simple-navigation", "~> 3.9.0"
 
 # deploy with capistrano
 gem 'rvm-capistrano', "~>1.2.7"

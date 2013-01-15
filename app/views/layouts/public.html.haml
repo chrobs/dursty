@@ -1,8 +1,1 @@
-- content_for :left do
-  = render "public/menu"
-
-- content_for :content do
-
-  = content_for?(:home_content) ? yield(:home_content) : yield
-
 = render :template => 'layouts/application'

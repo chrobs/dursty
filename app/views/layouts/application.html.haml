@@ -19,11 +19,14 @@
 
     %div{id:"body"}
       %div{id:"left"}
+        %div{id:"menu"}
+          %h2 Menü
+          = render_navigation
         = yield(:left)
 
       %div{id:"main"}
         %div{id:"pathway"}
-          #{link_to "Home", root_path} #{yield(:pathway)}
+          = render_navigation :renderer => :breadcrumbs, :join_with => " &raquo; ", :prefix => "Dursty &raquo; "
         = content_for?(:content) ? yield(:content) : yield
 
       %div{id:"right"}

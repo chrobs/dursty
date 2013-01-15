@@ -135,7 +135,7 @@ a:hover, .js-link:hover {
   height: 17px;
 }
 
-#left > div li a:hover {
+#left > div li a:hover, #left > div li a.selected {
   text-decoration: none;
   background-color: $color-b3;
   color: $color-b1;

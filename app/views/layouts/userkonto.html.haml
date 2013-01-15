@@ -1,13 +1,1 @@
-- content_for :left do
-  = render "shared/menu"
-  - if user_signed_in?
-    = render "home/user"
-
-- content_for :content do
-
-  = content_for?(:home_content) ? yield(:home_content) : yield
-
-- content_for :pathway do
-  &raquo; #{link_to "Kassenstand", userkonto_show_path(current_user.id)} #{yield(:pathway)}
-
 = render :template => 'layouts/application'
