@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223113647) do
+ActiveRecord::Schema.define(:version => 20130209141354) do
+
+  create_table "item_prices", :force => true do |t|
+    t.string   "name"
+    t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "item_id"
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+  end
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -59,8 +67,8 @@ ActiveRecord::Schema.define(:version => 20121223113647) do
   end
 
   create_table "orders", :force => true do |t|
-    t.integer  "user_id"
-    t.boolean  "closed"
+    t.integer  "user_id",    :null => false
+    t.boolean  "closed",     :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "stock_id"
@@ -83,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20121223113647) do
     t.integer  "amount"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "item_price_id"
   end
 
   create_table "shop_bundles", :force => true do |t|

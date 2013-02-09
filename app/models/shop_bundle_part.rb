@@ -2,6 +2,7 @@ class ShopBundlePart < ActiveRecord::Base
   attr_accessible :amount, :id, :item_id, :shop_bundle_id
   belongs_to :shop_bundle
   belongs_to :item
+  belongs_to :item_price
 
   def self.newFromBundleParams params
     (1..(params[:shop_bundle][:max_items].to_i)).each do |i|

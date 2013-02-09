@@ -4,6 +4,7 @@ class Item < ActiveRecord::Base
 
   has_many :shop_bundle_parts
   has_many :order_parts
+  has_many :item_prices
 
   def self.itemsForAutocomplete
     res = self.all.map {|k| '{label: "'+k.name+'", value: "'+k.id.to_s+'"}'}.join(",")
