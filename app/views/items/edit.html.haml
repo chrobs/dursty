@@ -2,8 +2,22 @@
   &raquo; Editiere "#{@item.name}"
 
 = semantic_form_for @item do |f|
+  %h2 Artikel
   = f.input :name
-  = f.input :preis
+
+  %br
+  %h2 Preisoptionen
+  %br
+  = f.inputs :for => :item_prices do |p|
+    = p.input :name
+    = p.input :price, :label => "Preis"
+    = p.input "_destroy", :as => :boolean, :label => "Löschen?"
+    %hr
+
+  %h3{:id => "addPrice", :class=>"js-link"} weitere Preisoption hinzufügen
+
+  %br
+  %br
   = f.actions do
     = f.action :submit, :as => :button, :label => "zurück"
     = f.action :submit, :as => :button, :label => "speichern"

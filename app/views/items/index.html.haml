@@ -7,11 +7,17 @@
 %table{:class=> "table-index"}
   %thead
     %td Name
-    %td Preis
+    %td Preisoptionen
   %tbody
     - @items.each do |i|
       %tr
         %td= i.name
-        %td= number_to_currency(i.preis, :precision=>2, :unit=>" &#8364; ", :separator=>",")
+        %td
         %td= link_to(image_tag("edit.png", :width => "20px"), edit_item_path(i), :title => "Item editieren")
         %td= link_to(image_tag("delete.png", :width => "20px"), item_path(i), :title => "Item löschen", :method => :delete, :confirm => "Dieses Item wirklich löschen?")
+      %tr{:class => "row_highlighted"}
+        %td
+        %td
+          %ol
+            - i.item_prices.each do |p|
+              %li= p.name + " (" + number_to_currency(p.price, :unit => "€") + ")"

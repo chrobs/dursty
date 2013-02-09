@@ -2,8 +2,20 @@
   &raquo; Neu
 
 = semantic_form_for @item do |f|
+  %h2 Artikel
   = f.input :name
-  = f.input :preis
+  %br
+  %h2 Preisoptionen
+  %br
+  = f.inputs :for => :item_prices do |p|
+    = p.input :name
+    = p.input :price, :label => "Preis"
+    %hr
+
+  %h3{:id => "addPrice", :class=>"js-link"} weitere Preisoption hinzufügen
+
+  %br
+  %br
   = f.actions do
-    = f.action :submit, :as => :button, :label => "abbrechen"
+    = f.action :cancel, :as => :link, :label => "abbrechen"
     = f.action :submit, :as => :button, :label => "speichern"

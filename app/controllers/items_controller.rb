@@ -14,10 +14,12 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @item.item_prices.build
   end
 
   def edit
     @item = Item.find(params[:id])
+    @item.item_prices.build if @item.item_prices.size < 1
   end
 
   def show
@@ -29,6 +31,7 @@ class ItemsController < ApplicationController
     if @item.update_attributes(params[:item])
       redirect_to(items_path, :notice => 'Artikel erfolgreich editiert.')
     else
+      @item.item_prices.build if @item.item_prices.size < 1
       render :edit
     end
   end
@@ -38,6 +41,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to(items_path, :notice => 'Artikel erfolgreich angelegt.')
     else
+      @item.item_prices.build if @item.item_prices.size < 1
       render :new
     end
   end
