@@ -1,5 +1,5 @@
 %tr
   - if positive
-    %td{:class => "type_positive"}= part.amount.to_s + "x " + part.item.name.to_s + " (" + number_to_currency(part.item_price, :locale => :de) + ")"
+    %td{:class => "type_positive"}= part.amount.to_s + "x " + part.item.name.to_s + " (" + number_to_currency(part.item_price.price, :locale => :de) + ")"
   - else
-    %td{:class => "type_negative"}= part.amount.to_s + "x " + part.item.name.to_s + " (" + number_to_currency((-1)*part.item_price, :locale => :de) + ")"
+    %td{:class => "type_negative"}= part.amount.to_s + "x " + part.item.name.to_s + " (" + number_to_currency((-1)*part.item_price.price, :locale => :de) + ")"

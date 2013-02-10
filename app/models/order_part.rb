@@ -10,7 +10,7 @@ class OrderPart < ActiveRecord::Base
      partItem = OrderPartItem.new :order_part_id => self.id,
                                   :item_id => p.item_id,
                                   :amount => p.amount,
-                                  :price => p.item.preis,
+                                  :price => p.item_price.price,
                                   :name => p.item.name
       return false unless partItem.save
     end

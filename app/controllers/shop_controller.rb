@@ -23,7 +23,7 @@ class ShopController < ApplicationController
     # get information for shopping card
     @order = Order.where(:user_id => current_user.id, :closed => false)
                   .order("updated_at DESC")
-                  .first_or_create!(:stock_id => @user.stocks.first)
+                  .first_or_create!(:stock_id => @user.stocks.first.id)
   end
 
   def addToCard
