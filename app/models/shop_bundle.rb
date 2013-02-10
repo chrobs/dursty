@@ -9,7 +9,7 @@ class ShopBundle < ActiveRecord::Base
   def getTotalCost
     total = 0
     self.shop_bundle_parts.each do |p|
-      total += p.amount * p.item.preis
+      total += p.amount * p.item_price.price
     end
 
     total = total * (-1) unless self.positive

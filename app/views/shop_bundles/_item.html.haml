@@ -1,2 +1,2 @@
 %tr
-  %td= part.amount.to_s + "x " + part.item.name.to_s + " (" + number_to_currency(part.item.preis, :unit => "€") + ")"
+  %td= part.amount.to_s + "x " + part.item.name.to_s + " (" + number_to_currency(part.item_price.price, :unit => "€") + ")"

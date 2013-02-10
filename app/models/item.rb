@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
-  attr_accessible :kategorie, :preis, :name, :item_prices_attributes
-  validates_presence_of :name, :preis
+  attr_accessible :kategorie, :name, :item_prices_attributes
+  validates_presence_of :name
 
   has_many :shop_bundle_parts
   has_many :order_parts
