@@ -15,6 +15,7 @@
   %br
 
   %h2 Kategorien
+  = f.input :shop_bundle_categories, :label => "", :as => :check_boxes, :collection => ShopBundleCategory.all, :required => false
 
   %h2 Neuen Artikel hinzufügen
   %table

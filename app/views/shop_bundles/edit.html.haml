@@ -11,13 +11,11 @@
   = f.label "Negativ"
   = f.radio_button :positive, 'false', :checked => !@bundle.positive
 
-  -#= f.input :max_items, :as => :hidden, :value => @bundle.shop_bundle_parts.size, :id => :max_items
-
   %br
   %br
 
   %h2 Kategorien
-  -# = f.input :shop_bundle_categories, :label => "", :as => :check_boxes, :collection => ShopBundleCategory.all, :required => false
+  = f.input :shop_bundle_categories, :label => "", :as => :check_boxes, :collection => ShopBundleCategory.all, :required => false
 
   %h2 Shop bundle Artikel
   %table
