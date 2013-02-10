@@ -1,5 +1,5 @@
 class ShopBundlePart < ActiveRecord::Base
-  attr_accessible :amount, :id, :item_id, :shop_bundle_id
+  attr_accessible :amount, :id, :item_id, :shop_bundle_id, :item_price_id
   belongs_to :shop_bundle
   belongs_to :item
   belongs_to :item_price

@@ -1,0 +1,6 @@
+%tr
+  %td= f.input :item_id, :as => :select, :label => false, :collection => Item.all, :input_html => {:onchange => "item_get_prices(this);"}
+  %td= f.input :amount, :label => false
+  %td= f.input :item_price_id, :label => false, :as => :select, :collection => []
+  %td= f.input "_destroy", :as => :boolean, :label => "Löschen?"
+  %td= f.input :shop_bundle_id, :as => :hidden, :value => @bundle.id

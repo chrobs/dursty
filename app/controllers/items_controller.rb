@@ -54,5 +54,10 @@ class ItemsController < ApplicationController
       redirect_to(items_path, :notice => 'Artikel nicht gelöscht.')
     end
   end
+
+  def get_priceoptions
+    item = Item.find params[:id]
+    render :text => item.item_prices.map{|p| {p.id =>"#{p.name} (#{view_context.number_to_currency(p.price, :locale => :de)})"}}.to_json and return
+  end
 end
 

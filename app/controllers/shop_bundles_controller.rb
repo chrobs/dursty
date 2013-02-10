@@ -24,18 +24,20 @@ class ShopBundlesController < ApplicationController
     #render :text => params.inspect and return
     @bundle = ShopBundle.find(params[:id])
 
+    render :edit and return unless @bundle.update_attributes(params["shop_bundle"])
+
     # update bundle
-    render :edit and return unless @bundle.update_attributes( :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive])
+    #render :edit and return unless @bundle.update_attributes( :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive])
 
-    # update bundle_parts
-    render :edit and return unless @bundle.shop_bundle_parts.destroy_all
-    render :edit and return unless ShopBundlePart.newFromBundleParams params
+    ## update bundle_parts
+    #render :edit and return unless @bundle.shop_bundle_parts.destroy_all
+    #render :edit and return unless ShopBundlePart.newFromBundleParams params
 
-    # update categories
-    cat_ids = params[:shop_bundle][:shop_bundle_category_ids]
-    cat_ids.reject!{|i| i.empty?}
-    categories = cat_ids.map{|cid| ShopBundleCategory.find cid}
-    @bundle.shop_bundle_categories = categories
+    ## update categories
+    #cat_ids = params[:shop_bundle][:shop_bundle_category_ids]
+    #cat_ids.reject!{|i| i.empty?}
+    #categories = cat_ids.map{|cid| ShopBundleCategory.find cid}
+    #@bundle.shop_bundle_categories = categories
 
     redirect_to(shop_bundles_path, :notice => 'Shop bundle erfolgreich editiert.')
   end
@@ -43,17 +45,18 @@ class ShopBundlesController < ApplicationController
   def create
 
     #render :text => params[:shop_bundle].inspect and return
-    @bundle = ShopBundle.new :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive]
+    #@bundle = ShopBundle.new :name => params[:shop_bundle][:name], :positive => params[:shop_bundle][:positive]
+    @bundle = ShopBundle.new params[:shop_bundle]
 
     render :new unless @bundle.save
-    params[:id] = @bundle.id
-    render :new unless ShopBundlePart.newFromBundleParams params
+    #params[:id] = @bundle.id
+    #render :new unless ShopBundlePart.newFromBundleParams params
 
-    # update categories
-    cat_ids = params[:shop_bundle][:shop_bundle_category_ids]
-    cat_ids.reject!{|i| i.empty?}
-    categories = cat_ids.map{|cid| ShopBundleCategory.find cid}
-    @bundle.shop_bundle_categories = categories
+    ## update categories
+    #cat_ids = params[:shop_bundle][:shop_bundle_category_ids]
+    #cat_ids.reject!{|i| i.empty?}
+    #categories = cat_ids.map{|cid| ShopBundleCategory.find cid}
+    #@bundle.shop_bundle_categories = categories
 
     redirect_to(shop_bundles_path, :notice => 'Bundle erfolgreich angelegt.')
   end

@@ -1,6 +1,9 @@
 class ShopBundle < ActiveRecord::Base
-  attr_accessible :id, :name, :positive
+  attr_accessible :id, :name, :positive, :shop_bundle_parts_attributes
+
   has_many :shop_bundle_parts
+  accepts_nested_attributes_for :shop_bundle_parts, :allow_destroy => true
+
   has_many :items, :through => :shop_bundle_parts
   has_many :order_parts
   has_and_belongs_to_many :shop_bundle_categories

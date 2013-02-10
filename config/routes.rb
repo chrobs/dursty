@@ -8,6 +8,7 @@ Dursty::Application.routes.draw do
   resources  :stock_changes
   get "stock/index"
   match "stock/showBundle/:id/:location" => "stock#showBundleAtLocation"
+  match "items/:id/get-priceoptions" => "items#get_priceoptions", :as => :item_get_priceoptions
 
 
   # admin

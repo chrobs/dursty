@@ -23,6 +23,7 @@ gem 'coffee-rails', '~> 3.2.1'
 #gem 'haml', '~> 3.1.7'
 gem 'haml-rails', '~> 0.3.5'
 gem 'formtastic', '~> 2.2.1'
+gem 'cocoon', '~> 1.1.2'
 
 # jquery
 gem 'jquery-rails'

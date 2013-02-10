@@ -4,7 +4,7 @@ class Item < ActiveRecord::Base
 
   has_many :shop_bundle_parts
   has_many :order_parts
-  has_many :item_prices
+  has_many :item_prices, :dependent => :destroy
   accepts_nested_attributes_for :item_prices, :allow_destroy => true, :reject_if => proc { |ip| ip['price'].blank? | ip['name'].blank? }
 
   def self.itemsForAutocomplete

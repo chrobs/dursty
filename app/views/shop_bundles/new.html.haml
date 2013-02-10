@@ -11,57 +11,37 @@
   = f.label "Negativ"
   = f.radio_button :positive, 'false', :checked => false
 
-  = f.input :max_items, :as => :hidden, :value => 0, :id => :max_items
   %br
   %br
 
   %h2 Kategorien
-  = f.input :shop_bundle_categories, :label => "", :as => :check_boxes, :collection => ShopBundleCategory.all, :required => false
 
   %h2 Neuen Artikel hinzufügen
   %table
     %thead
       %td Artikel
       %td Anzahl
-    %tr
-      = f.fields_for :new_part do |n|
-        %td= n.text_field :item_name_new
-        %td= n.text_field :item_amount_new, :size => 5
-        %td
-          %span{:class => "js-link", :id => "addItem"}
-            Artikel hinzufügen
-        %td= n.input :item_id_new, :as => :hidden
+      %td Preisoption
+    %tbody{:id => :shop_bundle_parts_tbody}
+      = f.inputs :for => :shop_bundle_parts do |part, i|
+        .nested-fields
+          %tr
+            %td= part.input :item_id, :as => :select, :label => false, :collection => Item.all, :input_html => {:onchange => "item_get_prices(this);"}
+            %td= part.input :amount, :label => false
+            %td= part.input :item_price_id, :label => false, :as => :select, :collection => @bundle.shop_bundle_parts[i-1].item.item_prices.map{|price| ["#{price.name} (#{number_to_currency(price.price, :locale => :de)})",price.id]}
+            %td= part.input "_destroy", :as => :boolean, :label => "Löschen?"
+            %td= part.input :shop_bundle_id, :as => :hidden, :value => @bundle.id
 
-
-  %br
-  %h2 Artikel im Shop bundle
-  = f.fields_for :shop_bundle_parts do |g|
-    %table{:class=>"table-index", :id => "item-list"}
-      %tr{:id => "item-row-sample", :style => "display:none"}
-        %td
-          = g.text_field :item_name_sample, :class => "item_name"
-        %td
-          = g.text_field :item_amount_sample, :size => 5, :class => "item_amount"
-        %td{:class => "item_id"}
-          = g.input :item_id_sample, :as => :hidden
-        %td
-          = image_tag "delete.png", :class => "delete_shop_bundle_part js-link", :width => "20px", :onclick => "del_row(event)"
-
-
-
+  .links{:id => :shop_bundle_parts_links}
+    = link_to_add_association 'weiteren Artikel', f, :shop_bundle_parts
 
   %br
   %br
   = f.actions do
-    = f.action :cancel, :as => :link, :label => "zurück"
-    = f.action :submit, :as => :button, :label => "speichern"
+    = f.action :cancel, :as => :link, :label => "abbrechen"
+    = f.action :submit, :as => :button, :label => "speichern", :name => :update_bundle
 
 :javascript
-  $("#shop_bundle_new_part_item_name_new").autocomplete({
-    source: #{getItemsAutocompleteForBundle()},
-    select: function(event, ui) {
-      $(event.target).val(ui.item.label)
-      $(event.target).parent().parent().find("#shop_bundle_new_part_item_id_new").val(ui.item.value)
-      return false
-    }
-  })
+  $("#shop_bundle_parts_links a.add_fields").
+    data("association-insertion-method", 'append').
+    data("association-insertion-node", '#shop_bundle_parts_tbody')
