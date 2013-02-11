@@ -13,6 +13,8 @@ class UserkontoController < ApplicationController
     orders = Order.closed.where :user_id => params[:id]
     transactions = @user.konto.transactions
     @buchungen = (orders + transactions).sort!{|a,b| b.created_at <=> a.created_at}
+    @buchungen << KontoTransaction.new(:to => User.first.konto.id,
+                    :name => "Initialwert", :price => User.first.konto.initial)
     @buchungen = @buchungen.paginate(page:params[:page], per_page:10)
   end
 

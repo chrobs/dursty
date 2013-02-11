@@ -1,8 +1,11 @@
 %tr{:class => "element_first_row element_last_row"}
-  %td=bill.updated_at.strftime("%d.%m.%Y, %H:%M")
+  - if bill.created_at
+    %td=bill.updated_at.strftime("%d.%m.%Y, %H:%M")
+  - else
+    %td
   %td= bill.name
   %td
-  - if bill.from_konto.id == @user.konto.id
+  - if bill.from_konto && bill.from_konto.id == @user.konto.id
     %td{:class => "type_negative cell_price"}=number_to_currency((-1)*bill.price, :locale => :de)
   - else
     %td{:class => "type_positive cell_price"}=number_to_currency(bill.price, :locale => :de)
