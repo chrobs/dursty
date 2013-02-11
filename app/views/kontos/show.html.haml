@@ -53,3 +53,15 @@
             =link_to(image_tag("edit.png", :width => "20px", :title => "Transaktion editieren"), edit_konto_transaction_path(t.id))
           %td
             =link_to(image_tag("delete.png", :width => "20px", :title => "Transaktion löschen"), konto_transaction_path(t.id), :method => :delete)
+
+      %tr{:class => "toggle_background"}
+        %td
+        %td
+        %td
+        %td Initialwert
+        - if @konto.initial < 0
+          %td{:class => "type_negative cell_price"}=number_to_currency @konto.initial, :locale => :de
+        - else
+          %td{:class => "type_positive cell_price"}=number_to_currency(@konto.initial, :locale => :de)
+        %td
+        %td

@@ -1,5 +1,5 @@
 class Konto < ActiveRecord::Base
-  attr_accessible :name, :user_id, :ag, :ext
+  attr_accessible :name, :user_id, :ag, :ext, :initial
 
   validates_presence_of :name
 
@@ -35,7 +35,8 @@ class Konto < ActiveRecord::Base
   end
 
   def saldo
-    saldo = saldoTransactions
+    saldo = self.initial
+    saldo += saldoTransactions
     if self.user
       saldo += self.user.ordersSaldo
     end

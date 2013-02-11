@@ -3,7 +3,8 @@
 
 = semantic_form_for @konto do |f|
   = f.input :name
-  = f.input :user_id, :label => "User-Id"
+  = f.input :user_id, :label => "User-Id", :hint => "Für AG- oder Externes-Konto leerlassen"
+  = f.input :initial, :label => "Initialwert"
   %h2 Spezielle Kontentypen:
   %h3 Für Verkäuferkonto nichts auswählen
   = f.input :ag, :as => :boolean, :label => "AG-Konto"
