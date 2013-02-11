@@ -42,6 +42,7 @@ gem "pry", '~>0.9.10', :group => :development
 
 # internationalization
 gem "rails-i18n", "~> 0.7.0"
+gem "delocalize", "~> 0.3.1"
 
 # pagination
 gem 'will_paginate', "~> 3.0.3"
