@@ -14,27 +14,30 @@ class KontoTransactionsController < ApplicationController
     @ag_kontos = Konto.ag
   end
 
+  def set_kontos
+    @kontos = Konto.ag
+    @kontos += Konto.ext
+    @kontos += Konto.verkaeufer
+  end
+
   def create
-    transact = KontoTransaction.new params[:konto_transaction]
-    if transact.save
-      redirect_to(konto_path(transact.from), :notice => 'Transaktion erfolgreich angelegt.')
+    set_kontos
+    @konto_transaction = KontoTransaction.new params[:konto_transaction]
+    if @konto_transaction.save
+      redirect_to(konto_path(@konto_transaction.from), :notice => 'Transaktion erfolgreich angelegt.')
     else
       render :new
     end
   end
 
   def new
-    @kontos = Konto.ag
-    @kontos += Konto.ext
-    @kontos += Konto.verkaeufer
+    set_kontos
     @konto_transaction = KontoTransaction.new(:from => params[:from])
   end
 
   def edit
     @konto_transaction = KontoTransaction.find params[:id]
-    @kontos = Konto.ag
-    @kontos += Konto.ext
-    @kontos += Konto.verkaeufer
+    set_kontos
   end
 
   def show
