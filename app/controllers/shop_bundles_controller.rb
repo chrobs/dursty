@@ -14,6 +14,7 @@ class ShopBundlesController < ApplicationController
 
   def new
     @bundle = ShopBundle.new
+    @bundle.shop_bundle_parts.build
   end
 
   def edit
@@ -28,7 +29,6 @@ class ShopBundlesController < ApplicationController
   end
 
   def create
-
     #render :text => params[:shop_bundle].inspect and return
     @bundle = ShopBundle.new params[:shop_bundle]
     render :new unless @bundle.save

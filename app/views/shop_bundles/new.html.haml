@@ -29,7 +29,10 @@
           %tr
             %td= part.input :item_id, :as => :select, :label => false, :collection => Item.all, :input_html => {:onchange => "item_get_prices(this);"}
             %td= part.input :amount, :label => false
-            %td= part.input :item_price_id, :label => false, :as => :select, :collection => @bundle.shop_bundle_parts[i-1].item.item_prices.map{|price| ["#{price.name} (#{number_to_currency(price.price, :locale => :de)})",price.id]}
+            - if @bundle.shop_bundle_parts[i-1].item
+              %td= part.input :item_price_id, :label => false, :as => :select, :collection => @bundle.shop_bundle_parts[i-1].item.item_prices.map{|price| ["#{price.name} (#{number_to_currency(price.price, :locale => :de)})",price.id]}
+            - else
+              %td= part.input :item_price_id, :label => false, :as => :select, :collection => []
             %td= part.input "_destroy", :as => :boolean, :label => "Löschen?"
             %td= part.input :shop_bundle_id, :as => :hidden, :value => @bundle.id
 
