@@ -149,6 +149,10 @@ a:hover, .js-link:hover {
   border-left: 8px solid $color-b3;
 }
 
+#left > div li a:hover i {
+  text-decoration: none;
+}
+
 #left > div > h2 {
   background-color: $color-a1;
   margin-left: -$padding-box;

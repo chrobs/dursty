@@ -49,35 +49,35 @@ SimpleNavigation::Configuration.run do |navigation|
     #                            when the item should be highlighted, you can set a regexp which is matched
     #                            against the current URI.  You may also use a proc, or the symbol <tt>:subpath</tt>. 
     #
-    first.item :home, 'Home', root_path
+    first.item :home, '<i class="icon-home"/></i> Home', root_path
 
     # Add an item which has a sub navigation (same params, but with block)
     first.item :login, 'Login', new_user_session_path, :unless => Proc.new { user_signed_in? }
 
     if user_signed_in?
-      first.item :kassenstand, 'Kassenstand', userkonto_show_path(current_user.id)
-      first.item :verkauf, 'Verkauf', shop_index_path do |shop|
+      first.item :kassenstand, '<i class="icon-tasks"></i> Kassenstand', userkonto_show_path(current_user.id)
+      first.item :verkauf, '<i class="icon-shopping-cart"></i> Verkauf', shop_index_path do |shop|
         ShopBundleCategory.all.each do |c|
           shop.item c.name.to_sym, c.name, shop_index_path(:category => c.id)
         end
       end
 
 
-      first.item :lagerwart, 'Lagerwart', stock_index_path, :if => Proc.new { current_user.lagerwart || current_user.admin}, :highlights_on => %r(^/stock_changes|^/stock) do |lager|
+      first.item :lagerwart, '<i class="icon-beer"></i> Lagerwart', stock_index_path, :if => Proc.new { current_user.lagerwart || current_user.admin}, :highlights_on => %r(^/stock_changes|^/stock) do |lager|
         lager.item :artikel, 'Artikel', items_path, :highlights_on => %r(^/items)
         lager.item :shopbundlecategories, 'Kategorien', shop_bundle_categories_path, :highlights_on => %r(^/shop_bundle_categories)
         lager.item :shopbundles, 'Shop bundles', shop_bundles_path, :highlights_on => %r(^/shop_bundles)
       end
 
-      first.item :kassenwart, 'Kassenwart', kasse_uebersicht_path, :if => Proc.new { current_user.kassenwart || current_user.admin} do |kasse|
+      first.item :kassenwart, '<i class="icon-credit-card"></i> Kassenwart', kasse_uebersicht_path, :if => Proc.new { current_user.kassenwart || current_user.admin} do |kasse|
         kasse.item :konten, 'Konten', kasse_uebersicht_path, :highlights_on => %r(^/kontos/\d+$|^/kasse/uebersicht$|^/konto_transactions)
         kasse.item :kontoadmin, 'Kontoadmin', kontos_path, :highlights_on => %r(^/kontos($|/new$|/\d+/edit$))
       end
 
-      first.item :useradmin, 'Useradmin', users_path, :if => Proc.new {current_user.admin}, :highlights_on => %r(^/admin/) do |admin|
+      first.item :useradmin, '<i class="icon-user"></i> Useradmin', users_path, :if => Proc.new {current_user.admin}, :highlights_on => %r(^/admin/) do |admin|
       end
 
-      first.item :logout, 'Logout', destroy_user_session_path, :method => :delete
+      first.item :logout, '<i class="icon-signout"></i> Logout', destroy_user_session_path, :method => :delete
     end
     # You can also specify a condition-proc that needs to be fullfilled to display an item.
     # Conditions are part of the options. They are evaluated in the context of the views,
