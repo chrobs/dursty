@@ -132,13 +132,21 @@ a:hover, .js-link:hover {
   display: block;
   width: $width-left - 2*$padding-box - 2*$padding-box;
   padding: $padding-box;
-  height: 17px;
+  min-height: 17px;
 }
 
-#left > div li a:hover, #left > div li a.selected {
+#left > div li a.selected {
   text-decoration: none;
   background-color: $color-b3;
   color: $color-b1;
+}
+
+#left > div li a.selected:hover {
+  border-left: 0px;
+}
+
+#left > div li a:hover {
+  border-left: 8px solid $color-b3;
 }
 
 #left > div > h2 {
