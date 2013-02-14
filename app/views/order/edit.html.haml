@@ -20,8 +20,7 @@
         %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
 
       %td
-        %a{:href => order_delete_bundle_path(:id => @order.id, :bundle => p.shop_bundle_id)}
-          = image_tag "delete.png", :class => "shop_delete_bundle_part", :width => "15px"
+        =link_to("",order_delete_bundle_path(:id => @order.id, :bundle => p.shop_bundle_id), :confirm => "Diesen Artikel wirklich löschen?", :class => "icon-trash", :title => "löschen")
 
     - p.order_part_items.each do |pi|
       %tr{:class => "bundle-item-list"}
@@ -46,5 +45,5 @@
 = semantic_form_for @order do |f|
   = f.input :stock, :as => :select, :collection => @order.user.stocks, :label => "Verkaufsort", :include_blank => false
   = f.actions do
-    = f.action :cancel, :as => :link, :label => "zurück zum Kassenstand"
+    = f.action :cancel, :as => :link, :label => "zurück zum Kassenstand", :url => userkonto_show_path(@order.user.id)
     = f.action :submit, :as => :button, :label => "Bestellung speichern"
