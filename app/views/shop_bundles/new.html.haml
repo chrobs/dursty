@@ -15,7 +15,7 @@
   %br
 
   %h2 Kategorien
-  = f.input :shop_bundle_categories, :label => "", :as => :check_boxes, :collection => ShopBundleCategory.all, :required => false
+  = f.input :shop_bundle_categories, :label => "", :as => :check_boxes, :collection => ShopBundleCategory.find(:all, :order => :name), :required => false
 
   %h2 Neuen Artikel hinzufügen
   %table
@@ -27,7 +27,7 @@
       = f.inputs :for => :shop_bundle_parts do |part, i|
         .nested-fields
           %tr
-            %td= part.input :item_id, :as => :select, :label => false, :collection => Item.all, :input_html => {:onchange => "item_get_prices(this);"}
+            %td= part.input :item_id, :as => :select, :label => false, :collection => Item.find(:all, :order => :name), :input_html => {:onchange => "item_get_prices(this);"}
             %td= part.input :amount, :label => false
             - if @bundle.shop_bundle_parts[i-1].item
               %td= part.input :item_price_id, :label => false, :as => :select, :collection => @bundle.shop_bundle_parts[i-1].item.item_prices.map{|price| ["#{price.name} (#{number_to_currency(price.price, :locale => :de)})",price.id]}
