@@ -27,3 +27,12 @@
       )
       $(obj).parent().find("i:last").remove()
   )
+
+jQuery ->
+  $(".table-datatable").dataTable({
+    sPaginationType: "full_numbers"
+    bJQueryUI: true
+    bProcessing: true
+    aLengthMenu: [[30, 50,100, -1],[30, 50,100, "All"]]
+  })
+
