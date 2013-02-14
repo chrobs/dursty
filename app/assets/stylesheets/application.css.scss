@@ -153,43 +153,51 @@ a:hover, .js-link:hover {
   text-decoration: none;
 }
 
+#left > div li a:hover{
+  width: $width-left - 2*$padding-box - 2*$padding-box;// - 2*$padding-box;
+}
+
 #left > div > h2 {
   background-color: $color-a1;
   margin-left: -$padding-box;
-padding: $padding-box;
+  padding: $padding-box;
 }
 
 #left div ul ul {
-  padding-left: 2*$padding-box;
+  //padding-left: 2*$padding-box;
 }
 
 #left div ul ul li a {
-width: $width-left - 2*$padding-box - 2*$padding-box - 2*$padding-box;
+  width: $width-left - 2*$padding-box - 2*$padding-box;// - 2*$padding-box;
+}
+
+#left div ul ul li a i {
+  width: 1em;
 }
 
 #main{
-width: $width-main;
-       max-width: $width-main-max;
-padding: $padding-box;
-float: left;
-       //margin-left: $width-left + 2*$padding-box;
+  width: $width-main;
+  max-width: $width-main-max;
+  padding: $padding-box;
+  float: left;
+  //margin-left: $width-left + 2*$padding-box;
 }
 
 #right{
-width: $width-right;
-padding: $padding-box;
-float: right;
+  width: $width-right;
+  padding: $padding-box;
+  float: right;
 }
 
 
 #flash_container{
   background-color: $color-a2;
-width: $width-body/3;
-       max-width: $width-body;
-       text-align: center;
-       margin-left: auto;
-       margin-right: auto;
-color: #FFF;
+  width: $width-body/3;
+  max-width: $width-body;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: #FFF;
 }
 
 #footer {

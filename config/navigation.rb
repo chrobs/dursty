@@ -58,20 +58,20 @@ SimpleNavigation::Configuration.run do |navigation|
       first.item :kassenstand, '<i class="icon-tasks"></i> Kassenstand', userkonto_show_path(current_user.id)
       first.item :verkauf, '<i class="icon-shopping-cart"></i> Verkauf', shop_index_path do |shop|
         ShopBundleCategory.all.each do |c|
-          shop.item c.name.to_sym, c.name, shop_index_path(:category => c.id)
+          shop.item c.name.to_sym, '<i class="icon-caret-right"></i> '+c.name, shop_index_path(:category => c.id)
         end
       end
 
 
       first.item :lagerwart, '<i class="icon-beer"></i> Lagerwart', stock_index_path, :if => Proc.new { current_user.lagerwart || current_user.admin}, :highlights_on => %r(^/stock_changes|^/stock) do |lager|
-        lager.item :artikel, 'Artikel', items_path, :highlights_on => %r(^/items)
-        lager.item :shopbundlecategories, 'Kategorien', shop_bundle_categories_path, :highlights_on => %r(^/shop_bundle_categories)
-        lager.item :shopbundles, 'Shop bundles', shop_bundles_path, :highlights_on => %r(^/shop_bundles)
+        lager.item :artikel, '<i class="icon-caret-right"></i> Artikel', items_path, :highlights_on => %r(^/items)
+        lager.item :shopbundlecategories, '<i class="icon-caret-right"></i> Kategorien', shop_bundle_categories_path, :highlights_on => %r(^/shop_bundle_categories)
+        lager.item :shopbundles, '<i class="icon-caret-right"></i> ShopBundles', shop_bundles_path, :highlights_on => %r(^/shop_bundles)
       end
 
       first.item :kassenwart, '<i class="icon-credit-card"></i> Kassenwart', kasse_uebersicht_path, :if => Proc.new { current_user.kassenwart || current_user.admin} do |kasse|
-        kasse.item :konten, 'Konten', kasse_uebersicht_path, :highlights_on => %r(^/kontos/\d+$|^/kasse/uebersicht$|^/konto_transactions)
-        kasse.item :kontoadmin, 'Kontoadmin', kontos_path, :highlights_on => %r(^/kontos($|/new$|/\d+/edit$))
+        kasse.item :konten, '<i class="icon-caret-right"></i> Konten', kasse_uebersicht_path, :highlights_on => %r(^/kontos/\d+$|^/kasse/uebersicht$|^/konto_transactions)
+        kasse.item :kontoadmin, '<i class="icon-caret-right"></i> Kontoadmin', kontos_path, :highlights_on => %r(^/kontos($|/new$|/\d+/edit$))
       end
 
       first.item :useradmin, '<i class="icon-user"></i> Useradmin', users_path, :if => Proc.new {current_user.admin}, :highlights_on => %r(^/admin/) do |admin|
