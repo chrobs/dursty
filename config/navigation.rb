@@ -52,7 +52,7 @@ SimpleNavigation::Configuration.run do |navigation|
     first.item :home, '<i class="icon-home"/></i> Home', root_path
 
     # Add an item which has a sub navigation (same params, but with block)
-    first.item :login, 'Login', new_user_session_path, :unless => Proc.new { user_signed_in? }
+    first.item :login, '<i class="icon-signin"></i> Login', new_user_session_path, :unless => Proc.new { user_signed_in? }
 
     if user_signed_in?
       first.item :kassenstand, '<i class="icon-tasks"></i> Kassenstand', userkonto_show_path(current_user.id)
