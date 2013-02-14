@@ -8,8 +8,9 @@
         %a{:href => order_update_bundle_amount_path(:id => @order.id, :bundle => p.shop_bundle_id, :amount => 1)}
           = image_tag "up.png", :class => "shop_more_bundle_part", :width => "15px"
         = p.amount.to_s + "x"
-        %a{:href => order_update_bundle_amount_path(:id => @order.id, :bundle => p.shop_bundle_id, :amount => -1)}
-          = image_tag "down.png", :class => "shop_less_bundle_part", :width => "15px"
+        - if p.amount > 1
+          %a{:href => order_update_bundle_amount_path(:id => @order.id, :bundle => p.shop_bundle_id, :amount => -1)}
+            = image_tag "down.png", :class => "shop_less_bundle_part", :width => "15px"
 
       %td=  p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
 
