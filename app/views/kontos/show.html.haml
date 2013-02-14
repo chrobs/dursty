@@ -52,7 +52,7 @@
           %td
             =link_to(image_tag("edit.png", :width => "20px", :title => "Transaktion editieren"), edit_konto_transaction_path(t.id))
           %td
-            =link_to(image_tag("delete.png", :width => "20px", :title => "Transaktion löschen"), konto_transaction_path(t.id), :method => :delete)
+            =link_to(image_tag("delete.png", :width => "20px", :title => "Transaktion löschen"), konto_transaction_path(t.id), :method => :delete, :confirm => "Diese Transaktion wirklich löschen?")
 
       %tr{:class => "toggle_background"}
         %td
