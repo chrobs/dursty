@@ -10,12 +10,12 @@ class KasseController < ApplicationController
   before_filter :set_ag_kontos
 
   def set_ag_kontos
-    @ag_kontos = Konto.ag
+    @ag_kontos = Konto.ag.order(:name)
   end
 
   def uebersicht
-    @verkaeufer_kontos = Konto.verkaeufer
-    @ext_kontos = Konto.ext
+    @verkaeufer_kontos = Konto.verkaeufer.order(:name)
+    @ext_kontos = Konto.ext.order(:name)
   end
 
   def show_konto
