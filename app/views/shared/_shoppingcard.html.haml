@@ -5,7 +5,7 @@
     %p stand vom: #{@order.updated_at.strftime "%d.%m.%Y - %H:%M"}
 
   %table
-    - @order.order_parts.each do |p|
+    - @order.order_parts.sort{|a,b| b.created_at <=> a.created_at}.each do |p|
       %tr
         %td
           %a{:href => shop_add_to_card_path(:bundle => p.shop_bundle_id, :amount => 1, :category => params[:category])}
