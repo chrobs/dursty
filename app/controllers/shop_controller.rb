@@ -35,9 +35,9 @@ class ShopController < ApplicationController
     # add order_part for each item in shop_bundle
     if @order.updateParts(params[:bundle], params[:amount])
       @order.touch
-      redirect_to(shop_index_path, :notice => "Erfolgreich in den Wagen gelegt.")
+      redirect_to(shop_index_path(:category => params[:category]), :notice => "Erfolgreich in den Wagen gelegt.")
     else
-      redirect_to(shop_index_path, :notice => "Fehler aufgetreten, nicht in den Wagen geleget.")
+      redirect_to(shop_index_path(:category => params[:category]), :notice => "Fehler aufgetreten, nicht in den Wagen geleget.")
     end
   end
 
