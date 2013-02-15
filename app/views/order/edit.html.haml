@@ -1,5 +1,10 @@
-- content_for :pathway_2 do
+- content_for :pathway_sub do
   &raquo; Bestellung vom #{@order.created_at.strftime("%d.%m.%Y, %H:%M")}
+
+- unless current_user.id == @order.user.id
+  %h1=@order.user.name
+  %h2 Bestellung vom #{@order.created_at.strftime("%d.%m.%Y, %H:%M")}
+  %br
 
 %table
   - @order.order_parts.each do |p|

@@ -1,3 +1,6 @@
+- unless current_user.id == @user.id
+  %h1=@user.name
+
 %table{:class=> "table-index table_bills"}
   %thead
     %tr
