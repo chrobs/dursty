@@ -41,4 +41,14 @@ class OrderPart < ActiveRecord::Base
     end
     return inv
   end
+
+  def updateItem item_id, amount
+    item = self.order_part_items.find(item_id)
+    if item.amount + amount.to_i > 0
+      item.amount += amount.to_i
+    else
+      item.amount = 0
+    end
+    return item.save
+  end
 end

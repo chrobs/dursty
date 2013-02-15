@@ -8,11 +8,11 @@
     - @order.order_parts.sort{|a,b| b.created_at <=> a.created_at}.each do |p|
       %tr
         %td
-          %a{:href => shop_add_to_card_path(:bundle => p.shop_bundle_id, :amount => 1, :category => params[:category])}
+          %a{:href => shop_add_bundle_to_card_path(:bundle => p.shop_bundle_id, :amount => 1, :category => params[:category])}
             = image_tag "up.png", :class => "shop_more_bundle_part", :width => "15px"
           = p.amount.to_s + "x"
           - if p.amount > 1
-            %a{:href => shop_add_to_card_path(:bundle => p.shop_bundle_id, :amount => -1, :category => params[:category])}
+            %a{:href => shop_add_bundle_to_card_path(:bundle => p.shop_bundle_id, :amount => -1, :category => params[:category])}
               = image_tag "down.png", :class => "shop_less_bundle_part", :width => "15px"
         %td=  p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
         - if p.positive
@@ -20,13 +20,17 @@
         - else
           %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
         %td
-          =link_to(image_tag("delete.png", :width => "15px", :title => "Artikel löschen"), shop_remove_from_card_path(:bundle => p.shop_bundle_id, :category => params[:category]), :confirm => "Diesen Artikel wirklich löschen?")
+          =link_to("", shop_remove_bundle_from_card_path(:bundle => p.shop_bundle_id, :category => params[:category]), :title => "Artikel löschen", :class => "icon-trash", :confirm => "Diesen Artikel wirklich löschen?")
 
       - p.order_part_items.each do |pi|
         %tr{:class => "bundle-item-list"}
           %td
           - if pi.order_part.positive; price = pi.price; else price = pi.price * (-1) end
-          %td= (pi.order_part.amount * pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
+          %td
+            - if pi.amount > 0
+              = link_to("", shop_change_order_part_item_path(:order_part => p.id, :order_part_item_id => pi.id, :amount => -1), :class => "icon-chevron-down", :style => "color:grey", :title => "verringern")
+            = link_to("", shop_change_order_part_item_path(:order_part => p.id, :order_part_item_id => pi.id, :amount => 1), :class => "icon-chevron-up", :style => "color:grey", :title => "eröhen")
+            = (pi.order_part.amount * pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
 
     - unless @order.id.nil?
       %tr

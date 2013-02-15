@@ -24,8 +24,9 @@ Dursty::Application.routes.draw do
   # shop
   get "shop/index"
   post "shop/buy"
-  match "shop/add_to_card/:bundle/:amount" => 'shop#addToCard', :as => :shop_add_to_card
-  match "shop/remove_from_card/:bundle" => 'shop#removeFromCard', :as => :shop_remove_from_card
+  match "shop/add_bundle_to_card/:bundle/:amount" => 'shop#addBundleToCard', :as => :shop_add_bundle_to_card
+  match "shop/remove_bundle_from_card/:bundle" => 'shop#removeBundleFromCard', :as => :shop_remove_bundle_from_card
+  match "shop/order_part_item_amount/:order_part/:order_part_item_id/:amount" => 'shop#changeOrderPartItemAmount', :as => :shop_change_order_part_item
   resources :shop_bundle_categories
 
   # userkonto

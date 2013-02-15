@@ -26,7 +26,7 @@ class ShopController < ApplicationController
                   .first_or_create!(:stock_id => @user.stocks.first.id)
   end
 
-  def addToCard
+  def addBundleToCard
     #get last or new order from user
     @order = Order.where(:user_id => current_user.id, :closed => false)
                   .order("updated_at DESC")
@@ -41,7 +41,20 @@ class ShopController < ApplicationController
     end
   end
 
-  def removeFromCard
+  def changeOrderPartItemAmount
+    # get last order
+    order = Order.where(:user_id => current_user.id, :closed => false).first
+    # select order part
+    part = order.order_parts.find(params[:order_part])
+    if part.updateItem(params[:order_part_item_id], params[:amount])
+      part.touch
+      redirect_to(shop_index_path(:category => params[:category]), :notice => "Erfolgreich in den Wagen gelegt.")
+    else
+      redirect_to(shop_index_path(:category => params[:category]), :notice => "Fehler aufgetreten, nicht in den Wagen geleget.")
+    end
+  end
+
+  def removeBundleFromCard
     # get last order from user or die
     @order = Order.where(:user_id => current_user.id, :closed => false)
                   .order("updated_at")
