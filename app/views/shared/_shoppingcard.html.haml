@@ -20,7 +20,7 @@
         - else
           %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
         %td
-          =link_to(image_tag("delete.png", :width => "15px", :title => "Artikel löschen"), shop_remove_from_card_path(:bundle => p.shop_bundle_id), :confirm => "Diesen Artikel wirklich löschen?")
+          =link_to(image_tag("delete.png", :width => "15px", :title => "Artikel löschen"), shop_remove_from_card_path(:bundle => p.shop_bundle_id, :category => params[:category]), :confirm => "Diesen Artikel wirklich löschen?")
 
       - p.order_part_items.each do |pi|
         %tr{:class => "bundle-item-list"}

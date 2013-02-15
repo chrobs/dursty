@@ -53,9 +53,9 @@ class ShopController < ApplicationController
     # remove bundle from order_parts
     if @order.removePart(params[:bundle])
       @order.touch
-      redirect_to(shop_index_path, :notice => "Erfolgreich aus dem Wagen entfernt.")
+      redirect_to(shop_index_path(:category => params[:category]), :notice => "Erfolgreich aus dem Wagen entfernt.")
     else
-      redirect_to(shop_index_path, :notice => "Fehler aufgetreten, nichts aus dem Wagen entfernt.")
+      redirect_to(shop_index_path(:category => params[:category]), :notice => "Fehler aufgetreten, nichts aus dem Wagen entfernt.")
     end
   end
 
