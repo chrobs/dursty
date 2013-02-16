@@ -14,11 +14,11 @@
           - if p.amount > 1
             %a{:href => shop_add_bundle_to_card_path(:bundle => p.shop_bundle_id, :amount => -1, :category => params[:category])}
               = image_tag "down.png", :class => "shop_less_bundle_part", :width => "15px"
-        %td=  p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
+        %td=  p.name
         - if p.positive
-          %td{:class => "type_positive cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+          %td{:class => "type_positive cell_price"}=number_to_currency(p.sumOfPartItems, :locale => :de)
         - else
-          %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+          %td{:class => "type_negative cell_price"}=number_to_currency(p.sumOfPartItems, :locale => :de)
         %td
           =link_to("", shop_remove_bundle_from_card_path(:bundle => p.shop_bundle_id, :category => params[:category]), :title => "Artikel löschen", :class => "icon-trash", :confirm => "Diesen Artikel wirklich löschen?")
 
@@ -30,7 +30,7 @@
             - if pi.amount > 0
               = link_to("", shop_change_order_part_item_path(:order_part => p.id, :order_part_item_id => pi.id, :amount => -1), :class => "icon-chevron-down", :style => "color:grey", :title => "verringern")
             = link_to("", shop_change_order_part_item_path(:order_part => p.id, :order_part_item_id => pi.id, :amount => 1), :class => "icon-chevron-up", :style => "color:grey", :title => "eröhen")
-            = (pi.order_part.amount * pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
+            = pi.amount.to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
 
     - unless @order.id.nil?
       %tr

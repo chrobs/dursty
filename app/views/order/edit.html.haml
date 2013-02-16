@@ -20,9 +20,9 @@
       %td=  p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
 
       - if p.positive
-        %td{:class => "type_positive cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+        %td{:class => "type_positive cell_price"}=number_to_currency(p.sumOfPartItems, :locale => :de)
       - else
-        %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+        %td{:class => "type_negative cell_price"}=number_to_currency(p.sumOfPartItems, :locale => :de)
 
       %td
         =link_to("",order_delete_bundle_path(:id => @order.id, :bundle => p.shop_bundle_id), :confirm => "Diesen Artikel wirklich löschen?", :class => "icon-trash", :title => "löschen")
@@ -31,7 +31,7 @@
       %tr{:class => "bundle-item-list"}
         %td
         - if pi.order_part.positive; price = pi.price; else price = pi.price * (-1) end
-        %td= (pi.order_part.amount * pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
+        %td= (pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
 
   - unless @order.id.nil?
     %tr

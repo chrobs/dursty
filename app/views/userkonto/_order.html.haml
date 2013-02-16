@@ -20,16 +20,16 @@
     %td
     %td=p.amount.to_s + "x " + p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
     - if p.positive
-      %td{:class => "type_positive cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+      %td{:class => "type_positive cell_price"}=number_to_currency(p.sumOfPartItems, :locale => :de)
     - else
-      %td{:class => "type_negative cell_price"}=number_to_currency(p.amount * p.sumOfPartItems, :locale => :de)
+      %td{:class => "type_negative cell_price"}=number_to_currency(p.sumOfPartItems, :locale => :de)
     %td
 
   - p.order_part_items.each do |pi|
     %tr{:class => "bundle-item-list"}
       %td
       - if pi.order_part.positive; price = pi.price; else price = pi.price * (-1) end
-      %td{:class => "indent"}= (pi.order_part.amount * pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
+      %td{:class => "indent"}= (pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
       %td
       %td
 

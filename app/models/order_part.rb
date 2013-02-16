@@ -5,18 +5,6 @@ class OrderPart < ActiveRecord::Base
   has_many :order_part_items
   has_many :items, :through => :order_part_items
 
-  def createPartItems shop_bundle
-    shop_bundle.shop_bundle_parts.each do |p|
-     partItem = OrderPartItem.new :order_part_id => self.id,
-                                  :item_id => p.item_id,
-                                  :amount => p.amount,
-                                  :price => p.item_price.price,
-                                  :name => p.item.name
-      return false unless partItem.save
-    end
-    return true
-  end
-
   def removePartItems
     return self.order_part_items.destroy_all
   end
@@ -42,13 +30,14 @@ class OrderPart < ActiveRecord::Base
     return inv
   end
 
-  def updateItem item_id, amount
-    item = self.order_part_items.find(item_id)
-    if item.amount + amount.to_i > 0
-      item.amount += amount.to_i
-    else
-      item.amount = 0
+  def updateItems shop_bundle_id, amount
+    ShopBundle.find(shop_bundle_id).shop_bundle_parts.each do |p|
+      part_item = self.order_part_items.where(:item_id => p.item_id)
+                    .first_or_create!(:order_part_id => self.id, :item_id => p.item_id, :amount => 0,
+                                      :price => p.item_price.price, :name => p.item.name)
+      part_item.amount += (amount.to_i * p.amount)
+      return false unless part_item.save
     end
-    return item.save
+    return true
   end
 end
