@@ -29,7 +29,7 @@ class Order < ActiveRecord::Base
       part = part.first
       part.amount += amount.to_i
       # update amount of partItems
-      return false unless part.updateItems shop_bundle_id, amount
+      return false unless part.updateBundleAmount shop_bundle_id, amount
       return part.save
     elsif part.size == 0
       # bundle not yet in order, create order_part and order_part_items
@@ -44,7 +44,7 @@ class Order < ActiveRecord::Base
 
       # create order_part_items for order_part from shop_bundle_id
       #return part.createPartItems bundle
-      return part.updateItems shop_bundle_id, amount
+      return part.updateBundleAmount shop_bundle_id, amount
     else
       # error: more than one order_part for same shop_bundle
       return false
