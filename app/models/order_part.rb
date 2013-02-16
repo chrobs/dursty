@@ -35,7 +35,11 @@ class OrderPart < ActiveRecord::Base
       part_item = self.order_part_items.where(:item_id => p.item_id)
                     .first_or_create!(:order_part_id => self.id, :item_id => p.item_id, :amount => 0,
                                       :price => p.item_price.price, :name => p.item.name)
-      part_item.amount += (amount.to_i * p.amount)
+      if part_item.amount + (amount.to_i * p.amount) > 0
+        part_item.amount += (amount.to_i * p.amount)
+      else
+        part_item.amount = 0
+      end
       return false unless part_item.save
     end
     return true

@@ -44,6 +44,17 @@ class OrderController < ApplicationController
 
   end
 
+  def changePartItemAmount
+    order = Order.find params[:id]
+    part = order.order_parts.find params[:order_part]
+    if part.updateItem(params[:order_part_item_id], params[:amount])
+      part.touch
+      redirect_to(edit_order_path(order.id), :notice => "Bestellung erfolgreich geändert.")
+    else
+      redirect_to(edit_order_path(order.id), :notice => "Fehler aufgetreten, Bestellung nicht geändert.")
+    end
+  end
+
   def delete_bundle
     @order = Order.find params[:id]
     if @order.removePart(params[:bundle])

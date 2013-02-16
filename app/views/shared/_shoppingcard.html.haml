@@ -27,9 +27,9 @@
           %td
           - if pi.order_part.positive; price = pi.price; else price = pi.price * (-1) end
           %td
+            = link_to("", shop_change_order_part_item_path(:order_part => p.id, :order_part_item_id => pi.id, :amount => 1), :class => "icon-chevron-up", :style => "color:grey", :title => "eröhen")
             - if pi.amount > 0
               = link_to("", shop_change_order_part_item_path(:order_part => p.id, :order_part_item_id => pi.id, :amount => -1), :class => "icon-chevron-down", :style => "color:grey", :title => "verringern")
-            = link_to("", shop_change_order_part_item_path(:order_part => p.id, :order_part_item_id => pi.id, :amount => 1), :class => "icon-chevron-up", :style => "color:grey", :title => "eröhen")
             = pi.amount.to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
 
     - unless @order.id.nil?

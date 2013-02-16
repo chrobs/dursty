@@ -36,6 +36,7 @@ Dursty::Application.routes.draw do
   resources :order
   match "order/:id/update/:bundle/:amount" => 'order#update_bundle_amount', :as => :order_update_bundle_amount
   match "order/:id/delete/:bundle" => 'order#delete_bundle', :as => :order_delete_bundle
+  match "order/:id/part/:order_part/item/:order_part_item_id/:amount" => 'order#changePartItemAmount', :as => :order_change_part_item
 
   # home
   get "home/index"

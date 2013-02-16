@@ -31,7 +31,11 @@
       %tr{:class => "bundle-item-list"}
         %td
         - if pi.order_part.positive; price = pi.price; else price = pi.price * (-1) end
-        %td= (pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
+        %td
+          = link_to("", order_change_part_item_path(:order_part => p.id, :order_part_item_id => pi.id, :amount => 1), :class => "icon-chevron-up", :style => "color:grey", :title => "eröhen")
+          - if pi.amount > 0
+            = link_to("", order_change_part_item_path(:order_part => p.id, :order_part_item_id => pi.id, :amount => -1), :class => "icon-chevron-down", :style => "color:grey", :title => "verringern")
+          = (pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
 
   - unless @order.id.nil?
     %tr
