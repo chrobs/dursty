@@ -54,4 +54,12 @@ class OrderPart < ActiveRecord::Base
     end
     return item.save
   end
+
+  def soldItems
+    res = Hash.new(0)
+    self.order_part_items.each do |pi|
+      res[pi.item] += self.amount * pi.amount
+    end
+    return res
+  end
 end

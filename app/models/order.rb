@@ -93,4 +93,17 @@ class Order < ActiveRecord::Base
     end
     return inv
   end
+
+  def soldBundles
+    # build sold Bundles hash {bundle => {:bundleAmount => bAmount, :items => {item => iAmount}}
+    res = {}
+    self.order_parts.each do |p|
+      res[p.shop_bundle] = {:bundleAmount => 0, :items => Hash.new(0)} unless res[p.shop_bundle]
+      res[p.shop_bundle][:bundleAmount] += p.amount
+      p.soldItems.each do |item, amount|
+        res[p.shop_bundle][:items][item] += amount
+      end
+    end
+    return res
+  end
 end

@@ -25,4 +25,27 @@ class Stock < ActiveRecord::Base
     end
     return inv
   end
+
+  # sold bundles between from-date and to-date
+  def soldBundles from, to
+    res = Hash.new
+
+    # get orders in time frame
+    self.orders.closed.where(:created_at => from..to).each do |o|
+      # get sold Bundles hash {bundle => {:bundleAmount => bAmount, :items => {item => iAmount}}
+      o.soldBundles.each do |bundle, bundleAmountItems|
+        # check bundle
+        res[bundle] = {:bundleAmount => 0, :items => Hash.new(0)} unless res[bundle]
+
+        # merge bundle amount
+        res[bundle][:bundleAmount] += bundleAmountItems[:bundleAmount]
+
+        # merge into res[bundle][item]
+        bundleAmountItems[:items].each do |item, iAmount|
+          res[bundle][:items][item] += iAmount
+        end
+      end
+    end
+    return res
+  end
 end

@@ -4,6 +4,32 @@
   %div{:class => "konto-uebersicht float-left"}
     %h2="Lager " + s.name.upcase
     %p=link_to "Lageränderungen anzeigen", stock_changes_path(:stock => s.id)
+
+    %br
+    %h3 Verkaufte Shop Bundles
+    %p
+      Zeitraum
+      %input{:id => "stock_#{s.id}_from", :class => "input-date"}
+      bis
+      %input{:id => "stock_#{s.id}_to", :class => "input-date"}
+      %i{:id => "stock_#{s.id}_load_link", :class => "icon-repeat js-link", :title => "Shop Bundle laden", :onclick => "loadSoldBundles(#{s.id});"}
+    %br
+    %table{:class=> "table-index table_bills"}
+      %thead
+        %tr
+          %th Shop Bundle
+          %th Bestandteile
+      %tbody{:id => "stock_#{s.id}_soldBundles"}
+        - @soldBundles[s.id].each do |bundle, bundleAmountItems|
+          %tr{:class => "toggle_background"}
+            %td=bundleAmountItems[:bundleAmount].to_s + "x " + bundle.name
+            %td
+              %ol{:class => "bundle-item-list"}
+                - bundleAmountItems[:items].each do |item, amount|
+                  %li=amount.to_s + "x " + item.name.to_s
+
+    %br
+    %h3 Lagerbestand
     %table{:class=> "table-index table_bills"}
       %thead
         %tr
@@ -14,3 +40,38 @@
           %tr{:class => "toggle_background"}
             %td=item.name
             %td=amount
+
+- @stocks.each do |s|
+  :javascript
+    var from = new Date("#{@soldBundles[:from].strftime('%Y,%m,%d')}")
+    var to = new Date("#{@soldBundles[:to].strftime('%Y,%m,%d')}")
+
+    $("#stock_#{s.id}_from").val("#{@soldBundles[:from].strftime('%d.%m.%Y')}")
+    $("#stock_#{s.id}_to").val("#{@soldBundles[:to].strftime('%d.%m.%Y')}")
+
+    $("#stock_#{s.id}_from").datepicker({
+      defaultDate: "+2w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      dateFormat: "dd.mm.yy",
+      showAnim: "fadeIn",
+      defaultDate: from,
+      setDate: from,
+      maxDate: to,
+      onClose: function( selectedDate ) {
+        $( "#stock_#{s.id}_to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    })
+    $("#stock_#{s.id}_to").datepicker({
+      defaultDate: "+2w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      dateFormat: "dd.mm.yy",
+      showAnim: "fadeIn",
+      defaultDate: to,
+      setDate: to,
+      minDate: from,
+      onClose: function( selectedDate ) {
+        $( "#stock_#{s.id}_from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });

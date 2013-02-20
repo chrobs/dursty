@@ -9,6 +9,7 @@ Dursty::Application.routes.draw do
   get "stock/index"
   match "stock/showBundle/:id/:location" => "stock#showBundleAtLocation"
   match "items/:id/get-priceoptions" => "items#get_priceoptions", :as => :item_get_priceoptions
+  match "stock/:id/sold-bundles/:from/:to" => "stock#sold_bundles", :as => :stock_get_sold_bundles
 
 
   # admin
