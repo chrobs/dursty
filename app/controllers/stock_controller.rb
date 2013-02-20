@@ -8,7 +8,7 @@ class StockController < ApplicationController
 
   def index
     @stocks = Stock.all
-    @soldBundles = {:from => 4.weeks.ago.beginning_of_day, :to => Time.zone.now.end_of_day}
+    @soldBundles = {:from => 2.weeks.ago.beginning_of_day, :to => Time.zone.now.end_of_day}
     @stocks.each do |s|
       @soldBundles[s.id] = s.soldBundles @soldBundles[:from], @soldBundles[:to]
     end

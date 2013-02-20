@@ -50,7 +50,7 @@
     $("#stock_#{s.id}_to").val("#{@soldBundles[:to].strftime('%d.%m.%Y')}")
 
     $("#stock_#{s.id}_from").datepicker({
-      defaultDate: "+2w",
+      defaultDate: "+1w",
       changeMonth: true,
       numberOfMonths: 1,
       dateFormat: "dd.mm.yy",
@@ -63,7 +63,7 @@
       }
     })
     $("#stock_#{s.id}_to").datepicker({
-      defaultDate: "+2w",
+      defaultDate: "+1w",
       changeMonth: true,
       numberOfMonths: 1,
       dateFormat: "dd.mm.yy",
