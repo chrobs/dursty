@@ -1,7 +1,7 @@
 %h1 Lagerübersicht
 
 - @stocks.each do |s|
-  %div{:class => "konto-uebersicht float-left"}
+  %div{:class => "konto-uebersicht float-left lager-uebersicht"}
     %h2="Lager " + s.name.upcase
     %p=link_to "Lageränderungen anzeigen", stock_changes_path(:stock => s.id)
 

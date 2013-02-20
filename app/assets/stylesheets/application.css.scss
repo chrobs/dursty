@@ -24,8 +24,9 @@
 
 $color-a1: #0285bd;
 $color-a2: #00355e;
+$color-b0: #7ecf88;
 $color-b1: #74be55;
-$color-b2: #195300;
+$color-b2: #A3D48C;
 $color-b3: #195300;
 
 $color-type-negative: red;
@@ -52,7 +53,7 @@ body {
   width: $width-body;
 
   font-family: Tahoma, Geneva, sans-serif;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: normal;
 }
 
@@ -86,7 +87,7 @@ a, .js-link {
 }
 
 a:hover, .js-link:hover {
-  color: $color-b2;
+  color: $color-b3;
   text-decoration: underline;
 }
 
@@ -163,6 +164,10 @@ a:hover, .js-link:hover {
 
 #left div ul ul {
   //padding-left: 2*$padding-box;
+}
+
+#left div ul ul li {
+  background-color: $color-b2;
 }
 
 #left div ul ul li a {
