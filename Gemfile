@@ -26,8 +26,8 @@ gem 'formtastic', '~> 2.2.1'
 gem 'cocoon', '~> 1.1.2'
 
 # jquery
-gem 'jquery-rails'
-gem "jquery-ui-rails", "~> 2.0.2"
+gem 'jquery-rails', '~> 2.2.1'
+gem "jquery-ui-rails", "~> 4.0.1"
 gem 'jquery-datatables-rails', "~> 1.11.1"
 
 # user authentication

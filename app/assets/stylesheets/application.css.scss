@@ -9,10 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require reset-min
- *= require jquery.ui.core
- *= require jquery.ui.theme
+ *= require jquery.ui.datepicker
  *= require dataTables/src/demo_table_jui
- *= require jquery.ui.autocomplete
  *= require_self
  *= require_tree .
  *= require formtastic

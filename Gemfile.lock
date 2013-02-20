@@ -80,7 +80,7 @@ GEM
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (2.0.2)
+    jquery-ui-rails (4.0.1)
       jquery-rails
       railties (>= 3.1.0)
     json (1.7.7)
@@ -190,8 +190,8 @@ DEPENDENCIES
   formtastic (~> 2.2.1)
   haml-rails (~> 0.3.5)
   jquery-datatables-rails (~> 1.11.1)
-  jquery-rails
-  jquery-ui-rails (~> 2.0.2)
+  jquery-rails (~> 2.2.1)
+  jquery-ui-rails (~> 4.0.1)
   libv8
   mysql2
   pry (~> 0.9.10)
