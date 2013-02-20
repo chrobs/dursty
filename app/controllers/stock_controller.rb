@@ -15,8 +15,8 @@ class StockController < ApplicationController
   end
 
   def sold_bundles
-    from = Time.zone.parse params[:from]
-    to = Time.zone.parse params[:to]
+    from = Time.zone.parse(params[:from]).beginning_of_day
+    to = Time.zone.parse(params[:to]).end_of_day
     @soldBundles = Stock.find(params[:id]).soldBundles from, to
     render :partial => "stock/soldBundle" and return
   end

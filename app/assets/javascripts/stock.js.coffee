@@ -8,9 +8,11 @@
 
   $("#stock_" + id + "_load_link").addClass("icon-spin")
   $("#stock_" + id + "_soldBundles").fadeOut('slow')
-  #$("#stock_" + id + "_soldBundles").empty()
-  $("#stock_" + id + "_soldBundles").load('/stock/'+id+'/sold-bundles/'+from+'/'+to,
+  $("#stock_" + id + "_soldBundles").load('/stocks/'+id+'/sold-bundles/'+from+'/'+to,
     (response, status, xhr) =>
+      if status != "success"
+        $("#stock_" + id + "_soldBundles").empty().prepend("<tr><td>"+status+"</td><tr>")
+
       $("#stock_" + id + "_soldBundles").fadeIn('slow')
       $("#stock_" + id + "_load_link").removeClass("icon-spin")
   )
