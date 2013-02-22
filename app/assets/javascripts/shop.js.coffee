@@ -7,6 +7,5 @@
   window.location="/shop/add_bundle_to_card/" + bundle + "/" + amount
 
 @shop_buy_bundle_category = (event, bundle, cat) =>
-  alert(cat)
   amount = $(event.currentTarget).parent().find("input").val()
   window.location="/shop/add_bundle_to_card/" + bundle + "/" + amount + "?category=" + cat
