@@ -1,5 +1,5 @@
 class ShopBundle < ActiveRecord::Base
-  attr_accessible :id, :name, :positive, :shop_bundle_parts_attributes, :shop_bundle_category_ids
+  attr_accessible :id, :name, :positive, :shop_bundle_parts_attributes, :shop_bundle_category_ids, :image
 
   has_many :shop_bundle_parts
   accepts_nested_attributes_for :shop_bundle_parts, :allow_destroy => true, :reject_if => proc {|a| a['item_id'].blank? | a['amount'].blank? | a['item_price_id'].blank?}
@@ -8,6 +8,12 @@ class ShopBundle < ActiveRecord::Base
   has_many :items, :through => :shop_bundle_parts
   has_many :order_parts
   has_many :stock_changes
+
+  # paperclip image
+  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>"}, :default_url => "/assets/missing.png"
+  validates_attachment :image,
+    :content_type => { :content_type => ["image/jpg","image/jpeg", "image/png"] },
+    :size => { :in => 0..1.megabytes }
 
   def getTotalCost
     total = 0

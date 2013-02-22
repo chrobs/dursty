@@ -18,7 +18,10 @@
   %tbody
     - @bundles.each do |b|
       %tr{:class => "row_highlighted"}
-        %td= b[:name]
+        %td
+          = b[:name]
+          %br
+          = image_tag(b.image.url(:thumb))
         - if b[:positive]
           %td{:class => "type_positive"}= number_to_currency(b.getTotalCost, :locale => :de)
         - else

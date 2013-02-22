@@ -8,6 +8,8 @@
       %tr{:class => "row_highlighted"}
         %td
           = b.name
+          %br
+          = image_tag(b.image.url(:thumb))
 
         %td
           %table{:class => "bundle-item-list"}

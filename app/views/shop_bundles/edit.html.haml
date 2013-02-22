@@ -1,7 +1,7 @@
 - content_for :pathway_sub do
   &raquo; Editiere "#{@bundle.name}"
 
-= semantic_form_for @bundle, :url => shop_bundle_path, :method => :put do |f|
+= semantic_form_for @bundle, :url => shop_bundle_path, :method => :put, :html => { :multipart => true } do |f|
   = f.label :name, :required => true
   = f.text_field :name
   %br
@@ -11,6 +11,12 @@
   = f.label "Negativ"
   = f.radio_button :positive, 'false', :checked => !@bundle.positive
 
+  %br
+  %br
+  %h2 Bild
+  = image_tag(@bundle.image.url(:thumb))
+  %br
+  = f.file_field :image
   %br
   %br
 

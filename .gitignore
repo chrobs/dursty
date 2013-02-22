@@ -15,6 +15,9 @@
 /tmp
 *.swp
 
+# ignore paperclip images
+public/system/shop_bundles/images/
+
 config/database.yml
 config/deploy.rb
 Capfile
