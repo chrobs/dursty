@@ -19,6 +19,5 @@
           - if params[:category]
             = image_tag "buy.png", :class => "js-link", :onclick => "shop_buy_bundle_category(event, #{b["id"]}, #{params[:category]})"
           - else
-            %p=params[:category].class
             = image_tag "buy.png", :class => "js-link", :onclick => "shop_buy_bundle(event, #{b["id"]})"
 
