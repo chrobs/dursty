@@ -52,6 +52,7 @@ gem "simple-navigation", "~> 3.9.0"
 
 # picture upload
 gem "paperclip", "~> 3.4.0"
+gem "paperclip-removable", "~> 0.5.0"
 
 # deploy with capistrano
 gem 'rvm-capistrano', "~>1.2.7"

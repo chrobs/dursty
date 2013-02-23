@@ -9,7 +9,7 @@
         %td
           = b.name
           %br
-          = image_tag(b.image.url(:thumb))
+          = image_tag(b.image.url(:thumb)) if b.image?
 
         %td
           %table{:class => "bundle-item-list"}

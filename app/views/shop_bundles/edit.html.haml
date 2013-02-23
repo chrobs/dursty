@@ -17,6 +17,7 @@
   = image_tag(@bundle.image.url(:thumb))
   %br
   = f.file_field :image
+  = f.input :remove_image, :as => :boolean, :label => "Löschen?" if f.object.image?
   %br
   %br
 
