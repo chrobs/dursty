@@ -59,7 +59,7 @@ class OrderPart < ActiveRecord::Base
   def soldItems
     res = Hash.new(0)
     self.order_part_items.each do |pi|
-      res[pi.item] += self.amount * pi.amount
+      res[pi.item] += pi.amount
     end
     return res
   end
