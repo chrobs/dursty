@@ -8,19 +8,24 @@
       %th Grund
       %th
       %th Betrag
+      %th
+      %th Saldo
+
   %tbody
     %tr{:class => "element_first_row element_last_row row_saldo"}
       %td
       %td Aktueller Kassenstand
-      %td{:style => "text-align:right"} Saldo:
+      %td
+      %td
+      %td{:style => "text-align:right"}
       - if @user.gesSaldo >= 0
         %td{:class => "type_positive cell_price"}
           =number_to_currency(@user.gesSaldo, :locale => :de)
       - else
         %td{:class => "type_negative cell_price"}
           =number_to_currency(@user.gesSaldo, :locale => :de)
-      %td
 
+    - @tempSaldo = @user.gesSaldo
     - @buchungen.each do |b|
       - if b.class == Order
         = render :partial => "order", :collection => [b]

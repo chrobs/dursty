@@ -9,21 +9,27 @@
     %td{:class => "type_negative cell_price"}
       =number_to_currency(order.gesamtpreis, :locale => :de)
 
-  - #unless order.created_at < Order.expiration.days.ago.beginning_of_day
   - unless order.expired
     %td{:class => "cell_edit"}
       %a{:href => edit_order_path(order.id)}
         = image_tag "edit.png"
 
+  - if @tempSaldo < 0
+    %td{:class => "type_negative cell_price row_saldo"}=number_to_currency(@tempSaldo, :locale => :de)
+  - else
+    %td{:class => "type_positive cell_price row_saldo"}=number_to_currency(@tempSaldo, :locale => :de)
+
 - order.order_parts.each do |p|
   %tr{:class => "bundle-item"}
     %td
-    %td=p.amount.to_s + "x " + p.name + " (" + number_to_currency(p.sumOfPartItems, :locale => :de) + ")"
+    %td=p.amount.to_s + "x " + p.name
     - if p.positive
       %td{:class => "type_positive cell_price"}=number_to_currency(p.sumOfPartItems, :locale => :de)
     - else
       %td{:class => "type_negative cell_price"}=number_to_currency(p.sumOfPartItems, :locale => :de)
     %td
+    %td
+    %td{:class => :row_saldo}
 
   - p.order_part_items.each do |pi|
     %tr{:class => "bundle-item-list"}
@@ -32,9 +38,16 @@
       %td{:class => "indent"}= (pi.amount).to_s + "x " + pi.name + " (" + number_to_currency(price, :locale => :de) + ")"
       %td
       %td
+      %td
+      %td{:class => :row_saldo}
 
 %tr{:class => "element_last_row"}
   %td
   %td
   %td
   %td
+  %td
+  %td{:class => :row_saldo}
+
+
+- @tempSaldo -= order.gesamtpreis

@@ -9,3 +9,13 @@
     %td{:class => "type_negative cell_price"}=number_to_currency((-1)*bill.price, :locale => :de)
   - else
     %td{:class => "type_positive cell_price"}=number_to_currency(bill.price, :locale => :de)
+  %td
+  - if @tempSaldo < 0
+    %td{:class => "type_negative cell_price row_saldo"}=number_to_currency(@tempSaldo, :locale => :de)
+  - else
+    %td{:class => "type_positive cell_price row_saldo"}=number_to_currency(@tempSaldo, :locale => :de)
+
+- if bill.from_konto && bill.from_konto.id == @user.konto.id
+  - @tempSaldo += bill.price
+- else
+  - @tempSaldo -= bill.price

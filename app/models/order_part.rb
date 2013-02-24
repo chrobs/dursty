@@ -20,6 +20,7 @@ class OrderPart < ActiveRecord::Base
     return sum
   end
 
+
   def inventory
     inv = {}
     self.shop_bundle.inventory.each do |item, amount|
