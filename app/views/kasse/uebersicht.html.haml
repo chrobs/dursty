@@ -74,5 +74,24 @@
         %td
         = render :partial => "konto_uebersicht", :collection => @verkaeufer_kontos, :as => :konto
 
-
-
+%div{:class => "konto-uebersicht float-left"}
+  %h1 Kassenstand Gesamt
+  %table{:class=> "table-index table_bills"}
+    %thead
+      %tr
+        %th Art
+        %th Saldo
+    %tbody
+      %tr{:class => "toggle_background"}
+        %td{:style => "text-align:right"} Gesamt:
+        - if @kasse_uebersicht_saldo >= 0
+          %td{:class => "type_positive cell_price"}=number_to_currency @kasse_uebersicht_saldo, :locale => :de
+        - else
+          %td{:class => "type_negative cell_price"}=number_to_currency @kasse_uebersicht_saldo, :locale => :de
+      - @kasse_uebersicht.each do |ue|
+        %tr{:class => "toggle_background"}
+          %td=ue[:name]
+          - if ue[:saldo] >= 0
+            %td{:class => "type_positive cell_price"}= number_to_currency ue[:saldo], :locale => :de
+          - else
+            %td{:class => "type_negative cell_price"}= number_to_currency ue[:saldo], :locale => :de

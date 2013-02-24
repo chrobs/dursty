@@ -26,6 +26,13 @@ class Stock < ActiveRecord::Base
     return inv
   end
 
+  def stock_value
+    res = 0
+    res = self.stock_changes.inject(res){|res,sc| res += sc.amount * sc.shop_bundle.getTotalCost}
+    res = self.orders.inject(res){|res,o| res -= o.gesamtpreis}
+    return res
+  end
+
   # sold bundles between from-date and to-date
   def soldBundles from, to
     res = Hash.new
