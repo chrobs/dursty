@@ -22,11 +22,14 @@ class OrderPart < ActiveRecord::Base
 
 
   def inventory
-    inv = {}
-    self.shop_bundle.inventory.each do |item, amount|
-      inv[item] = amount * self.amount
-      # count negative for outgoing and positive for incoming items
-      inv[item] *= (-1) if self.positive
+    inv = Hash.new(0)
+    self.order_part_items.each do |pi|
+      pi.inventory.each do |item,amount|
+        # count negative for outgoing and positive for incoming items
+        amount *= (-1) if self.positive
+
+        inv[item] += amount
+      end
     end
     return inv
   end

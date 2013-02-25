@@ -5,4 +5,10 @@ class OrderPartItem < ActiveRecord::Base
   belongs_to :item
   belongs_to :order
 
+  def inventory
+    inv = Hash.new(0)
+    inv[self.item] = self.amount
+    return inv
+  end
+
 end
