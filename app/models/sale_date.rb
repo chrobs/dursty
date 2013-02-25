@@ -11,7 +11,7 @@ class SaleDate < ActiveRecord::Base
 
   def self.next_dates
     dates = []
-    d = Date.today.next_day.next_day.next_day.next_day
+    d = Date.today
     @@weeks_ahead.times do
       # get tuesdays
       tmp_date = next_cwday(d,2)
