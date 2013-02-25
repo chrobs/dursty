@@ -19,7 +19,6 @@ class KasseController < ApplicationController
     @kasse_uebersicht = []
     @kasse_uebersicht << {:name => :"Verkäuferkonten", :saldo => Konto.verkaeufer.inject(0){|s,k| s+=k.saldo}}
     @kasse_uebersicht << {:name => :"AG-Konten", :saldo => Konto.ag.inject(0){|s,k| s+=k.saldo}}
-    @kasse_uebersicht << {:name => :"EXT-Konten", :saldo => Konto.ext.inject(0){|s,k| s+=k.saldo}}
     Stock.all.each do |s|
       @kasse_uebersicht << {:name => :"Lagerwert #{s.name.upcase}", :saldo => s.stock_value}
     end
