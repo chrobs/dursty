@@ -6,7 +6,11 @@ class Stock < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   def inventory
-    inv = Hash.new(0)
+    inv = {}
+    Item.all.each do |i|
+      inv[i] = 0
+    end
+
 
     self.stock_changes.each do |sc|
       sc.inventory.each do |item, amount|
