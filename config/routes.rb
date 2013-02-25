@@ -1,5 +1,11 @@
 Dursty::Application.routes.draw do
 
+  # sale dates
+  get "sale_date/index"
+  get "public/sale_dates"
+  match "sale_date/:id/assign/:userid" => "sale_date#assign", :as => :sale_date_assign
+  match "sale_date/:id/unassign/:userid" => "sale_date#unassign", :as => :sale_date_unassign
+
   devise_for :users
 
   # lagerwart

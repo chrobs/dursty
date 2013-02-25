@@ -1,0 +1,2 @@
+module SaleDateHelper
+end

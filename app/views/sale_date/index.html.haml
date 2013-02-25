@@ -1,0 +1,33 @@
+%h1 Verkaufstermine OPH
+
+%table{:class => "table-index"}
+  %thead
+    %td Dienstag
+    %td Verkäufer
+    %td
+    %td Donnerstag
+    %td Verkäufer
+    %td
+  %tbody
+    - @dates.each do |cw, dates|
+      %tr{:class => "toggle_background"}
+        - dates.each do |d|
+          - if d.nil?
+            %td
+            %td
+            %td{:class => "td-width td-padding-left"}
+          - else
+            %td
+              =d.date.strftime("%d.%m.%y")
+            %td
+              - if d.user
+                =d.user.name
+                - if d.user.id == current_user.id
+                  %td{:class => "td-width td-padding-left"}
+                    =link_to "", sale_date_unassign_path(:id => d.id, :userid => current_user.id), :title => "An diesem Termin zum Verkaufen austragen", :class => "icon-trash", :confirm => "wirklich austragen?"
+                - else
+                  %td{:class => "td-width td-padding-left"}
+              - else
+                <i style="color:red">frei</i>
+                %td{:class => "td-width td-padding-left"}
+                  =link_to "", sale_date_assign_path(:id => d.id, :userid => current_user.id), :title => "An diesem Termin zum Verkaufen eintragen", :class => "icon-pencil"

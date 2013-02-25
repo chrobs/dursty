@@ -77,6 +77,10 @@ SimpleNavigation::Configuration.run do |navigation|
       first.item :useradmin, '<i class="icon-user"></i> Useradmin', users_path, :if => Proc.new {current_user.admin}, :highlights_on => %r(^/admin/) do |admin|
       end
 
+      if current_user.admin || current_user.stocks.any?{|s| s.name == "oph"}
+        first.item :termine, '<i class="icon-calendar"></i> Termine', sale_date_index_path
+      end
+
       first.item :logout, '<i class="icon-signout"></i> Logout', destroy_user_session_path, :method => :delete
     end
     # You can also specify a condition-proc that needs to be fullfilled to display an item.

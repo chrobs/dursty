@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   has_many :orders
   has_many :user_account_bills
+  has_many :sale_dates
   has_one :konto
   has_and_belongs_to_many :stocks
 
