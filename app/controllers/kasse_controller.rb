@@ -24,6 +24,7 @@ class KasseController < ApplicationController
       @kasse_uebersicht << {:name => :"Lagerwert #{s.name.upcase}", :saldo => s.stock_value}
     end
     @kasse_uebersicht_saldo = @kasse_uebersicht.inject(0){|s,i| s+=i[:saldo]}
+    @lastOrders = Order.closed.order("updated_at DESC").limit(10)
   end
 
   def show_konto

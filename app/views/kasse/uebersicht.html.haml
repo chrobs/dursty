@@ -95,3 +95,23 @@
             %td{:class => "type_positive cell_price"}= number_to_currency ue[:saldo], :locale => :de
           - else
             %td{:class => "type_negative cell_price"}= number_to_currency ue[:saldo], :locale => :de
+
+%div{:style => "clear:both"}
+%br
+%div{:class => "konto-uebersicht float-left"}
+  %h1 Letzte Bestellungen
+  %table{:class=> "table-index table_bills"}
+    %thead
+      %tr
+        %th Datum
+        %th Benutzer
+        %th Summe
+    %tbody
+      - @lastOrders.each do |lo|
+        %tr{:class => "toggle_background"}
+          %td=lo.updated_at.strftime("%d.%m.%y, %H:%M Uhr")
+          %td=link_to lo.user.name, userkonto_show_path(lo.user.id), :title => "Zum Kassenstand von #{lo.user.name}"
+          - if lo.gesamtpreis >= 0
+            %td{:class => "type_positive cell_price"}= number_to_currency lo.gesamtpreis, :locale => :de
+          - else
+            %td{:class => "type_negative cell_price"}= number_to_currency lo.gesamtpreis, :locale => :de
