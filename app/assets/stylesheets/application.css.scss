@@ -80,6 +80,13 @@ h3 {
   font-style: italic;
 }
 
+h4 {
+  font-size: 1.5em;
+  font-weight: normal;
+  margin-bottom: $padding-box;
+  margin-top: $padding-box;
+}
+
 a, .js-link {
   font-size: 1em;
   color: $color-b3;
@@ -281,4 +288,13 @@ table tr.row_highlighted > td {
 
 .input-date{
   width: 93px;
+}
+
+.half-max-width{
+  width: 510px;
+  padding: $padding-box;
+}
+
+.center-text{
+  text-align: center;
 }
