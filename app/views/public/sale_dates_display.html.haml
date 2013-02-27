@@ -1,0 +1,44 @@
+%div{:class => "div-center", :id => "display_box"}
+  %div{:class => "half-max-width padding-box div-center"}
+    %h1 OPH & TVK Getränke-AG
+    %br
+    %br
+    %h2 Öffnungszeiten:
+    %div{:class => "center-text"}
+      %br
+      %h4 Dienstag 19:45 Uhr - 20:00 Uhr
+      %h4 Donnerstag 19:45 Uhr - 20:00 Uhr
+      %br
+    %br
+    %br
+    %p Natürlich könnt ihr auch außerhalb dieser Öffnungszeiten bei den Verkäufern Getränke bekommen.
+    %br
+    %p Bitte beachtet evtl. an den Zimmertüren ausgehängte persönliche Öffnungszeiten.
+    %br
+    %p Falls ein Verkäufer mal nicht erscheint, hat er es evtl. vergessen, dann sucht doch einen unserer Verkäufer auf!
+
+  %br
+  %br
+  %br
+
+  %div{:class => "half-max-width padding-box div-center"}
+    %h1 Verkaufstermine im OPH
+    %br
+    %table{:class => "div-center"}
+      %tbody
+        - @dates.each do |d|
+          %tr{:class => "toggle_background"}
+            %td=l d.date, :format => "%a"
+            %td=l d.date, :format => "%d. %B %Y"
+            - if d.user
+              %td
+                = d.user.name
+                - if d.user.room
+                  = " ("+d.user.room+")"
+            - else
+              %td -
+
+:javascript
+    $(".not-in-pdf").css("display","none")
+    $("#main").css("width", "1200px")
+
