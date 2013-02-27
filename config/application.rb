@@ -43,6 +43,9 @@ module Dursty
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
 
+    # enable threadsafe
+    config.threadsafe!
+
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
     # like if you have constraints or database-specific column types
@@ -62,5 +65,8 @@ module Dursty
 
     # add fonts to to assets pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    # pdfkit
+    config.middleware.use PDFKit::Middleware, :print_media_type => true
   end
 end

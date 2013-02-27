@@ -54,6 +54,9 @@ gem "simple-navigation", "~> 3.9.0"
 gem "paperclip", "~> 3.4.0"
 gem "paperclip-removable", "~> 0.5.0"
 
+# pdf generation
+gem "pdfkit", "~> 0.5.3"
+
 # deploy with capistrano
 gem 'rvm-capistrano', "~>1.2.7"
 

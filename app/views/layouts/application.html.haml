@@ -10,15 +10,15 @@
 
   %body
 
-    %div{id:"header"}
+    %div{id:"header", :class => "not-in-pdf"}
       %h1 Dursty - Getränke für OPH & TVK
-    %div{id:"flash_container"}
+    %div{id:"flash_container", :class => "not-in-pdf"}
       - flash.each do |name,msg|
         - if msg.is_a?(String)
           =content_tag :p, msg, :class=>"flash_element"
 
     %div{id:"body"}
-      %div{id:"left"}
+      %div{id:"left", :class => "not-in-pdf"}
         %div{id:"menu"}
           %h2 Menü
           = render_navigation

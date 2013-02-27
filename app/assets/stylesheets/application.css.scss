@@ -298,3 +298,42 @@ table tr.row_highlighted > td {
 .center-text{
   text-align: center;
 }
+
+.div-center{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media print {
+  #main {
+    max-width: none;
+    width: $width-body;
+  }
+  .not-in-pdf {
+    display: none;
+  }
+  .div-center{
+    width: $width-body - 100;
+    margin-top: 80px;
+    margin-bottom: 100px;
+  }
+  .half-max-width{
+    width: 540px;
+  }
+  .half-max-width > table {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h1 {
+    font-size: 2.3em;
+  }
+  h2 {
+    font-size: 2em;
+  }
+  h4 {
+    font-size: 1.5em;
+  }
+  body {
+    font-size: 1.2em;
+  }
+}
