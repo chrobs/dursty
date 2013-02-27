@@ -7,4 +7,5 @@ PDFKit.configure do |config|
     #:print_media_type => true
   }
   # config.root_url = "http://localhost" # Use only if your external hostname is unavailable on the server.
+  config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf-static-amd64' if Rails.env.production?
 end
