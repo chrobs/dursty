@@ -24,6 +24,9 @@
           %td=l d.date, :format => "%a"
           %td=l d.date, :format => "%d. %B %Y"
           - if d.user
-            %td=d.user.name
+            %td
+              = d.user.name
+              - if d.user.room
+                = " ("+d.user.room+")"
           - else
             %td -

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def create
     # create user
     data = params[:user]
-    @user = User.new :name => data[:name], :email => data[:email]
+    @user = User.new :name => data[:name], :email => data[:email], :room => data[:room]
 
     # set stocks
     @user.set_stocks(data[:stock_ids])
@@ -53,6 +53,7 @@ class UsersController < ApplicationController
     data = params[:user]
     @user.name = data[:name]
     @user.email = data[:email]
+    @user.room = data[:room]
 
     # update stocks
     @user.set_stocks(data[:stock_ids])

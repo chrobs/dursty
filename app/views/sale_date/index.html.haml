@@ -21,7 +21,9 @@
               =d.date.strftime("%d.%m.%y")
             %td
               - if d.user
-                =d.user.name
+                = d.user.name
+                - if d.user.room
+                  = " (" + d.user.room + ")"
                 - if d.user.id == current_user.id
                   %td{:class => "td-width td-padding-left"}
                     =link_to "", sale_date_unassign_path(:id => d.id, :userid => current_user.id), :title => "An diesem Termin zum Verkaufen austragen", :class => "icon-trash", :confirm => "wirklich austragen?"

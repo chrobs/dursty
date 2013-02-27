@@ -10,6 +10,7 @@
         %th Id
         %th Name
         %th Email
+        %th Zimmer
         %th Erstellt
         %th Verkaufsort
         %th Kasse
@@ -21,6 +22,7 @@
           %td= u.id
           %td= u.name
           %td= u.email
+          %td= u.room
           %td= u.created_at.strftime("%d.%m.%Y, %H:%M")
           %td= u.stocks.map{|s| s.name}.join(", ")
           - if u.kassenwart

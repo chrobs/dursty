@@ -3,7 +3,8 @@
 
 = semantic_form_for @user do |f|
   = f.input :name
-  = f.input :email
+  = f.input :email, :as => :email
+  = f.input :room, :label => "Zimmer"
   %h2 Verkaufsorte
   = f.input :stocks, :as => :check_boxes, :collection => Stock.all, :label => "", :include_blank => false
   %h2 Spezielle Ämter
