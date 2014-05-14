@@ -9,7 +9,7 @@
   %br
   = f.inputs :for => :item_prices do |p|
     = p.input :name
-    = p.input :price, :label => "Preis"
+    = p.input :price, :label => "Preis", :as => :string
     %hr
 
   %h3{:id => "addPrice", :class=>"js-link"} weitere Preisoption hinzufügen

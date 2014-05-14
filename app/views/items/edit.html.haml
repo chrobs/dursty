@@ -10,7 +10,7 @@
   %br
   = f.inputs :for => :item_prices do |p|
     = p.input :name
-    = p.input :price, :label => "Preis"
+    = p.input :price, :label => "Preis", :as => :string
     = p.input "_destroy", :as => :boolean, :label => "Löschen?"
     %hr
 
