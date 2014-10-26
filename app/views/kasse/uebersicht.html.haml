@@ -74,7 +74,7 @@
         %td
         = render :partial => "konto_uebersicht", :collection => @verkaeufer_kontos, :as => :konto
 
-%div{:class => "konto-uebersicht float-left"}
+-#%div{:class => "konto-uebersicht float-left"}
   %h1 Kassenstand Gesamt
   %table{:class=> "table-index table_bills"}
     %thead
@@ -96,7 +96,7 @@
           - else
             %td{:class => "type_negative cell_price"}= number_to_currency ue[:saldo], :locale => :de
 
-%div{:style => "clear:both"}
+-#%div{:style => "clear:both"}
 %br
 %div{:class => "konto-uebersicht float-left"}
   %h1 Letzte Bestellungen
