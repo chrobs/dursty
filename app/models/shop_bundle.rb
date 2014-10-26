@@ -21,6 +21,7 @@ class ShopBundle < ActiveRecord::Base
   def getTotalCost
     total = 0
     self.shop_bundle_parts.each do |p|
+      return false unless p.item_price
       total += p.amount * p.item_price.price
     end
 

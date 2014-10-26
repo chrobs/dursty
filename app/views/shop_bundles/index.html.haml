@@ -22,10 +22,14 @@
           = b[:name]
           %br
           = image_tag(b.image.url(:thumb))
-        - if b[:positive]
-          %td{:class => "type_positive"}= number_to_currency(b.getTotalCost, :locale => :de)
+        - totalCost = b.getTotalCost
+        - if totalCost
+          - if b[:positive]
+            %td{:class => "type_positive"}= number_to_currency(totalCost, :locale => :de)
+          - else
+            %td{:class => "type_negative"}= number_to_currency(totalCost, :locale => :de)
         - else
-          %td{:class => "type_negative"}= number_to_currency(b.getTotalCost, :locale => :de)
+          %td ERROR
         %td
           %table
             = render :partial => "item", :collection => b.shop_bundle_parts, :as => "part"
