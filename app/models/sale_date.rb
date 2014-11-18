@@ -29,10 +29,13 @@ class SaleDate < ActiveRecord::Base
   # returns next 'cwday' for 'date'
   # 'date' has to be an object which supports .year, .cweek, .cwday and .next_week (e.g. DateTime)
   def self.next_cwday date, cwday
+    date = date.clone
+
     if date.cwday <= cwday
-      d = Date.commercial(date.year, date.cweek, cwday)
+      d = date + (cwday-date.cwday).day
     else
-      d = Date.commercial(date.year, date.next_week.cweek, cwday)
+      d = date + (8-date.cwday).day
+      d = d + (cwday-d.cwday).day
     end
     return d
   end
