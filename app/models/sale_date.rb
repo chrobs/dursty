@@ -9,10 +9,11 @@ class SaleDate < ActiveRecord::Base
   scope :assigned, where("user_id is not null")
   scope :not_assigned, where(:user_id => nil)
 
-  def self.next_dates
+  def self.next_dates(dates_limit=nil)
+    dates_limit = @@weeks_ahead unless dates_limit
     dates = []
     d = Date.today
-    @@weeks_ahead.times do
+    dates_limit.times do
       # get tuesdays
       tmp_date = next_cwday(d,2)
       dates << self.where(:date => tmp_date).first_or_create!
