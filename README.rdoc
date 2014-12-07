@@ -3,7 +3,16 @@
 1. create new secret token with
   rake secret
 
-2. Created file 'config/initializers/secret_token.rb' with the following content (!replace token value with the created one!). Alternatively link this file via capistrano deploy scripts.
+2. Created file 'config/initializers/secret_token.rb' with the following content (!replace token value with the created one!)
 
   Dursty::Application.config.secret_token = '6324721ab9d42748219...'
 
+3. (If you're using capistrano deploy) Save this file on your production server in the shared folder and link it via deploy task (similar to the following):
+  namespace :deploy do
+  [...]
+    desc "Create symlinks"
+    task :symlink, :roles => :app do
+      run "ln -nfs #{release_path}/../../shared/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
+    end
+  end
+  before 'deploy:assets:precompile', 'deploy:symlink_db'
