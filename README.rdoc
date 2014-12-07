@@ -3,6 +3,7 @@
 1. create new secret token with
   rake secret
 
-2. Created file 'config/initializers/secret_token.rb' with the following content (!replace token value with the created one!):
+2. Created file 'config/initializers/secret_token.rb' with the following content (!replace token value with the created one!). Alternatively link this file via capistrano deploy scripts.
 
   Dursty::Application.config.secret_token = '6324721ab9d42748219...'
+
