@@ -12,7 +12,9 @@
   [...]
     desc "Create symlinks"
     task :symlink, :roles => :app do
+      run "ln -nfs #{release_path}/../../shared/database.yml #{release_path}/config/database.yml"
       run "ln -nfs #{release_path}/../../shared/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
+      [...]
     end
   end
   before 'deploy:assets:precompile', 'deploy:symlink_db'
