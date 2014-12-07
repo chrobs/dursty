@@ -20,4 +20,5 @@ public/system/shop_bundles/images/
 
 config/database.yml
 config/deploy.rb
+config/initializers/secret_token.rb
 Capfile
